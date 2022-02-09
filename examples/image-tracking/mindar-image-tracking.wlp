@@ -1,0 +1,281 @@
+{
+    "objects": {
+        "17": {
+            "name": "ARCamera",
+            "components": [
+                {
+                    "type": "view"
+                },
+                {
+                    "type": "image-tracking.js",
+                    "image-tracking.js": {
+                        "videoPane": "18",
+                        "trackingTargetObject": "19",
+                        "trackingTarget": "19"
+                    }
+                }
+            ]
+        },
+        "18": {
+            "name": "VideoPlane",
+            "parent": "17",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "p0",
+                        "material": "DefaultFontMaterial"
+                    }
+                }
+            ]
+        },
+        "19": {
+            "name": "TrackingTarget",
+            "parent": "17"
+        },
+        "20": {
+            "name": "Cube",
+            "parent": "19",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "p1",
+                        "material": "21"
+                    },
+                    "active": true
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.5329999,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.5329999,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        }
+    },
+    "meshes": {
+        "p0": {
+            "link": {
+                "name": "PrimitivePlane",
+                "file": "default"
+            }
+        },
+        "p1": {
+            "link": {
+                "name": "PrimitiveCube",
+                "file": "default"
+            }
+        },
+        "p2": {
+            "link": {
+                "name": "PrimitiveSphere",
+                "file": "default"
+            }
+        },
+        "p3": {
+            "link": {
+                "name": "PrimitiveCone",
+                "file": "default"
+            }
+        },
+        "p4": {
+            "link": {
+                "name": "PrimitiveCylinder",
+                "file": "default"
+            }
+        },
+        "p5": {
+            "link": {
+                "name": "PrimitiveCircle",
+                "file": "default"
+            }
+        }
+    },
+    "textures": {
+        "t0": {
+            "link": {
+                "name": "DefaultFont",
+                "file": "default"
+            }
+        }
+    },
+    "images": {
+        "f0": {
+            "link": {
+                "name": "DefaultFontImage",
+                "file": "default"
+            }
+        }
+    },
+    "materials": {
+        "DefaultFontMaterial": {
+            "link": {
+                "name": "DefaultFontMaterial",
+                "file": "default"
+            },
+            "pipeline": "6",
+            "Phong": {
+                "ambientColor": [
+                    0.199998,
+                    0.1999994,
+                    0.2,
+                    1.0
+                ]
+            },
+            "Flat": {
+                "color": [
+                    0.9999914,
+                    1.0,
+                    0.9999899,
+                    1.0
+                ],
+                "flatTexture": "t0"
+            }
+        },
+        "21": {
+            "name": "material1",
+            "Phong": {
+                "ambientColor": [
+                    0.432449,
+                    0.5483562,
+                    0.7254902,
+                    1.0
+                ]
+            }
+        }
+    },
+    "shaders": {
+        "1": {
+            "link": {
+                "name": "DistanceFieldVector",
+                "file": "default"
+            }
+        },
+        "3": {
+            "link": {
+                "name": "Dynamic",
+                "file": "default"
+            }
+        },
+        "4": {
+            "link": {
+                "name": "Flat",
+                "file": "default"
+            }
+        },
+        "7": {
+            "link": {
+                "name": "MeshVisualizer",
+                "file": "default"
+            }
+        },
+        "9": {
+            "link": {
+                "name": "Static",
+                "file": "default"
+            }
+        },
+        "10": {
+            "link": {
+                "name": "Phong",
+                "file": "default"
+            }
+        },
+        "13": {
+            "link": {
+                "name": "Skinning",
+                "file": "default"
+            }
+        },
+        "14": {
+            "link": {
+                "name": "Particle",
+                "file": "default"
+            }
+        }
+    },
+    "animations": {},
+    "skins": {},
+    "pipelines": {
+        "2": {
+            "link": {
+                "name": "DistanceFieldVector",
+                "file": "default"
+            }
+        },
+        "5": {
+            "link": {
+                "name": "Flat Opaque",
+                "file": "default"
+            }
+        },
+        "6": {
+            "link": {
+                "name": "Flat Opaque Textured",
+                "file": "default"
+            }
+        },
+        "8": {
+            "link": {
+                "name": "MeshVisualizer",
+                "file": "default"
+            }
+        },
+        "11": {
+            "link": {
+                "name": "Phong Opaque",
+                "file": "default"
+            }
+        },
+        "12": {
+            "link": {
+                "name": "Phong Opaque Textured",
+                "file": "default"
+            }
+        },
+        "15": {
+            "link": {
+                "name": "Foliage",
+                "file": "default"
+            }
+        },
+        "16": {
+            "link": {
+                "name": "Particle",
+                "file": "default"
+            }
+        }
+    },
+    "settings": {
+        "project": {
+            "name": "mindar-image-tracking",
+            "version": [
+                0,
+                8,
+                8
+            ]
+        },
+        "vr": {
+            "enable": false
+        },
+        "scripting": {
+            "sourcePaths": [
+                "/js/editor-components-bundle.js",
+                "js"
+            ]
+        }
+    }
+}
