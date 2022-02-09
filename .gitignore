@@ -1,0 +1,4 @@
+*.swp
+node_modules
+examples/image-tracking/deploy
+examples/image-tracking/cache
