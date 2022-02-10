@@ -5,13 +5,6 @@ WL.registerComponent('image-tracking.js', {
     trackingTarget: {type: WL.Type.Object},
 }, {
     init: function() {
-	// TODO: better way to import MindAR library
-	
-	var script = document.createElement("script");
-	script.setAttribute("type", "text/javascript");
-	script.setAttribute("src", "/mindar-image.prod.js");
-	document.getElementsByTagName("head")[0].appendChild(script);
-
         if(!navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             console.error("No media devices found.");
             this.active = false;
@@ -19,16 +12,6 @@ WL.registerComponent('image-tracking.js', {
     },
     start: async function() {
         this.view = this.object.getComponent('view');
-
-        await new Promise((resolve, reject) => {
-	  const waitHandler = setInterval(() => {
-	    console.log("mindar ready", window.MINDAR);
-	    if (window.MINDAR) {
-	      clearInterval(waitHandler);
-	      resolve();
-	    }
-	  }, 1000);
-	});
 
         navigator.mediaDevices.getUserMedia({audio: false, video: true})
             .then(stream => {

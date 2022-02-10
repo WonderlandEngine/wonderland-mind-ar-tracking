@@ -2333,10 +2333,6 @@
     trackingTarget: { type: WL.Type.Object }
   }, {
     init: function() {
-      var script = document.createElement("script");
-      script.setAttribute("type", "text/javascript");
-      script.setAttribute("src", "/mindar-image.prod.js");
-      document.getElementsByTagName("head")[0].appendChild(script);
       if (!navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         console.error("No media devices found.");
         this.active = false;
@@ -2344,15 +2340,6 @@
     },
     start: async function() {
       this.view = this.object.getComponent("view");
-      await new Promise((resolve, reject) => {
-        const waitHandler = setInterval(() => {
-          console.log("mindar ready", window.MINDAR);
-          if (window.MINDAR) {
-            clearInterval(waitHandler);
-            resolve();
-          }
-        }, 1e3);
-      });
       navigator.mediaDevices.getUserMedia({ audio: false, video: true }).then((stream) => {
         this.video = document.createElement("video");
         this.video.srcObject = stream;
