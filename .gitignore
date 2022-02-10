@@ -2,3 +2,5 @@
 node_modules
 examples/image-tracking/deploy
 examples/image-tracking/cache
+examples/image-tracking-multiple-targets/deploy
+examples/image-tracking-multiple-targets/cache
