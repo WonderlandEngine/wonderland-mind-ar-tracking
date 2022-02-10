@@ -1,16 +1,20 @@
 import { quat2, mat4, vec3, vec4 } from 'gl-matrix';
 
-WL.registerComponent('image-tracking.js', {
+WL.registerComponent('image-tracking', {
     videoPane: {type: WL.Type.Object},
-    trackingTarget: {type: WL.Type.Object},
+    mindPath: {type: WL.Type.String},
 }, {
     init: function() {
         if(!navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             console.error("No media devices found.");
             this.active = false;
         }
+
+	this.trackingTargets = [];
     },
     start: async function() {
+	//return;
+
         this.view = this.object.getComponent('view');
 
         navigator.mediaDevices.getUserMedia({audio: false, video: true})
@@ -33,6 +37,10 @@ WL.registerComponent('image-tracking.js', {
 	this._updateCameraProjection();
     },
 
+    registerTarget(targetIndex, target) {
+	this.trackingTargets.push({targetIndex, target});
+    },
+
     // start AR. input can be HTML image or video
     _setupAR: async function(input) {
 	const controller = new MINDAR.IMAGE.Controller({
@@ -41,13 +49,17 @@ WL.registerComponent('image-tracking.js', {
 	    onUpdate: (data) => {
 		if (data.type === 'updateMatrix') {
 		    const {targetIndex, worldMatrix} = data;
-		    if (targetIndex === 0) {
-			this._updateTrack(worldMatrix);
-		    }
+
+		    this.trackingTargets.forEach((t) => { 
+			if (targetIndex === t.targetIndex) {
+			    const [markerWidth, markerHeight] = this.markerDimensions[targetIndex];
+			    t.target.updateTrack(worldMatrix, markerWidth, markerHeight);
+			}
+		    });
 		}
 	    }
 	});
-	const {dimensions, matchingDataList, imageListList} = await controller.addImageTargets('./targets.mind');
+	const {dimensions, matchingDataList, imageListList} = await controller.addImageTargets(this.mindPath);
 	const texture = new WL.Texture(input);
 
 	this.input = input;
@@ -119,17 +131,23 @@ WL.registerComponent('image-tracking.js', {
 
 	//console.log("updated camera projection", projectionMatrix);
     },
+});
+
+WL.registerComponent('image-tracking-target', {
+    targetIndex: {type: WL.Type.Int},
+    arCamera: {type: WL.Type.Object},
+}, {
+    init: function() {
+	this.arCamera.getComponent("image-tracking").registerTarget(this.targetIndex, this);
+    },
 
     // update tracking target transformation
-    _updateTrack: function(worldMatrix) {
+    updateTrack: function(worldMatrix, markerWidth, markerHeight) {
 	if (!worldMatrix) {
-	    this.trackingTarget.scalingLocal = [0,0,0];
-	    this.trackingTarget.setDirty();
+	    this.object.scalingLocal = [0,0,0];
+	    this.object.setDirty();
 	    return;
 	}
-
-	// update tracking object transform
-	const [markerWidth, markerHeight] = this.markerDimensions[0];
 
         const fixedWorldMatrix = new Float32Array(16);
 	// anchor point should be the marker center
@@ -140,13 +158,13 @@ WL.registerComponent('image-tracking.js', {
 	    markerWidth/2, markerHeight/2, 0, 1
 	];
 	mat4.multiply(fixedWorldMatrix, worldMatrix, adjustMatrix);
-        quat2.fromMat4(this.trackingTarget.transformLocal, fixedWorldMatrix);
+        quat2.fromMat4(this.object.transformLocal, fixedWorldMatrix);
 
-	this.trackingTarget.scalingLocal = [
+	this.object.scalingLocal = [
 	  markerWidth / window.devicePixelRatio,
 	  markerWidth / window.devicePixelRatio,
 	  markerWidth / window.devicePixelRatio
 	];
-        this.trackingTarget.setDirty();
+        this.object.setDirty();
     }
 });
