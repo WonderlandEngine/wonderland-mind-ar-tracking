@@ -7,11 +7,10 @@
                     "type": "view"
                 },
                 {
-                    "type": "image-tracking.js",
-                    "image-tracking.js": {
+                    "type": "image-tracking",
+                    "image-tracking": {
                         "videoPane": "18",
-                        "trackingTargetObject": "19",
-                        "trackingTarget": "19"
+                        "mindPath": "./targets.mind"
                     }
                 }
             ]
@@ -31,7 +30,15 @@
         },
         "19": {
             "name": "TrackingTarget",
-            "parent": "17"
+            "parent": "17",
+            "components": [
+                {
+                    "type": "image-tracking-target",
+                    "image-tracking-target": {
+                        "arCamera": "17"
+                    }
+                }
+            ]
         },
         "20": {
             "name": "Cube",
@@ -266,7 +273,8 @@
                 0,
                 8,
                 8
-            ]
+            ],
+            "customIndexHtml": true
         },
         "vr": {
             "enable": false
