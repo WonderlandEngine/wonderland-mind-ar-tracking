@@ -1,6 +1,22 @@
 # wonderland-mind-ar-tracking
-Wonderland Engine integration of mind-ar-js image and face tracking
+[Wonderland Engine](https://wonderlandengine.com/) integration of [mind-ar-js](https://github.com/hiukim/mind-ar-js) image and face tracking
 
-# Development
+# quick start
 
-> npm run dev
+https://github.com/WonderlandEngine/wonderland-mind-ar-tracking/wiki/Quick-Start
+
+# demo video
+
+https://youtu.be/0PJngMiO_tM
+
+# examples
+
+minimal: `/examples/image-tracking`
+
+multiple targets: `/examples/image-tracking-multiple-targets`
+
+# Roadmaps
+
+Face-Tracking Integration
+
+Improve Image Tracking Accuracies
