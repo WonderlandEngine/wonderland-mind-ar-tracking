@@ -9,6 +9,8 @@ https://github.com/WonderlandEngine/wonderland-mind-ar-tracking/wiki/Quick-Start
 
 https://youtu.be/0PJngMiO_tM
 
+![Demo](https://i3.ytimg.com/vi/0PJngMiO_tM/maxresdefault.jpg)
+
 # examples
 
 minimal: `/examples/image-tracking`
