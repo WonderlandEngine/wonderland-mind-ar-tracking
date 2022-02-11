@@ -10,7 +10,8 @@
                     "type": "image-tracking",
                     "image-tracking": {
                         "videoPane": "18",
-                        "mindPath": "./targets.mind"
+                        "mindPath": "./targets.mind",
+                        "maxTrack": 1
                     }
                 }
             ]
@@ -71,7 +72,412 @@
                 0.0,
                 -0.9700366,
                 1.0
+            ],
+            "deleted": true
+        },
+        "28": {
+            "link": {
+                "name": "RootNode (gltf orientation matrix)",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "parent": "19"
+        },
+        "29": {
+            "link": {
+                "name": "RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "parent": "28",
+            "transformation": [
+                1.5,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.5,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.5,
+                0.0,
+                0.0,
+                0.0,
+                0.75,
+                1.0
             ]
+        },
+        "30": {
+            "link": {
+                "name": "1.FBX<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "parent": "29"
+        },
+        "31": {
+            "link": {
+                "name": "RootNode<1.FBX<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "parent": "30"
+        },
+        "32": {
+            "link": {
+                "name": "Group18985<RootNode<1.FBX<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "parent": "31"
+        },
+        "33": {
+            "link": {
+                "name": "Group18985_default_0<Group18985<RootNode<1.FBX<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "parent": "32"
+        },
+        "34": {
+            "link": {
+                "name": "Box002<RootNode<1.FBX<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "parent": "31"
+        },
+        "35": {
+            "link": {
+                "name": "Box002_default_0<Box002<RootNode<1.FBX<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "parent": "34"
+        },
+        "36": {
+            "link": {
+                "name": "Object001<RootNode<1.FBX<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "parent": "31"
+        },
+        "37": {
+            "link": {
+                "name": "Object001_default_0<Object001<RootNode<1.FBX<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "parent": "36"
+        },
+        "38": {
+            "name": "Light",
+            "parent": "17",
+            "components": [
+                {
+                    "type": "light",
+                    "active": true,
+                    "light": {
+                        "type": "point"
+                    }
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "deleted": true
+        },
+        "39": {
+            "name": "TrackingTarget1",
+            "parent": "17",
+            "components": [
+                {
+                    "type": "image-tracking-target",
+                    "image-tracking-target": {
+                        "targetIndex": 1,
+                        "arCamera": "17"
+                    },
+                    "active": true
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "44": {
+            "link": {
+                "name": "RootNode (gltf orientation matrix)",
+                "file": "assets\\dinosaur\\scene.gltf"
+            },
+            "parent": "39"
+        },
+        "45": {
+            "link": {
+                "name": "RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\dinosaur\\scene.gltf"
+            },
+            "parent": "44"
+        },
+        "46": {
+            "link": {
+                "name": "67866a058a114411946d32e91de9150f.fbx<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\dinosaur\\scene.gltf"
+            },
+            "parent": "45"
+        },
+        "47": {
+            "link": {
+                "name": "RootNode<67866a058a114411946d32e91de9150f.fbx<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\dinosaur\\scene.gltf"
+            },
+            "parent": "46",
+            "transformation": [
+                0.5,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.5,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.5,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "48": {
+            "link": {
+                "name": "Dino<RootNode<67866a058a114411946d32e91de9150f.fbx<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\dinosaur\\scene.gltf"
+            },
+            "parent": "47"
+        },
+        "49": {
+            "link": {
+                "name": "Dino_Dino_0<Dino<RootNode<67866a058a114411946d32e91de9150f.fbx<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
+                "file": "assets\\dinosaur\\scene.gltf"
+            },
+            "parent": "48",
+            "components": [
+                {
+                    "active": true
+                }
+            ]
+        },
+        "50": {
+            "name": "Light.000",
+            "parent": "19",
+            "components": [
+                {
+                    "type": "light",
+                    "light": {
+                        "attenuation": 0.001
+                    },
+                    "active": true
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                1.956711,
+                2.0485849,
+                1.0
+            ],
+            "deleted": true
+        },
+        "51": {
+            "name": "Light.001",
+            "parent": "19",
+            "components": [
+                {
+                    "type": "light",
+                    "light": {
+                        "type": "sun"
+                    }
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.8200776,
+                2.3187303,
+                1.0
+            ],
+            "deleted": true
+        },
+        "52": {
+            "name": "Light.002",
+            "parent": "19",
+            "components": [
+                {
+                    "type": "light",
+                    "active": true
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                1.8158496,
+                1.936037,
+                1.0
+            ],
+            "deleted": true
+        },
+        "53": {
+            "name": "Light.003",
+            "parent": "19",
+            "components": [
+                {
+                    "type": "light",
+                    "light": {
+                        "type": "point",
+                        "attenuation": 0.001
+                    }
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                1.3605475,
+                2.0465314,
+                1.0
+            ],
+            "deleted": true
+        },
+        "54": {
+            "name": "Light.004",
+            "components": [
+                {
+                    "type": "light",
+                    "light": {
+                        "type": "sun",
+                        "attenuation": 0.0000099
+                    }
+                }
+            ],
+            "parent": "17",
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "55": {
+            "name": "Light.005",
+            "parent": "17",
+            "components": [
+                {
+                    "type": "light",
+                    "light": {
+                        "type": "sun",
+                        "attenuation": 0.001
+                    }
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                -0.9742371,
+                0.2255341,
+                0.0,
+                0.0,
+                -0.2255341,
+                -0.9742371,
+                0.0,
+                0.0,
+                -1.6391277313232423e-7,
+                1.5849552,
+                1.0
+            ],
+            "deleted": true
         }
     },
     "meshes": {
@@ -110,6 +516,30 @@
                 "name": "PrimitiveCircle",
                 "file": "default"
             }
+        },
+        "25": {
+            "link": {
+                "name": "Group18985_default_0",
+                "file": "assets\\shiba\\scene.gltf"
+            }
+        },
+        "26": {
+            "link": {
+                "name": "Box002_default_0",
+                "file": "assets\\shiba\\scene.gltf"
+            }
+        },
+        "27": {
+            "link": {
+                "name": "Object001_default_0",
+                "file": "assets\\shiba\\scene.gltf"
+            }
+        },
+        "43": {
+            "link": {
+                "name": "Dino_Dino_0",
+                "file": "assets\\dinosaur\\scene.gltf"
+            }
         }
     },
     "textures": {
@@ -118,6 +548,18 @@
                 "name": "DefaultFont",
                 "file": "default"
             }
+        },
+        "23": {
+            "link": {
+                "name": "texture_0",
+                "file": "assets\\shiba\\scene.gltf"
+            }
+        },
+        "41": {
+            "link": {
+                "name": "texture_0",
+                "file": "assets\\dinosaur\\scene.gltf"
+            }
         }
     },
     "images": {
@@ -125,6 +567,18 @@
             "link": {
                 "name": "DefaultFontImage",
                 "file": "default"
+            }
+        },
+        "22": {
+            "link": {
+                "name": "image_0",
+                "file": "assets\\shiba\\scene.gltf"
+            }
+        },
+        "40": {
+            "link": {
+                "name": "image_0",
+                "file": "assets\\dinosaur\\scene.gltf"
             }
         }
     },
@@ -138,6 +592,20 @@
         },
         "21": {
             "name": "material"
+        },
+        "24": {
+            "link": {
+                "name": "default",
+                "file": "assets\\shiba\\scene.gltf"
+            },
+            "pipeline": "6"
+        },
+        "42": {
+            "link": {
+                "name": "Dino",
+                "file": "assets\\dinosaur\\scene.gltf"
+            },
+            "pipeline": "6"
         }
     },
     "shaders": {
@@ -261,5 +729,9 @@
         "vr": {
             "enable": false
         }
-    }
+    },
+    "files": [
+        "assets/shiba/scene.gltf",
+        "assets/dinosaur/scene.gltf"
+    ]
 }

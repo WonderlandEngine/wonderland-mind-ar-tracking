@@ -2330,7 +2330,8 @@
   // image-tracking.js
   WL.registerComponent("image-tracking", {
     videoPane: { type: WL.Type.Object },
-    mindPath: { type: WL.Type.String }
+    mindPath: { type: WL.Type.String },
+    maxTrack: { type: WL.Type.Int, default: 1 }
   }, {
     init: function() {
       if (!navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -2365,6 +2366,7 @@
       const controller = new MINDAR.IMAGE.Controller({
         inputWidth: input.width,
         inputHeight: input.height,
+        maxTrack: this.maxTrack,
         onUpdate: (data) => {
           if (data.type === "updateMatrix") {
             const { targetIndex, worldMatrix } = data;
@@ -2437,6 +2439,8 @@
   }, {
     init: function() {
       this.arCamera.getComponent("image-tracking").registerTarget(this.targetIndex, this);
+      this.object.scalingLocal = [0, 0, 0];
+      this.object.setDirty();
     },
     updateTrack: function(worldMatrix, markerWidth, markerHeight) {
       if (!worldMatrix) {
