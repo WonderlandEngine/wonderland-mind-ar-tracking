@@ -3,6 +3,7 @@ import { quat2, mat4, vec3, vec4 } from 'gl-matrix';
 WL.registerComponent('image-tracking', {
     videoPane: {type: WL.Type.Object},
     mindPath: {type: WL.Type.String},
+    maxTrack: {type: WL.Type.Int, default: 1},
 }, {
     init: function() {
         if(!navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -46,6 +47,7 @@ WL.registerComponent('image-tracking', {
 	const controller = new MINDAR.IMAGE.Controller({
 	    inputWidth: input.width,
 	    inputHeight: input.height,
+	    maxTrack: this.maxTrack,
 	    onUpdate: (data) => {
 		if (data.type === 'updateMatrix') {
 		    const {targetIndex, worldMatrix} = data;
@@ -139,6 +141,8 @@ WL.registerComponent('image-tracking-target', {
 }, {
     init: function() {
 	this.arCamera.getComponent("image-tracking").registerTarget(this.targetIndex, this);
+	this.object.scalingLocal = [0,0,0];
+	this.object.setDirty();
     },
 
     // update tracking target transformation
