@@ -2354,9 +2354,6 @@
       });
     },
     update: function(dt) {
-      if (this.videoTexture) {
-        this.videoTexture.update();
-      }
       this._updateCameraProjection();
     },
     registerTarget(targetIndex, target) {
@@ -2367,7 +2364,13 @@
         inputWidth: input.width,
         inputHeight: input.height,
         maxTrack: this.maxTrack,
+        interpolationFactor: 0,
+        missTolerance: 3,
+        warmupTolerance: 0,
         onUpdate: (data) => {
+          if (this.videoTexture) {
+            this.videoTexture.update();
+          }
           if (data.type === "updateMatrix") {
             const { targetIndex, worldMatrix } = data;
             this.trackingTargets.forEach((t) => {

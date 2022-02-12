@@ -14,8 +14,6 @@ WL.registerComponent('image-tracking', {
 	this.trackingTargets = [];
     },
     start: async function() {
-	//return;
-
         this.view = this.object.getComponent('view');
 
         navigator.mediaDevices.getUserMedia({audio: false, video: true})
@@ -32,9 +30,9 @@ WL.registerComponent('image-tracking', {
             });
     },
     update: function(dt) {
-	if (this.videoTexture) {
-	    this.videoTexture.update();
-	}
+	//if (this.videoTexture) {
+	    //this.videoTexture.update();
+	//}
 	this._updateCameraProjection();
     },
 
@@ -48,7 +46,14 @@ WL.registerComponent('image-tracking', {
 	    inputWidth: input.width,
 	    inputHeight: input.height,
 	    maxTrack: this.maxTrack,
+	    interpolationFactor: 0,
+	    missTolerance: 3,
+	    warmupTolerance: 0,
+
 	    onUpdate: (data) => {
+		if (this.videoTexture) {
+		    this.videoTexture.update();
+		}
 		if (data.type === 'updateMatrix') {
 		    const {targetIndex, worldMatrix} = data;
 
