@@ -46,9 +46,10 @@ WL.registerComponent('image-tracking', {
 	    inputWidth: input.width,
 	    inputHeight: input.height,
 	    maxTrack: this.maxTrack,
-	    interpolationFactor: 0,
-	    missTolerance: 3,
-	    warmupTolerance: 0,
+	    filterMinCF: 0.001, // OneEuroFilter, min cutoff frequency. default is 0.001
+	    filterBeta: 1, // OneEuroFilter, beta. default is 1000
+	    missTolerance: 5, // number of miss before considered target lost. default is 5
+	    warmupTolerance: 5, // number of track before considered target found. default is 5
 
 	    onUpdate: (data) => {
 		if (this.videoTexture) {

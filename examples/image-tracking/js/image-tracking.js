@@ -2364,9 +2364,10 @@
         inputWidth: input.width,
         inputHeight: input.height,
         maxTrack: this.maxTrack,
-        interpolationFactor: 0,
-        missTolerance: 3,
-        warmupTolerance: 0,
+        filterMinCF: 1e-3,
+        filterBeta: 1,
+        missTolerance: 5,
+        warmupTolerance: 5,
         onUpdate: (data) => {
           if (this.videoTexture) {
             this.videoTexture.update();
