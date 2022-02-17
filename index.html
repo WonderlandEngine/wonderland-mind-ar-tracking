@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <link rel="preload" href="{{ settings.project.name }}-bundle.js?t={{timestamp}}" as="script">
+    <title>{{ settings.project.name }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{{ settings.runtime.xrButtonColor }}">
+    {{ if settings.ar.framework == "8thwall" }}
+    <script src="//apps.8thwall.com/xrweb?appKey={{ settings.ar.8thwall.apiToken }}"></script>
+    {{ end }}
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+
+    <style>
+    html {
+        height: 100%;
+    }
+    body {
+        height: 100%;
+        margin: 0px;
+        background-image: linear-gradient(black, #2b2b2b);
+    }
+    .xr-button-container {
+      display: block;
+      position: fixed;
+      width: 100%;
+      bottom: 0px;
+      display: flex;
+      justify-content: center;
+    }
+    #vr-button, #ar-button {
+      float: left;
+      width: 100px;
+      padding-left: 10px;
+      padding-bottom: 25px;
+      display: block;
+    }
+
+    .xr-button-label {
+      fill: {{ settings.runtime.xrButtonColor }};
+    }
+
+    .xr-button-frame {
+      stroke: {{ settings.runtime.xrButtonColor }};
+    }
+    </style>
+    <script>
+        var Module = {
+          scene: "{{ settings.project.name }}.bin",
+          webxr_framebuffer_scale_factor: {{ settings.vr.framebufferScaleFactor }}
+        };
+    </script>
+    {{ if settings.runtime.pwa.enable }}
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="homescreen192.png">
+    <script>
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('Service worker registered!', reg))
+                .catch(err => console.log('Unable to register service worker!', err));
+        }
+    </script>
+    {{ end }}
+    <script src="wonderland.min.js?t={{timestamp}}"></script>
+    <script type="module">
+        import { simd, threads } from "./wasm-featuredetect.js";
+
+        function loadRuntime(simd, threads) {
+
+            let runtime = '{{ runtimeName }}' + (simd ? '-simd' : '') + (threads ? '-threads' : '')
+
+            const s = document.createElement('script');
+            document.body.appendChild(s);
+            const bundle = document.createElement('script');
+            bundle.id = 'bundle';
+            document.body.appendChild(bundle);
+
+            /* We need to ensure the bundle is loaded after the runtime js always */
+            Module.preRun = function() {
+              addRunDependency('bundle');
+              bundle.onload = () => {
+                removeRunDependency('bundle');
+              };
+              bundle.src = "{{ settings.project.name }}-bundle.js?t={{timestamp}}";
+            }
+            s.src = runtime + '.js';
+        }
+
+        Promise.all([simd(), threads()]).then((support) => {
+            const simdSupported = support[0];
+            const threadsSupported = support[1];
+            if (simdSupported) {
+                console.log("WASM SIMD is supported");
+            } else {
+                console.warn("WASM SIMD is not supported");
+            }
+
+            if (threadsSupported) {
+              if (self.crossOriginIsolated) {
+                console.log("WASM Threads is supported");
+              } else {
+                console.warn("WASM Threads is supported, but the page is not crossOriginIsolated, therefore thread support is disabled.");
+              }
+            } else {
+              console.warn("WASM Threads is not supported");
+            }
+
+            loadRuntime(simdSupported, threadsSupported && self.crossOriginIsolated);
+        });
+    </script>
+    {{ if settings.runtime.googleAnalytics != '' }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.runtime.googleAnalytics }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '{{ settings.runtime.googleAnalytics }}');
+      {{ if settings.runtime.googleAnalyticsSecondary != '' }}gtag('config', '{{ settings.runtime.googleAnalyticsSecondary }}');{{ end }}
+    </script>
+    {{ end }}
+  </head>
+  <body>
+    <canvas id="canvas" style="width: 100%; height: 100%; display: block;" tabindex="0"></canvas>
+    <div class="xr-button-container">
+      {{ if settings.vr.enable }}<a id="vr-button" onclick="Module['webxr_request_session_func']('immersive-vr', [{{ webxrRequiredFeatures }}], [{{ webxrOptionalFeatures }}])">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109.41 65"><rect class="xr-button-frame" x="3.5" y="3.5" width="102.41" height="58" rx="16.68" style="fill:none;stroke-linejoin:round;stroke-width:7px"/><path class="xr-button-label" d="M36.24,48.84a2,2,0,0,1-1.78-1.15L23.39,17.46a1.84,1.84,0,0,1,1.78-1.84h5.45a1.8,1.8,0,0,1,1.66,1.21l7.29,20.42,7.28-20.42a1.8,1.8,0,0,1,1.67-1.21H54a1.84,1.84,0,0,1,1.78,1.84L44.67,47.69a2,2,0,0,1-1.78,1.15Z"/><path class="xr-button-label" d="M70.61,40H68v7a1.84,1.84,0,0,1-1.78,1.84H61.31A1.83,1.83,0,0,1,59.54,47V17.46a1.83,1.83,0,0,1,1.77-1.84H73s13,.12,13,12.22c0,6-3.21,9-6.42,10.5L86.38,47a1.76,1.76,0,0,1-1.77,1.84h-5.8a1.91,1.91,0,0,1-1.43-.69ZM68,32.09h5c2.24,0,4.08-1.15,4.08-4.25s-1.84-4.36-4.08-4.36H68Z"/></svg>
+      </a>{{ end }}
+
+      {{ if settings.ar.framework == 'webxr' }}<a id="ar-button" onclick="Module['webxr_request_session_func']('immersive-ar', [{{ webxrRequiredFeatures }}], [{{ webxrOptionalFeatures }}])">
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109.41 65"><path class="xr-button-label" d="M42.89,15.62a2,2,0,0,1,1.78,1.15L55.75,47A1.84,1.84,0,0,1,54,48.84H48.52a1.81,1.81,0,0,1-1.67-1.2l-1.49-4.19H33.77l-1.49,4.19a1.8,1.8,0,0,1-1.66,1.2H25.17A1.83,1.83,0,0,1,23.39,47L34.46,16.77a2,2,0,0,1,1.78-1.15Zm-6.31,20h6l-3-8.38Z"/><path class="xr-button-label" d="M70.61,40H68V47a1.84,1.84,0,0,1-1.78,1.83H61.31A1.83,1.83,0,0,1,59.54,47V17.46a1.83,1.83,0,0,1,1.77-1.84H73s13,.12,13,12.22c0,6-3.21,9-6.42,10.5L86.38,47a1.76,1.76,0,0,1-1.77,1.83h-5.8a1.91,1.91,0,0,1-1.43-.69ZM68,32.09h5c2.24,0,4.08-1.15,4.08-4.25s-1.84-4.36-4.08-4.36H68Z"/><rect class="xr-button-frame" x="3.5" y="3.5" width="102.41" height="58" rx="16.68" style="fill:none;stroke-linejoin:round;stroke-width:7px"/></svg>
+        </a>{{ end }}
+    </div>
+  </body>
+</html>
