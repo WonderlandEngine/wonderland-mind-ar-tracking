@@ -1,9 +1,12 @@
 import { quat2, mat4, vec3, vec4 } from 'gl-matrix';
 
+const FacingModes = ['environment', 'user'];
+
 WL.registerComponent('image-tracking', {
     videoPane: {type: WL.Type.Object},
     mindPath: {type: WL.Type.String},
     maxTrack: {type: WL.Type.Int, default: 1},
+    facingMode: {type: WL.Type.Enum, values: FacingModes, default: FacingModes[0]},
 }, {
     init: function() {
         if(!navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -16,7 +19,7 @@ WL.registerComponent('image-tracking', {
     start: async function() {
         this.view = this.object.getComponent('view');
 
-        navigator.mediaDevices.getUserMedia({audio: false, video: true})
+        navigator.mediaDevices.getUserMedia({audio: false, video: {facingMode: FacingModes[this.facingMode]}})
             .then(stream => {
                 this.video = document.createElement('video');
                 this.video.srcObject = stream;

@@ -2328,32 +2328,23 @@
   }
 
   // image-tracking.js
-  WL.registerComponent("image-tracking.js", {
+  var FacingModes = ["environment", "user"];
+  WL.registerComponent("image-tracking", {
     videoPane: { type: WL.Type.Object },
-    trackingTarget: { type: WL.Type.Object }
+    mindPath: { type: WL.Type.String },
+    maxTrack: { type: WL.Type.Int, default: 1 },
+    facingMode: { type: WL.Type.Enum, values: FacingModes, default: FacingModes[0] }
   }, {
     init: function() {
-      var script = document.createElement("script");
-      script.setAttribute("type", "text/javascript");
-      script.setAttribute("src", "/mindar-image.prod.js");
-      document.getElementsByTagName("head")[0].appendChild(script);
       if (!navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         console.error("No media devices found.");
         this.active = false;
       }
+      this.trackingTargets = [];
     },
     start: async function() {
       this.view = this.object.getComponent("view");
-      await new Promise((resolve, reject) => {
-        const waitHandler = setInterval(() => {
-          console.log("mindar ready", window.MINDAR);
-          if (window.MINDAR) {
-            clearInterval(waitHandler);
-            resolve();
-          }
-        }, 1e3);
-      });
-      navigator.mediaDevices.getUserMedia({ audio: false, video: true }).then((stream) => {
+      navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: FacingModes[this.facingMode] } }).then((stream) => {
         this.video = document.createElement("video");
         this.video.srcObject = stream;
         this.video.addEventListener("loadedmetadata", () => {
@@ -2365,25 +2356,36 @@
       });
     },
     update: function(dt) {
-      if (this.videoTexture) {
-        this.videoTexture.update();
-      }
       this._updateCameraProjection();
+    },
+    registerTarget(targetIndex, target) {
+      this.trackingTargets.push({ targetIndex, target });
     },
     _setupAR: async function(input) {
       const controller = new MINDAR.IMAGE.Controller({
         inputWidth: input.width,
         inputHeight: input.height,
+        maxTrack: this.maxTrack,
+        filterMinCF: 1e-3,
+        filterBeta: 1,
+        missTolerance: 5,
+        warmupTolerance: 5,
         onUpdate: (data) => {
+          if (this.videoTexture) {
+            this.videoTexture.update();
+          }
           if (data.type === "updateMatrix") {
             const { targetIndex, worldMatrix } = data;
-            if (targetIndex === 0) {
-              this._updateTrack(worldMatrix);
-            }
+            this.trackingTargets.forEach((t) => {
+              if (targetIndex === t.targetIndex) {
+                const [markerWidth, markerHeight] = this.markerDimensions[targetIndex];
+                t.target.updateTrack(worldMatrix, markerWidth, markerHeight);
+              }
+            });
           }
         }
       });
-      const { dimensions, matchingDataList, imageListList } = await controller.addImageTargets("./targets.mind");
+      const { dimensions, matchingDataList, imageListList } = await controller.addImageTargets(this.mindPath);
       const texture = new WL.Texture(input);
       this.input = input;
       this.controller = controller;
@@ -2435,14 +2437,23 @@
       this.view.projectionMatrix.set(projectionMatrix);
       this.lastProjectionCanvasWidth = WL.canvas.width;
       this.lastProjectionCanvasHeight = WL.canvas.height;
+    }
+  });
+  WL.registerComponent("image-tracking-target", {
+    targetIndex: { type: WL.Type.Int },
+    arCamera: { type: WL.Type.Object }
+  }, {
+    init: function() {
+      this.arCamera.getComponent("image-tracking").registerTarget(this.targetIndex, this);
+      this.object.scalingLocal = [0, 0, 0];
+      this.object.setDirty();
     },
-    _updateTrack: function(worldMatrix) {
+    updateTrack: function(worldMatrix, markerWidth, markerHeight) {
       if (!worldMatrix) {
-        this.trackingTarget.scalingLocal = [0, 0, 0];
-        this.trackingTarget.setDirty();
+        this.object.scalingLocal = [0, 0, 0];
+        this.object.setDirty();
         return;
       }
-      const [markerWidth, markerHeight] = this.markerDimensions[0];
       const fixedWorldMatrix = new Float32Array(16);
       const adjustMatrix = [
         1,
@@ -2463,13 +2474,10 @@
         1
       ];
       mat4_exports.multiply(fixedWorldMatrix, worldMatrix, adjustMatrix);
-      quat2_exports.fromMat4(this.trackingTarget.transformLocal, fixedWorldMatrix);
-      this.trackingTarget.scalingLocal = [
-        markerWidth / window.devicePixelRatio,
-        markerWidth / window.devicePixelRatio,
-        markerWidth / window.devicePixelRatio
-      ];
-      this.trackingTarget.setDirty();
+      quat2_exports.fromMat4(this.object.transformLocal, fixedWorldMatrix);
+      const mw = markerWidth / window.devicePixelRatio;
+      this.object.scalingLocal = [mw, mw, mw];
+      this.object.setDirty();
     }
   });
 })();

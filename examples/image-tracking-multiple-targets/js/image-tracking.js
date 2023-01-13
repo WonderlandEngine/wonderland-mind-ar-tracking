@@ -2328,10 +2328,12 @@
   }
 
   // image-tracking.js
+  var FacingModes = ["environment", "user"];
   WL.registerComponent("image-tracking", {
     videoPane: { type: WL.Type.Object },
     mindPath: { type: WL.Type.String },
-    maxTrack: { type: WL.Type.Int, default: 1 }
+    maxTrack: { type: WL.Type.Int, default: 1 },
+    facingMode: { type: WL.Type.Enum, values: FacingModes, default: FacingModes[0] }
   }, {
     init: function() {
       if (!navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -2342,7 +2344,7 @@
     },
     start: async function() {
       this.view = this.object.getComponent("view");
-      navigator.mediaDevices.getUserMedia({ audio: false, video: true }).then((stream) => {
+      navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: FacingModes[this.facingMode] } }).then((stream) => {
         this.video = document.createElement("video");
         this.video.srcObject = stream;
         this.video.addEventListener("loadedmetadata", () => {
@@ -2473,11 +2475,8 @@
       ];
       mat4_exports.multiply(fixedWorldMatrix, worldMatrix, adjustMatrix);
       quat2_exports.fromMat4(this.object.transformLocal, fixedWorldMatrix);
-      this.object.scalingLocal = [
-        markerWidth / window.devicePixelRatio,
-        markerWidth / window.devicePixelRatio,
-        markerWidth / window.devicePixelRatio
-      ];
+      const mw = markerWidth / window.devicePixelRatio;
+      this.object.scalingLocal = [mw, mw, mw];
       this.object.setDirty();
     }
   });
