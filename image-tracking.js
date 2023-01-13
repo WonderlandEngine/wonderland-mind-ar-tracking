@@ -170,11 +170,8 @@ WL.registerComponent('image-tracking-target', {
         mat4.multiply(fixedWorldMatrix, worldMatrix, adjustMatrix);
         quat2.fromMat4(this.object.transformLocal, fixedWorldMatrix);
 
-        this.object.scalingLocal = [
-            markerWidth / window.devicePixelRatio,
-            markerWidth / window.devicePixelRatio,
-            markerWidth / window.devicePixelRatio
-        ];
+        const mw = markerWidth / window.devicePixelRatio;
+        this.object.scalingLocal = [mw, mw, mw];
         this.object.setDirty();
     }
 });
