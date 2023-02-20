@@ -22,6 +22,7 @@ WL.registerComponent('image-tracking', {
         navigator.mediaDevices.getUserMedia({audio: false, video: {facingMode: FacingModes[this.facingMode]}})
             .then(stream => {
                 this.video = document.createElement('video');
+                this.video.playsInline = true;
                 this.video.srcObject = stream;
                 this.video.addEventListener('loadedmetadata', () => {
                     this.video.play();
