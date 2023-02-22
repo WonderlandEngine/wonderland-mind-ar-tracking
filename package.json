@@ -3,16 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "build": "esbuild image-tracking.js --sourcemap --bundle --outfile=dist/image-tracking.js",
-    "dev": "esbuild image-tracking.js --sourcemap --bundle --outfile=examples/image-tracking/js/image-tracking.js --watch"
-  },
+  "scripts": {},
+  "wonderlandengine": {},
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "esbuild": "^0.14.19"
-  },
   "dependencies": {
+    "@wonderlandengine/api": "^0.9.6",
     "gl-matrix": "^3.4.3"
+  },
+  "devDependencies": {
+    "prettier": "2.8.4"
   }
 }
