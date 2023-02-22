@@ -22,7 +22,7 @@ export class ImageTracking extends Component {
         this.trackingTargets = [];
     }
 
-    async start() {
+    start() {
         this.view = this.object.getComponent('view');
 
         navigator.mediaDevices
