@@ -1,26 +1,33 @@
-import { quat2, mat4, vec3, vec4 } from 'gl-matrix';
+import {Component, Texture, Type} from '@wonderlandengine/api';
+
+import {quat2, mat4, vec3, vec4} from 'gl-matrix';
 
 const FacingModes = ['environment', 'user'];
 
-WL.registerComponent('image-tracking', {
-    videoPane: {type: WL.Type.Object},
-    mindPath: {type: WL.Type.String},
-    maxTrack: {type: WL.Type.Int, default: 1},
-    facingMode: {type: WL.Type.Enum, values: FacingModes, default: FacingModes[0]},
-}, {
-    init: function() {
-        if(!navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            console.error("No media devices found.");
+export class ImageTracking extends Component {
+    static TypeName = 'image-tracking';
+    static Properties = {
+        videoPane: {type: Type.Object},
+        mindPath: {type: Type.String},
+        maxTrack: {type: Type.Int, default: 1},
+        facingMode: {type: Type.Enum, values: FacingModes, default: FacingModes[0]},
+    };
+
+    init() {
+        if (!navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            console.error('No media devices found.');
             this.active = false;
         }
 
         this.trackingTargets = [];
-    },
-    start: async function() {
+    }
+
+    async start() {
         this.view = this.object.getComponent('view');
 
-        navigator.mediaDevices.getUserMedia({audio: false, video: {facingMode: FacingModes[this.facingMode]}})
-            .then(stream => {
+        navigator.mediaDevices
+            .getUserMedia({audio: false, video: {facingMode: FacingModes[this.facingMode]}})
+            .then((stream) => {
                 this.video = document.createElement('video');
                 this.video.playsInline = true;
                 this.video.srcObject = stream;
@@ -32,20 +39,21 @@ WL.registerComponent('image-tracking', {
                     this._setupAR(this.video);
                 });
             });
-    },
-    update: function(dt) {
+    }
+
+    update(dt) {
         //if (this.videoTexture) {
         //this.videoTexture.update();
         //}
         this._updateCameraProjection();
-    },
+    }
 
     registerTarget(targetIndex, target) {
         this.trackingTargets.push({targetIndex, target});
-    },
+    }
 
     // start AR. input can be HTML image or video
-    _setupAR: async function(input) {
+    async _setupAR(input) {
         const controller = new MINDAR.IMAGE.Controller({
             inputWidth: input.width,
             inputHeight: input.height,
@@ -64,15 +72,17 @@ WL.registerComponent('image-tracking', {
 
                     this.trackingTargets.forEach((t) => {
                         if (targetIndex === t.targetIndex) {
-                            const [markerWidth, markerHeight] = this.markerDimensions[targetIndex];
+                            const [markerWidth, markerHeight] =
+                                this.markerDimensions[targetIndex];
                             t.target.updateTrack(worldMatrix, markerWidth, markerHeight);
                         }
                     });
                 }
-            }
+            },
         });
-        const {dimensions, matchingDataList, imageListList} = await controller.addImageTargets(this.mindPath);
-        const texture = new WL.Texture(input);
+        const {dimensions, matchingDataList, imageListList} =
+            await controller.addImageTargets(this.mindPath);
+        const texture = new Texture(e);
 
         this.input = input;
         this.controller = controller;
@@ -86,25 +96,27 @@ WL.registerComponent('image-tracking', {
         this._updateCameraProjection();
 
         this.controller.processVideo(input);
-    },
+    }
 
     // update camera projection matrix and background video plane
-    _updateCameraProjection: function() {
+    _updateCameraProjection() {
         const {input, controller} = this;
 
         if (!input || !controller) {
             return;
         }
 
-        if (this.lastProjectionCanvasWidth === WL.canvas.width &&
-            this.lastProjectionCanvasHeight === WL.canvas.height) {
+        if (
+            this.lastProjectionCanvasWidth === this.engine.canvas.width &&
+            this.lastProjectionCanvasHeight === this.engine.canvas.height
+        ) {
             return;
         }
 
         const controllerProjectionMatrix = controller.getProjectionMatrix();
         const projectionMatrix = [...controllerProjectionMatrix];
 
-        const canvasAspect = WL.canvas.width / WL.canvas.height;
+        const canvasAspect = this.engine.canvas.width / this.engine.canvas.height;
         const inputAspect = input.width / input.height;
         if (canvasAspect < inputAspect) {
             projectionMatrix[0] *= inputAspect / canvasAspect;
@@ -121,44 +133,47 @@ WL.registerComponent('image-tracking', {
         let videoScaleX, videoScaleY, videoOffsetX, videoOffsetY;
         if (inputAspect < canvasAspect) {
             videoScaleX = corner[0];
-            videoScaleY = videoScaleX * input.height / input.width;
+            videoScaleY = (videoScaleX * input.height) / input.width;
         } else {
             videoScaleY = corner[1];
-            videoScaleX = videoScaleY * input.width / input.height;
+            videoScaleX = (videoScaleY * input.width) / input.height;
         }
 
         const far = projectionMatrix[14] / (projectionMatrix[10] + 1.0);
-        const videoTranslateZ = -far*0.999; // slightly less than far clippig plane to avoid clipped
+        const videoTranslateZ = -far * 0.999; // slightly less than far clippig plane to avoid clipped
 
         this.videoPane.scalingLocal = [
-            videoScaleX / corner[2] * videoTranslateZ,
-            videoScaleY / corner[2] * videoTranslateZ,
-            1.0
+            (videoScaleX / corner[2]) * videoTranslateZ,
+            (videoScaleY / corner[2]) * videoTranslateZ,
+            1.0,
         ];
         this.videoPane.setTranslationLocal([0, 0, videoTranslateZ]);
         this.view.projectionMatrix.set(projectionMatrix);
 
-        this.lastProjectionCanvasWidth = WL.canvas.width;
-        this.lastProjectionCanvasHeight = WL.canvas.height;
+        this.lastProjectionCanvasWidth = this.engine.canvas.width;
+        this.lastProjectionCanvasHeight = this.engine.canvas.height;
 
         //console.log("updated camera projection", projectionMatrix);
-    },
-});
+    }
+}
 
-WL.registerComponent('image-tracking-target', {
-    targetIndex: {type: WL.Type.Int},
-    arCamera: {type: WL.Type.Object},
-}, {
-    init: function() {
-        this.arCamera.getComponent("image-tracking").registerTarget(this.targetIndex, this);
-        this.object.scalingLocal = [0,0,0];
+export class ImageTrackingTarget extends Component {
+    static TypeName = 'image-tracking-target';
+    static Properties = {
+        targetIndex: {type: Type.Int},
+        arCamera: {type: Type.Object},
+    };
+
+    init() {
+        this.arCamera.getComponent('image-tracking').registerTarget(this.targetIndex, this);
+        this.object.scalingLocal = [0, 0, 0];
         this.object.setDirty();
-    },
+    }
 
     // update tracking target transformation
-    updateTrack: function(worldMatrix, markerWidth, markerHeight) {
+    updateTrack(worldMatrix, markerWidth, markerHeight) {
         if (!worldMatrix) {
-            this.object.scalingLocal = [0,0,0];
+            this.object.scalingLocal = [0, 0, 0];
             this.object.setDirty();
             return;
         }
@@ -166,10 +181,22 @@ WL.registerComponent('image-tracking-target', {
         const fixedWorldMatrix = new Float32Array(16);
         // anchor point should be the marker center
         const adjustMatrix = [
-            1, 0, 0, 0,
-            0, 1, 0, 0,
-            0, 0, 1, 0,
-            markerWidth/2, markerHeight/2, 0, 1
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            markerWidth / 2,
+            markerHeight / 2,
+            0,
+            1,
         ];
         mat4.multiply(fixedWorldMatrix, worldMatrix, adjustMatrix);
         quat2.fromMat4(this.object.transformLocal, fixedWorldMatrix);
@@ -178,4 +205,4 @@ WL.registerComponent('image-tracking-target', {
         this.object.scalingLocal = [mw, mw, mw];
         this.object.setDirty();
     }
-});
+}
