@@ -1,8 +1,14 @@
 import {Component, Texture, Type} from '@wonderlandengine/api';
 
-import {quat2, mat4, vec3, vec4} from 'gl-matrix';
+import {quat2, mat4, vec3} from 'gl-matrix';
 
 const FacingModes = ['environment', 'user'];
+
+if (!WL_EDITOR) {
+    const s = document.createElement('script');
+    s.setAttribute('src', 'mindar-image.prod.js');
+    document.body.appendChild(s);
+}
 
 export class ImageTracking extends Component {
     static TypeName = 'image-tracking';
@@ -41,13 +47,6 @@ export class ImageTracking extends Component {
             });
     }
 
-    update(dt) {
-        //if (this.videoTexture) {
-        //this.videoTexture.update();
-        //}
-        this._updateCameraProjection();
-    }
-
     registerTarget(targetIndex, target) {
         this.trackingTargets.push({targetIndex, target});
     }
@@ -64,9 +63,10 @@ export class ImageTracking extends Component {
             warmupTolerance: 5, // number of track before considered target found. default is 5
 
             onUpdate: (data) => {
-                if (this.videoTexture) {
-                    this.videoTexture.update();
-                }
+                if (this.videoTexture) this.videoTexture.update();
+                this.engine.scene.colorClearEnabled = false;
+
+                this._updateCameraProjection();
                 if (data.type === 'updateMatrix') {
                     const {targetIndex, worldMatrix} = data;
 
@@ -80,9 +80,8 @@ export class ImageTracking extends Component {
                 }
             },
         });
-        const {dimensions, matchingDataList, imageListList} =
-            await controller.addImageTargets(this.mindPath);
-        const texture = new Texture(e);
+        const {dimensions} = await controller.addImageTargets(this.mindPath);
+        const texture = new Texture(this.engine, this.video);
 
         this.input = input;
         this.controller = controller;
@@ -93,12 +92,10 @@ export class ImageTracking extends Component {
         videoPaneMesh.material = videoPaneMesh.material.clone();
         videoPaneMesh.material.flatTexture = texture;
 
-        this._updateCameraProjection();
-
         this.controller.processVideo(input);
     }
 
-    // update camera projection matrix and background video plane
+    /* Update camera projection matrix and background video plane */
     _updateCameraProjection() {
         const {input, controller} = this;
 
@@ -130,7 +127,7 @@ export class ImageTracking extends Component {
         const corner = new Float32Array(3);
         vec3.transformMat4(corner, [1, 1, 0], invProjectionMatrix);
 
-        let videoScaleX, videoScaleY, videoOffsetX, videoOffsetY;
+        let videoScaleX, videoScaleY;
         if (inputAspect < canvasAspect) {
             videoScaleX = corner[0];
             videoScaleY = (videoScaleX * input.height) / input.width;
@@ -152,8 +149,6 @@ export class ImageTracking extends Component {
 
         this.lastProjectionCanvasWidth = this.engine.canvas.width;
         this.lastProjectionCanvasHeight = this.engine.canvas.height;
-
-        //console.log("updated camera projection", projectionMatrix);
     }
 }
 

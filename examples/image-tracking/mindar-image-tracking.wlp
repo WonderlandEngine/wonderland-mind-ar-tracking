@@ -26,6 +26,22 @@
                         "material": "DefaultFontMaterial"
                     }
                 }
+            ],
+            "translation": [
+                2.3805131377230282e-7,
+                0.0046208,
+                -1.5524981
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
+                1.0,
+                1.0,
+                1.0
             ]
         },
         "19": {
@@ -53,22 +69,20 @@
                     "active": true
                 }
             ],
-            "transformation": [
+            "translation": [
+                0.0,
+                0.0,
+                -3.2851562
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
                 1.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
                 1.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                1.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
                 1.0
             ]
         }
@@ -144,9 +158,9 @@
             },
             "Flat": {
                 "color": [
-                    0.9999914,
                     1.0,
-                    0.9999899,
+                    1.0,
+                    1.0,
                     1.0
                 ],
                 "flatTexture": "t0"
@@ -281,6 +295,10 @@
             "link": {
                 "name": "Flat Opaque Textured",
                 "file": "default"
+            },
+            "features": {
+                "ALPHA_MASKED": false,
+                "TEXTURED": true
             }
         },
         "8": {
@@ -299,6 +317,9 @@
             "link": {
                 "name": "Phong Opaque Textured",
                 "file": "default"
+            },
+            "features": {
+                "ALPHA_MASKED": true
             }
         },
         "15": {
@@ -329,6 +350,9 @@
             "link": {
                 "name": "Physical Opaque Textured",
                 "file": "default"
+            },
+            "features": {
+                "ALPHA_MASKED": true
             }
         },
         "31": {
@@ -342,6 +366,18 @@
                 "name": "Sky",
                 "file": "default"
             }
+        },
+        "35": {
+            "link": {
+                "name": "Phong Normalmapped",
+                "file": "default"
+            }
+        },
+        "36": {
+            "link": {
+                "name": "Phong Lightmapped",
+                "file": "default"
+            }
         }
     },
     "settings": {
@@ -350,7 +386,7 @@
             "version": [
                 0,
                 9,
-                3
+                5
             ],
             "customIndexHtml": false
         },
@@ -359,9 +395,23 @@
         },
         "scripting": {
             "sourcePaths": [
-                "/js/editor-components-bundle.js",
-                "js"
-            ]
+                "js",
+                "js/index.js"
+            ],
+            "libraryPaths": [
+                "/js/lib/"
+            ],
+            "bundlingType": "esbuild",
+            "autoManageEntryPoint": true,
+            "esbuildFlags": ""
+        }
+    },
+    "fonts": {
+        "37": {
+            "link": {
+                "name": "DejaVuSans.ttf",
+                "file": "default"
+            }
         }
     }
 }

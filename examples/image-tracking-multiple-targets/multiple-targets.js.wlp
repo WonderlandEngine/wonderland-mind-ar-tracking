@@ -41,6 +41,22 @@
                         "arCamera": "17"
                     }
                 }
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
+                1.0,
+                0.9999996,
+                0.9999996
             ]
         },
         "28": {
@@ -48,7 +64,23 @@
                 "name": "RootNode (gltf orientation matrix)",
                 "file": "assets\\shiba\\scene.gltf"
             },
-            "parent": "19"
+            "parent": "19",
+            "translation": [
+                0.0,
+                -0.3329777,
+                0.3500743
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
+                0.5,
+                0.4999967,
+                0.4999967
+            ]
         },
         "29": {
             "link": {
@@ -56,23 +88,21 @@
                 "file": "assets\\shiba\\scene.gltf"
             },
             "parent": "28",
-            "transformation": [
-                1.5,
+            "translation": [
+                0.0,
+                0.0,
+                0.75
+            ],
+            "rotation": [
                 0.0,
                 0.0,
                 0.0,
-                0.0,
-                1.5,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                1.5,
-                0.0,
-                0.0,
-                0.0,
-                0.75,
                 1.0
+            ],
+            "scaling": [
+                1.5,
+                1.5,
+                1.5
             ]
         },
         "30": {
@@ -144,22 +174,20 @@
                     "active": true
                 }
             ],
-            "transformation": [
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
                 1.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
                 1.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                1.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
                 1.0
             ]
         },
@@ -168,7 +196,23 @@
                 "name": "RootNode (gltf orientation matrix)",
                 "file": "assets\\dinosaur\\scene.gltf"
             },
-            "parent": "39"
+            "parent": "39",
+            "translation": [
+                0.0,
+                0.0,
+                0.4645909
+            ],
+            "rotation": [
+                -0.0000013,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
+                0.57,
+                0.5699994,
+                0.5699994
+            ]
         },
         "45": {
             "link": {
@@ -190,23 +234,21 @@
                 "file": "assets\\dinosaur\\scene.gltf"
             },
             "parent": "46",
-            "transformation": [
-                0.5,
+            "translation": [
                 0.0,
                 0.0,
-                0.0,
-                0.0,
-                0.5,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                0.5,
-                0.0,
+                0.0
+            ],
+            "rotation": [
                 0.0,
                 0.0,
                 0.0,
                 1.0
+            ],
+            "scaling": [
+                0.5,
+                0.5,
+                0.5
             ]
         },
         "48": {
@@ -240,22 +282,20 @@
                 }
             ],
             "parent": "17",
-            "transformation": [
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
                 1.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
                 1.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                1.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
                 1.0
             ]
         }
@@ -505,6 +545,9 @@
             "link": {
                 "name": "Flat Opaque Textured",
                 "file": "default"
+            },
+            "features": {
+                "ALPHA_MASKED": true
             }
         },
         "8": {
@@ -523,6 +566,9 @@
             "link": {
                 "name": "Phong Opaque Textured",
                 "file": "default"
+            },
+            "features": {
+                "ALPHA_MASKED": true
             }
         },
         "15": {
@@ -553,6 +599,9 @@
             "link": {
                 "name": "Physical Opaque Textured",
                 "file": "default"
+            },
+            "features": {
+                "ALPHA_MASKED": true
             }
         },
         "65": {
@@ -566,6 +615,18 @@
                 "name": "Sky",
                 "file": "default"
             }
+        },
+        "69": {
+            "link": {
+                "name": "Phong Normalmapped",
+                "file": "default"
+            }
+        },
+        "70": {
+            "link": {
+                "name": "Phong Lightmapped",
+                "file": "default"
+            }
         }
     },
     "settings": {
@@ -574,15 +635,20 @@
             "version": [
                 0,
                 9,
-                3
+                5
             ],
             "customIndexHtml": false
         },
         "scripting": {
             "sourcePaths": [
-                "/js/editor-components-bundle.js",
                 "js"
-            ]
+            ],
+            "libraryPaths": [
+                "/js/lib/"
+            ],
+            "bundlingType": "esbuild",
+            "esbuildFlags": "",
+            "autoManageEntryPoint": true
         },
         "vr": {
             "enable": false
@@ -591,5 +657,13 @@
     "files": [
         "assets/shiba/scene.gltf",
         "assets/dinosaur/scene.gltf"
-    ]
+    ],
+    "fonts": {
+        "71": {
+            "link": {
+                "name": "DejaVuSans.ttf",
+                "file": "default"
+            }
+        }
+    }
 }
