@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wonderlandengine/api": "file:../wonderland-engine/js/api",
+    "@wonderlandengine/api": "^0.9.8",
     "gl-matrix": "^3.4.3"
   },
   "devDependencies": {
