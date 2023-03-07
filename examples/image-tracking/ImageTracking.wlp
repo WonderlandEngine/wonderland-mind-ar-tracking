@@ -403,7 +403,7 @@
             ],
             "bundlingType": "esbuild",
             "autoManageEntryPoint": true,
-            "esbuildFlags": ""
+            "esbuildFlags": "--define:IS_BROWSER=true"
         }
     },
     "fonts": {
