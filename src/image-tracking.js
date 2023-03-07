@@ -2,13 +2,9 @@ import {Component, Texture, Type} from '@wonderlandengine/api';
 
 import {quat2, mat4, vec3} from 'gl-matrix';
 
-const FacingModes = ['environment', 'user'];
+import {Controller} from 'mind-ar/src/image-target/controller.js';
 
-if (!WL_EDITOR) {
-    const s = document.createElement('script');
-    s.setAttribute('src', 'mindar-image.prod.js');
-    document.body.appendChild(s);
-}
+const FacingModes = ['environment', 'user'];
 
 export class ImageTracking extends Component {
     static TypeName = 'image-tracking';
@@ -53,7 +49,7 @@ export class ImageTracking extends Component {
 
     // start AR. input can be HTML image or video
     async _setupAR(input) {
-        const controller = new MINDAR.IMAGE.Controller({
+        const controller = new Controller({
             inputWidth: input.width,
             inputHeight: input.height,
             maxTrack: this.maxTrack,
