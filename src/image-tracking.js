@@ -157,43 +157,27 @@ export class ImageTrackingTarget extends Component {
 
     init() {
         this.arCamera.getComponent('image-tracking').registerTarget(this.targetIndex, this);
-        this.object.scalingLocal = [0, 0, 0];
+        /* "Hide" object */
+        this.object.scalingLocal.fill(0);
         this.object.setDirty();
     }
 
-    // update tracking target transformation
+    /* Update tracking target transformation */
     updateTrack(worldMatrix, markerWidth, markerHeight) {
         if (!worldMatrix) {
-            this.object.scalingLocal = [0, 0, 0];
+            /* "Hide" object => invalid tracking */
+            this.object.scalingLocal.fill(0);
             this.object.setDirty();
             return;
         }
 
-        const fixedWorldMatrix = new Float32Array(16);
-        // anchor point should be the marker center
-        const adjustMatrix = [
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            markerWidth / 2,
-            markerHeight / 2,
-            0,
-            1,
-        ];
-        mat4.multiply(fixedWorldMatrix, worldMatrix, adjustMatrix);
-        quat2.fromMat4(this.object.transformLocal, fixedWorldMatrix);
+        quat2.fromMat4(this.object.transformLocal, worldMatrix);
+        quat2.normalize(this.object.transformLocal, this.object.transformLocal);
+        // Anchor point should be the marker center
+        this.object.translateObject([markerWidth / 2, markerHeight / 2, 0]);
 
         const mw = markerWidth / window.devicePixelRatio;
-        this.object.scalingLocal = [mw, mw, mw];
+        this.object.scalingLocal.fill(mw);
         this.object.setDirty();
     }
 }
