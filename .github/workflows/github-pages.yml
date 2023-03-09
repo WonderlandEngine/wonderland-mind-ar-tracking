@@ -15,6 +15,7 @@ jobs:
         # Build examples
         /usr/local/bin/entrypoint.sh WonderlandEditor --windowless --package --project examples/image-tracking/ImageTracking.wlp --output deploy/image-tracking --credentials "$WLE_CREDENTIALS"
         /usr/local/bin/entrypoint.sh WonderlandEditor --windowless --package --project examples/image-tracking-multiple-targets/MultipleTargets.wlp --output deploy/image-tracking-multiple-targets --credentials "$WLE_CREDENTIALS"
+        cp examples/index.html deploy/index.html
       env:
           WLE_CREDENTIALS: ${{ secrets.WLE_CREDENTIALS }}
     - name: Upload package artifact
