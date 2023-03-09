@@ -1,17 +1,22 @@
 import {Component, Texture, Type} from '@wonderlandengine/api';
-
-import {quat2, mat4, vec3} from 'gl-matrix';
-
+import {mat4, vec3} from 'gl-matrix';
 import {Controller} from 'mind-ar/src/image-target/controller.js';
 
 const FacingModes = ['environment', 'user'];
 
+/**
+ * MindAR image tracking setup
+ */
 export class ImageTracking extends Component {
     static TypeName = 'image-tracking';
     static Properties = {
+        /** Object with plane mesh for the background video */
         videoPane: {type: Type.Object},
+        /** Path to the .mind file containing the marker information */
         mindPath: {type: Type.String},
+        /** Maximum amount of markers to use */
         maxTrack: {type: Type.Int, default: 1},
+        /** Facing mode of the user camera to get the video feed from */
         facingMode: {type: Type.Enum, values: FacingModes, default: FacingModes[0]},
     };
 
@@ -43,6 +48,7 @@ export class ImageTracking extends Component {
             });
     }
 
+    /** Register an 'image-tracking-target' component to follow a marker */
     registerTarget(targetIndex, target) {
         this.trackingTargets.push({targetIndex, target});
     }
@@ -145,39 +151,5 @@ export class ImageTracking extends Component {
 
         this.lastProjectionCanvasWidth = this.engine.canvas.width;
         this.lastProjectionCanvasHeight = this.engine.canvas.height;
-    }
-}
-
-export class ImageTrackingTarget extends Component {
-    static TypeName = 'image-tracking-target';
-    static Properties = {
-        targetIndex: {type: Type.Int},
-        arCamera: {type: Type.Object},
-    };
-
-    init() {
-        this.arCamera.getComponent('image-tracking').registerTarget(this.targetIndex, this);
-        /* "Hide" object */
-        this.object.scalingLocal.fill(0);
-        this.object.setDirty();
-    }
-
-    /* Update tracking target transformation */
-    updateTrack(worldMatrix, markerWidth, markerHeight) {
-        if (!worldMatrix) {
-            /* "Hide" object => invalid tracking */
-            this.object.scalingLocal.fill(0);
-            this.object.setDirty();
-            return;
-        }
-
-        quat2.fromMat4(this.object.transformLocal, worldMatrix);
-        quat2.normalize(this.object.transformLocal, this.object.transformLocal);
-        // Anchor point should be the marker center
-        this.object.translateObject([markerWidth / 2, markerHeight / 2, 0]);
-
-        const mw = markerWidth / window.devicePixelRatio;
-        this.object.scalingLocal.fill(mw);
-        this.object.setDirty();
     }
 }

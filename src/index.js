@@ -1,1 +1,2 @@
-export {ImageTracking, ImageTrackingTarget} from './image-tracking.js';
+export {ImageTracking} from './image-tracking.js';
+export {ImageTrackingTarget} from './image-tracking-target.js';
