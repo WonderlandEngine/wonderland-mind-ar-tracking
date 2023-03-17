@@ -1,0 +1,43 @@
+on: [push]
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    container:
+      image: wonderlandengine/editor:edge
+    environment:
+      name: "Github Pages"
+      url: https://wonderlandengine.github.io/wonderland-mind-ar-tracking
+    steps:
+    - uses: actions/checkout@v2
+    - name: Package
+      run: |
+        # Build wonderland-mind-ar-tracking
+        npm ci
+        npm run build
+        # Build examples
+        /usr/local/bin/entrypoint.sh WonderlandEditor --windowless --package --project examples/image-tracking/ImageTracking.wlp --output deploy/image-tracking --credentials "$WLE_CREDENTIALS"
+        /usr/local/bin/entrypoint.sh WonderlandEditor --windowless --package --project examples/image-tracking-multiple-targets/MultipleTargets.wlp --output deploy/image-tracking-multiple-targets --credentials "$WLE_CREDENTIALS"
+        cp examples/index.html deploy/index.html
+      env:
+          WLE_CREDENTIALS: ${{ secrets.WLE_CREDENTIALS }}
+    - name: Upload package artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: pages-deploy
+        path: deploy/
+  deploy:
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Download package artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: pages-deploy
+        path: deploy
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.1
+      with:
+        branch: gh-pages
+        folder: deploy

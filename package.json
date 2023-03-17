@@ -1,18 +1,34 @@
 {
-  "name": "mindar-image-tracking",
+  "name": "@wonderlandengine/mind-ar-tracking",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Mind-AR tracking powered AR tracking in Wonderland Engine.",
   "scripts": {
-    "build": "esbuild image-tracking.js --sourcemap --bundle --outfile=dist/image-tracking.js",
-    "dev": "esbuild image-tracking.js --sourcemap --bundle --outfile=examples/image-tracking/js/image-tracking.js --watch"
+      "build": "node esbuild.mjs"
   },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "esbuild": "^0.14.19"
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "wonderlandengine": {},
+  "author": "Wonderland GmbH",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WonderlandEngine/wonderland-mind-ar-tracking.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WonderlandEngine/api/issues"
+  },
+  "homepage": "https://github.com/WonderlandEngine/api#readme",
+  "exports": {
+      ".": "./dist/index.js"
   },
   "dependencies": {
-    "gl-matrix": "^3.4.3"
+    "@wonderlandengine/api": "^0.9.8",
+    "gl-matrix": "^3.4.3",
+    "mind-ar": "1.2.1"
+  },
+  "devDependencies": {
+    "esbuild-plugin-inline-worker": "^0.1.1",
+    "prettier": "2.8.4"
   }
 }
