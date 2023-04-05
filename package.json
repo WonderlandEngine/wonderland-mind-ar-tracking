@@ -23,7 +23,7 @@
       ".": "./dist/index.js"
   },
   "dependencies": {
-    "@wonderlandengine/api": "^0.9.8",
+    "@wonderlandengine/api": "^1.0.0-rc.2",
     "gl-matrix": "^3.4.3",
     "mind-ar": "1.2.1"
   },
