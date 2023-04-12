@@ -1,8 +1,12 @@
 import {Component, Texture, Type} from '@wonderlandengine/api';
 import {mat4, vec3} from 'gl-matrix';
-import {Controller} from 'mind-ar/src/image-target/controller.js';
 
 const FacingModes = ['environment', 'user'];
+if (!WL_EDITOR) {
+    var Controller = require('mind-ar/src/image-target/controller.js').Controller;
+} else {
+    var Controller;
+}
 
 /**
  * MindAR image tracking setup

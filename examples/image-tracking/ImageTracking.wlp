@@ -384,9 +384,9 @@
         "project": {
             "name": "mindar-image-tracking",
             "version": [
+                1,
                 0,
-                9,
-                5
+                0
             ],
             "customIndexHtml": false
         },
@@ -402,8 +402,7 @@
                 "/js/lib/"
             ],
             "bundlingType": "esbuild",
-            "autoManageEntryPoint": true,
-            "esbuildFlags": "--define:IS_BROWSER=true"
+            "esbuildFlags": "--format=esm"
         }
     },
     "fonts": {
@@ -413,5 +412,6 @@
                 "file": "default"
             }
         }
-    }
+    },
+    "languages": {}
 }

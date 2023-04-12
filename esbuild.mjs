@@ -7,6 +7,7 @@ await build({
     outfile: 'dist/index.js',
     treeShaking: true,
     target: 'es2017',
+    conditions: ['module'],
     format: 'esm',
     plugins: [inlineWorkerPlugin()],
 });

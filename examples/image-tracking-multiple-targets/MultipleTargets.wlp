@@ -633,9 +633,9 @@
         "project": {
             "name": "multiple-targets",
             "version": [
+                1,
                 0,
-                9,
-                5
+                0
             ],
             "customIndexHtml": false
         },
@@ -647,7 +647,7 @@
                 "/js/lib/"
             ],
             "bundlingType": "esbuild",
-            "esbuildFlags": "",
+            "esbuildFlags": "--format=esm",
             "autoManageEntryPoint": true
         },
         "vr": {
@@ -665,5 +665,6 @@
                 "file": "default"
             }
         }
-    }
+    },
+    "languages": {}
 }

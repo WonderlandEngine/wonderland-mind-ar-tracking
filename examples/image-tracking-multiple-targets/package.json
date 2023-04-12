@@ -15,8 +15,8 @@
     "esbuild": "^0.15.18"
   },
   "dependencies": {
-    "@wonderlandengine/api": "^0.9.6",
-    "@wonderlandengine/components": "^0.9.2",
+    "@wonderlandengine/api": "^1.0.0-rc.2",
+    "@wonderlandengine/components": "^1.0.0-rc.3",
     "gl-matrix": "^3.4.3",
     "mindar-image-tracking": "file:../.."
   }
