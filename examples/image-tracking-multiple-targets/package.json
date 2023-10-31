@@ -18,6 +18,6 @@
     "@wonderlandengine/api": "^1.0.0",
     "@wonderlandengine/components": "^1.0.1",
     "gl-matrix": "^3.4.3",
-    "mindar-image-tracking": "file:../.."
+    "@wonderlandengine/mind-ar-tracking": "^1.0.0"
   }
 }
