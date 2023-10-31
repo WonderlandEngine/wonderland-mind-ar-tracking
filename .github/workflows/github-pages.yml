@@ -10,7 +10,7 @@ jobs:
       url: https://wonderlandengine.github.io/wonderland-mind-ar-tracking
     steps:
     - name: Install Git
-      run: apt-get update && apt-get install -y git
+      run: apt-get update && apt-get install -y git git-lfs
     - uses: actions/checkout@v4
       with:
         lfs: true
