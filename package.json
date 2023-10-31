@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Mind-AR tracking powered AR tracking in Wonderland Engine.",
   "scripts": {
+      "prepublishOnly": "npm run build",
       "build": "node esbuild.mjs"
   },
   "type": "module",
@@ -16,9 +17,9 @@
     "url": "git+https://github.com/WonderlandEngine/wonderland-mind-ar-tracking.git"
   },
   "bugs": {
-    "url": "https://github.com/WonderlandEngine/api/issues"
+    "url": "https://github.com/WonderlandEngine/wonderland-mind-ar-tracking/issues"
   },
-  "homepage": "https://github.com/WonderlandEngine/api#readme",
+  "homepage": "https://github.com/WonderlandEngine/wonderland-mind-ar-tracking#readme",
   "exports": {
       ".": "./dist/index.js"
   },
