@@ -1,8 +1,10 @@
-# wonderland-mind-ar-tracking
-
 Integration of [mind-ar-js](https://github.com/hiukim/mind-ar-js), an
 open-source image tracking framework,
 for [Wonderland Engine](https://wonderlandengine.com/).
+
+## Try it!
+
+Examples are [live here](https://wonderlandengine.github.io/wonderland-mind-ar-tracking).
 
 ## Setup
 
