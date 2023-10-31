@@ -23,10 +23,10 @@
       ".": "./dist/index.js"
   },
   "peerDependencies": {
-    "@wonderlandengine/api": "^1.0.0"
+    "@wonderlandengine/api": "^1.0.0",
+    "gl-matrix": "^3.4.3"
   },
   "dependencies": {
-    "gl-matrix": "^3.4.3",
     "mind-ar": "1.2.1"
   },
   "devDependencies": {

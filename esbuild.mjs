@@ -10,4 +10,5 @@ await build({
     conditions: ['module'],
     format: 'esm',
     plugins: [inlineWorkerPlugin()],
+    external: ['@wonderlandengine/api', 'gl-matrix'],
 });
