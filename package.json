@@ -6,6 +6,7 @@
       "prepublishOnly": "npm run build",
       "build": "node esbuild.mjs"
   },
+  "keywords": ["webar", "image-tracking", "ar"],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
