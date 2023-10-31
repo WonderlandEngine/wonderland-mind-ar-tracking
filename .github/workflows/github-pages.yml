@@ -9,6 +9,8 @@ jobs:
       name: "Github Pages"
       url: https://wonderlandengine.github.io/wonderland-mind-ar-tracking
     steps:
+    - name: Install Git
+      run: apt-get update && apt-get install -y git
     - uses: actions/checkout@v4
       with:
         lfs: true
