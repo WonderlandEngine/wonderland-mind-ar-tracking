@@ -10,6 +10,8 @@ jobs:
       url: https://wonderlandengine.github.io/wonderland-mind-ar-tracking
     steps:
     - uses: actions/checkout@v2
+      with:
+        lfs: true
     - name: Package
       run: |
         # Build wonderland-mind-ar-tracking
