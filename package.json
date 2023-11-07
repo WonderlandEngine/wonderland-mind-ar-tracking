@@ -1,12 +1,16 @@
 {
   "name": "@wonderlandengine/mind-ar-tracking",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Mind-AR tracking powered AR tracking in Wonderland Engine.",
   "scripts": {
-      "prepublishOnly": "npm run build",
-      "build": "node esbuild.mjs"
+    "prepublishOnly": "npm run build",
+    "build": "node esbuild.mjs"
   },
-  "keywords": ["webar", "image-tracking", "ar"],
+  "keywords": [
+    "webar",
+    "image-tracking",
+    "ar"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -22,7 +26,7 @@
   },
   "homepage": "https://github.com/WonderlandEngine/wonderland-mind-ar-tracking#readme",
   "exports": {
-      ".": "./dist/index.js"
+    ".": "./dist/index.js"
   },
   "files": [
     "dist/**/*.d.ts",
