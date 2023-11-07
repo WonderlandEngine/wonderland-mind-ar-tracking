@@ -138,9 +138,9 @@ export class ImageTracking extends Component {
         const inputAspect = input.width / input.height;
         if (canvasAspect < inputAspect) {
             projectionMatrix[0] *= inputAspect / canvasAspect;
-        } else {
-            projectionMatrix[5] *= canvasAspect / inputAspect;
         }
+        this.view.fov = 2.0*Math.atan(1.0/projectionMatrix[0])*180.0/Math.PI;
+
         this.lastProjectionCanvasWidth = this.engine.canvas.width;
         this.lastProjectionCanvasHeight = this.engine.canvas.height;
 
@@ -149,7 +149,7 @@ export class ImageTracking extends Component {
 
         // put the background video to the far clipping plane
         const invProjectionMatrix = new Float32Array(16);
-        mat4.invert(invProjectionMatrix, projectionMatrix);
+        mat4.invert(invProjectionMatrix, this.view.projectionMatrix);
         const corner = new Float32Array(3);
         vec3.transformMat4(corner, [1, 1, 0], invProjectionMatrix);
 
@@ -171,7 +171,5 @@ export class ImageTracking extends Component {
             1.0,
         ];
         this.videoPane.setTranslationLocal([0, 0, videoTranslateZ]);
-        this.view.projectionMatrix.set(projectionMatrix);
-
     }
 }
