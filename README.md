@@ -33,14 +33,14 @@ Set up the camera to receive tracking results:
    For example, you can put the `targets.mind` file into a `static` folder under the root directory,
    and then set his parameter to `targets.mind`.
 
-#### Camera Plane
+#### Camera Feed
 
 Setup the camera feed in the background:
 
-7. For the video plane, add a new child object `Mesh` on `AR Camera`. Optionally renamed it to `Video Plane`
-8. In the `mesh` component, select `Primitive Plane` as mesh.
-9. Assign a material with a `Flat Opaque Textured` pipeline.
-10. In the `image-tracking` component on the `AR Camera`, assign the `Video Plane` to the `videoPane` parameter.
+7. Find "Sky" in `Resources > Pipelines`.
+8. Set the shader to "Background" and enabled `TEXTURED`.
+9. Create a new material "VideoFeed" in `Resources > Materials` and make it use the Sky pipeline.
+10. Go to `Project Settings > Rendering`, enable sky and drag-drop the new material into the material slot.
 
 #### Tracking Targets
 
