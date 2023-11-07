@@ -1,4 +1,4 @@
-import {Component, Texture, Type} from '@wonderlandengine/api';
+import {Component, Texture, Property} from '@wonderlandengine/api';
 import {mat4, vec3} from 'gl-matrix';
 
 const FacingModes = ['environment', 'user'];
@@ -15,11 +15,11 @@ export class ImageTracking extends Component {
     static TypeName = 'image-tracking';
     static Properties = {
         /** Object with plane mesh for the background video */
-        videoPane: {type: Type.Object},
+        videoPane: Property.object(),
         /** Path to the .mind file containing the marker information */
-        mindPath: {type: Type.String},
+        mindPath: Property.string(),
         /** Maximum amount of markers to use */
-        maxTrack: {type: Type.Int, default: 1},
+        maxTrack: Property.int(1),
         /** Facing mode of the user camera to get the video feed from */
         facingMode: {type: Type.Enum, values: FacingModes, default: FacingModes[0]},
     };
