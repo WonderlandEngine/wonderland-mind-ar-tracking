@@ -33,7 +33,7 @@
     "gl-matrix": "^3.4.3"
   },
   "dependencies": {
-    "mind-ar": "1.2.1"
+    "mind-ar": "1.2.3"
   },
   "devDependencies": {
     "esbuild-plugin-inline-worker": "^0.1.1",
