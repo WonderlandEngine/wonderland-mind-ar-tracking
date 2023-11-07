@@ -21,7 +21,15 @@ export class ImageTracking extends Component {
         /** Maximum amount of markers to use */
         maxTrack: Property.int(1),
         /** Facing mode of the user camera to get the video feed from */
-        facingMode: {type: Type.Enum, values: FacingModes, default: FacingModes[0]},
+        facingMode: Property.enum(FacingModes),
+        /* OneEuroFilter, min cutoff frequency. default is 0.001 */
+        filterMinCF: Property.float(0.001),
+        /* OneEuroFilter, beta. */
+        filterBeta: Property.float(1),
+        /* number of miss before considered target lost. */
+        missTolerance: Property.int(5),
+        /* number of track before considered target found. */
+        warmupTolerance: Property.int(5),
     };
 
     init() {
@@ -63,10 +71,10 @@ export class ImageTracking extends Component {
             inputWidth: input.width,
             inputHeight: input.height,
             maxTrack: this.maxTrack,
-            filterMinCF: 0.001, // OneEuroFilter, min cutoff frequency. default is 0.001
-            filterBeta: 1, // OneEuroFilter, beta. default is 1000
-            missTolerance: 5, // number of miss before considered target lost. default is 5
-            warmupTolerance: 5, // number of track before considered target found. default is 5
+            filterMinCF: this.filterMinCF,
+            filterBeta: this.filterBeta,
+            missTolerance: this.missTolerance,
+            warmupTolerance: this.warmupTolerance,
 
             onUpdate: (data) => {
                 if (this.videoTexture) this.videoTexture.update();
