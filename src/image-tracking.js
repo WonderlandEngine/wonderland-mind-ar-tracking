@@ -102,9 +102,16 @@ export class ImageTracking extends Component {
         this.markerDimensions = dimensions;
         this.videoTexture = texture;
 
-        const videoPaneMesh = this.videoPane.getComponent('mesh');
-        videoPaneMesh.material = videoPaneMesh.material.clone();
-        videoPaneMesh.material.flatTexture = texture;
+        if(this.videoPane) {
+            /* Backwards compatibility mesh pane for the video before fullscreen sky shaders */
+            const videoPaneMesh = this.videoPane.getComponent('mesh');
+            videoPaneMesh.material = videoPaneMesh.material.clone();
+            videoPaneMesh.material.flatTexture = texture;
+        } else if(this.engine.scene.skyMaterial) {
+            this.engine.scene.skyMaterial.texture = texture;
+        } else {
+            console.warn("No videoPane or sky material set, cannot show video feed.");
+        }
 
         this.controller.processVideo(input);
     }
@@ -134,6 +141,11 @@ export class ImageTracking extends Component {
         } else {
             projectionMatrix[5] *= canvasAspect / inputAspect;
         }
+        this.lastProjectionCanvasWidth = this.engine.canvas.width;
+        this.lastProjectionCanvasHeight = this.engine.canvas.height;
+
+        /* Backwards compatibility mesh pane for the video before fullscreen sky shaders */
+        if(!this.videoPane) return;
 
         // put the background video to the far clipping plane
         const invProjectionMatrix = new Float32Array(16);
@@ -161,7 +173,5 @@ export class ImageTracking extends Component {
         this.videoPane.setTranslationLocal([0, 0, videoTranslateZ]);
         this.view.projectionMatrix.set(projectionMatrix);
 
-        this.lastProjectionCanvasWidth = this.engine.canvas.width;
-        this.lastProjectionCanvasHeight = this.engine.canvas.height;
     }
 }
