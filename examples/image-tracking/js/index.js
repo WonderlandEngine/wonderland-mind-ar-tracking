@@ -12,6 +12,8 @@
  */
 
 /* wle:auto-imports:start */
+import {ImageTracking} from '@wonderlandengine/mind-ar-tracking';
+import {ImageTrackingTarget} from '@wonderlandengine/mind-ar-tracking';
 /* wle:auto-imports:end */
 
 import {loadRuntime} from '@wonderlandengine/api';
@@ -21,14 +23,14 @@ import * as API from '@wonderlandengine/api'; // Deprecated: Backward compatibil
 const RuntimeOptions = {
     physx: false,
     loader: false,
-    xrFramebufferScaleFactor: 1.0,
+    xrFramebufferScaleFactor: 1,
+    canvas: 'canvas',
 };
-
 const Constants = {
-    ProjectName: 'MyWonderland',
+    ProjectName: 'mindar-image-tracking',
     RuntimeBaseName: 'WonderlandRuntime',
-    WebXRRequiredFeatures: [],
-    WebXROptionalFeatures: [],
+    WebXRRequiredFeatures: ['local',],
+    WebXROptionalFeatures: ['local','hand-tracking','hit-test',],
 };
 /* wle:auto-constants:end */
 
@@ -74,6 +76,8 @@ if (document.readyState === 'loading') {
 }
 
 /* wle:auto-register:start */
+engine.registerComponent(ImageTracking);
+engine.registerComponent(ImageTrackingTarget);
 /* wle:auto-register:end */
 
 engine.scene.load(`${Constants.ProjectName}.bin`);

@@ -15,35 +15,6 @@
                 }
             ]
         },
-        "18": {
-            "name": "VideoPlane",
-            "parent": "17",
-            "components": [
-                {
-                    "type": "mesh",
-                    "mesh": {
-                        "mesh": "p0",
-                        "material": "DefaultFontMaterial"
-                    }
-                }
-            ],
-            "translation": [
-                2.3805131377230282e-7,
-                0.0046208,
-                -1.5524981
-            ],
-            "rotation": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-            ],
-            "scaling": [
-                1.0,
-                1.0,
-                1.0
-            ]
-        },
         "19": {
             "name": "TrackingTarget",
             "parent": "17",
@@ -176,6 +147,13 @@
                     1.0
                 ]
             }
+        },
+        "54": {
+            "name": "VideoFeed",
+            "pipeline": "34",
+            "Background": {
+                "texture": "t0"
+            }
         }
     },
     "shaders": {
@@ -274,6 +252,96 @@
                 "name": "TileFeedback.frag",
                 "file": "default"
             }
+        },
+        "38": {
+            "link": {
+                "name": "lib\\Color.glsl",
+                "file": "default"
+            }
+        },
+        "39": {
+            "link": {
+                "name": "lib\\Compatibility.frag",
+                "file": "default"
+            }
+        },
+        "40": {
+            "link": {
+                "name": "lib\\CoordinateSystems.glsl",
+                "file": "default"
+            }
+        },
+        "41": {
+            "link": {
+                "name": "lib\\GI.frag",
+                "file": "default"
+            }
+        },
+        "42": {
+            "link": {
+                "name": "lib\\Inputs.frag",
+                "file": "default"
+            }
+        },
+        "43": {
+            "link": {
+                "name": "lib\\Lights.frag",
+                "file": "default"
+            }
+        },
+        "44": {
+            "link": {
+                "name": "lib\\Materials.frag",
+                "file": "default"
+            }
+        },
+        "45": {
+            "link": {
+                "name": "lib\\Math.glsl",
+                "file": "default"
+            }
+        },
+        "46": {
+            "link": {
+                "name": "lib\\Packing.frag",
+                "file": "default"
+            }
+        },
+        "47": {
+            "link": {
+                "name": "lib\\Quaternion.glsl",
+                "file": "default"
+            }
+        },
+        "48": {
+            "link": {
+                "name": "lib\\Slug.frag",
+                "file": "default"
+            }
+        },
+        "49": {
+            "link": {
+                "name": "lib\\Slug.vert",
+                "file": "default"
+            }
+        },
+        "50": {
+            "link": {
+                "name": "lib\\Surface.frag",
+                "file": "default"
+            }
+        },
+        "51": {
+            "link": {
+                "name": "lib\\Textures.frag",
+                "file": "default"
+            }
+        },
+        "53": {
+            "link": {
+                "name": "lib\\Uniforms.glsl",
+                "file": "default"
+            }
         }
     },
     "animations": {},
@@ -365,7 +433,8 @@
             "link": {
                 "name": "Sky",
                 "file": "default"
-            }
+            },
+            "shader": "22"
         },
         "35": {
             "link": {
@@ -378,6 +447,12 @@
                 "name": "Phong Lightmapped",
                 "file": "default"
             }
+        },
+        "52": {
+            "link": {
+                "name": "TileFeedback",
+                "file": "default"
+            }
         }
     },
     "settings": {
@@ -385,8 +460,8 @@
             "name": "mindar-image-tracking",
             "version": [
                 1,
-                0,
-                0
+                1,
+                2
             ],
             "customIndexHtml": false
         },
@@ -403,6 +478,12 @@
             ],
             "bundlingType": "esbuild",
             "esbuildFlags": "--format=esm"
+        },
+        "rendering": {
+            "sky": {
+                "enabled": true,
+                "material": "54"
+            }
         }
     },
     "fonts": {
@@ -413,5 +494,6 @@
             }
         }
     },
-    "languages": {}
+    "languages": {},
+    "files": {}
 }

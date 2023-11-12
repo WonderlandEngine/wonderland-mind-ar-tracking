@@ -16,19 +16,6 @@
                 }
             ]
         },
-        "18": {
-            "name": "VideoPlane",
-            "parent": "17",
-            "components": [
-                {
-                    "type": "mesh",
-                    "mesh": {
-                        "mesh": "p0",
-                        "material": "DefaultFontMaterial"
-                    }
-                }
-            ]
-        },
         "19": {
             "name": "TrackingTarget0",
             "parent": "17",
@@ -426,6 +413,13 @@
                 "file": "assets\\dinosaur\\scene.gltf"
             },
             "pipeline": "6"
+        },
+        "90": {
+            "name": "VideoFeed",
+            "pipeline": "68",
+            "Background": {
+                "texture": "t0"
+            }
         }
     },
     "shaders": {
@@ -524,6 +518,96 @@
                 "name": "TileFeedback.frag",
                 "file": "default"
             }
+        },
+        "72": {
+            "link": {
+                "name": "lib\\Color.glsl",
+                "file": "default"
+            }
+        },
+        "73": {
+            "link": {
+                "name": "lib\\Compatibility.frag",
+                "file": "default"
+            }
+        },
+        "74": {
+            "link": {
+                "name": "lib\\CoordinateSystems.glsl",
+                "file": "default"
+            }
+        },
+        "75": {
+            "link": {
+                "name": "lib\\GI.frag",
+                "file": "default"
+            }
+        },
+        "76": {
+            "link": {
+                "name": "lib\\Inputs.frag",
+                "file": "default"
+            }
+        },
+        "77": {
+            "link": {
+                "name": "lib\\Lights.frag",
+                "file": "default"
+            }
+        },
+        "78": {
+            "link": {
+                "name": "lib\\Materials.frag",
+                "file": "default"
+            }
+        },
+        "79": {
+            "link": {
+                "name": "lib\\Math.glsl",
+                "file": "default"
+            }
+        },
+        "80": {
+            "link": {
+                "name": "lib\\Packing.frag",
+                "file": "default"
+            }
+        },
+        "81": {
+            "link": {
+                "name": "lib\\Quaternion.glsl",
+                "file": "default"
+            }
+        },
+        "82": {
+            "link": {
+                "name": "lib\\Slug.frag",
+                "file": "default"
+            }
+        },
+        "83": {
+            "link": {
+                "name": "lib\\Slug.vert",
+                "file": "default"
+            }
+        },
+        "84": {
+            "link": {
+                "name": "lib\\Surface.frag",
+                "file": "default"
+            }
+        },
+        "85": {
+            "link": {
+                "name": "lib\\Textures.frag",
+                "file": "default"
+            }
+        },
+        "87": {
+            "link": {
+                "name": "lib\\Uniforms.glsl",
+                "file": "default"
+            }
         }
     },
     "animations": {},
@@ -614,7 +698,8 @@
             "link": {
                 "name": "Sky",
                 "file": "default"
-            }
+            },
+            "shader": "56"
         },
         "69": {
             "link": {
@@ -627,6 +712,12 @@
                 "name": "Phong Lightmapped",
                 "file": "default"
             }
+        },
+        "86": {
+            "link": {
+                "name": "TileFeedback",
+                "file": "default"
+            }
         }
     },
     "settings": {
@@ -634,8 +725,8 @@
             "name": "multiple-targets",
             "version": [
                 1,
-                0,
-                0
+                1,
+                2
             ],
             "customIndexHtml": false
         },
@@ -652,12 +743,24 @@
         },
         "vr": {
             "enable": false
+        },
+        "rendering": {
+            "sky": {
+                "enabled": true,
+                "material": "90"
+            }
         }
     },
-    "files": [
-        "assets/shiba/scene.gltf",
-        "assets/dinosaur/scene.gltf"
-    ],
+    "files": {
+        "88": {
+            "fileName": "assets/shiba/scene.gltf",
+            "importerName": ""
+        },
+        "89": {
+            "fileName": "assets/dinosaur/scene.gltf",
+            "importerName": ""
+        }
+    },
     "fonts": {
         "71": {
             "link": {

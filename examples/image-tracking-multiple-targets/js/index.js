@@ -12,8 +12,8 @@
  */
 
 /* wle:auto-imports:start */
-import {ImageTracking} from 'mindar-image-tracking';
-import {ImageTrackingTarget} from 'mindar-image-tracking';
+import {ImageTracking} from '@wonderlandengine/mind-ar-tracking';
+import {ImageTrackingTarget} from '@wonderlandengine/mind-ar-tracking';
 /* wle:auto-imports:end */
 
 import {loadRuntime} from '@wonderlandengine/api';
