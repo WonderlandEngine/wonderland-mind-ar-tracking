@@ -6273,11 +6273,11 @@ var WASM = class {
    *     the string should be written. This is useful when using multiple temporaries.
    * @return The temporary pointer onto the WASM memory
    */
-  tempUTF8(str4, byteOffset = 0) {
-    const strLen = this.lengthBytesUTF8(str4) + 1;
+  tempUTF8(str5, byteOffset = 0) {
+    const strLen = this.lengthBytesUTF8(str5) + 1;
     this.requireTempMem(strLen + byteOffset);
     const ptr = this._tempMem + byteOffset;
-    this.stringToUTF8(str4, ptr, strLen);
+    this.stringToUTF8(str5, ptr, strLen);
     return ptr;
   }
   /**
@@ -7062,7 +7062,7 @@ function scale(out, a, v) {
 }
 function rotate(out, a, rad, axis) {
   var x = axis[0], y = axis[1], z = axis[2];
-  var len3 = Math.hypot(x, y, z);
+  var len4 = Math.hypot(x, y, z);
   var s, c, t;
   var a00, a01, a02, a03;
   var a10, a11, a12, a13;
@@ -7070,13 +7070,13 @@ function rotate(out, a, rad, axis) {
   var b00, b01, b02;
   var b10, b11, b12;
   var b20, b21, b22;
-  if (len3 < EPSILON) {
+  if (len4 < EPSILON) {
     return null;
   }
-  len3 = 1 / len3;
-  x *= len3;
-  y *= len3;
-  z *= len3;
+  len4 = 1 / len4;
+  x *= len4;
+  y *= len4;
+  z *= len4;
   s = Math.sin(rad);
   c = Math.cos(rad);
   t = 1 - c;
@@ -7254,15 +7254,15 @@ function fromScaling(out, v) {
 }
 function fromRotation(out, rad, axis) {
   var x = axis[0], y = axis[1], z = axis[2];
-  var len3 = Math.hypot(x, y, z);
+  var len4 = Math.hypot(x, y, z);
   var s, c, t;
-  if (len3 < EPSILON) {
+  if (len4 < EPSILON) {
     return null;
   }
-  len3 = 1 / len3;
-  x *= len3;
-  y *= len3;
-  z *= len3;
+  len4 = 1 / len4;
+  x *= len4;
+  y *= len4;
+  z *= len4;
   s = Math.sin(rad);
   c = Math.cos(rad);
   t = 1 - c;
@@ -7720,7 +7720,7 @@ function orthoZO(out, left, right, bottom, top, near, far) {
   return out;
 }
 function lookAt(out, eye2, center, up) {
-  var x0, x1, x2, y0, y1, y2, z0, z1, z2, len3;
+  var x0, x1, x2, y0, y1, y2, z0, z1, z2, len4;
   var eyex = eye2[0];
   var eyey = eye2[1];
   var eyez = eye2[2];
@@ -7736,37 +7736,37 @@ function lookAt(out, eye2, center, up) {
   z0 = eyex - centerx;
   z1 = eyey - centery;
   z2 = eyez - centerz;
-  len3 = 1 / Math.hypot(z0, z1, z2);
-  z0 *= len3;
-  z1 *= len3;
-  z2 *= len3;
+  len4 = 1 / Math.hypot(z0, z1, z2);
+  z0 *= len4;
+  z1 *= len4;
+  z2 *= len4;
   x0 = upy * z2 - upz * z1;
   x1 = upz * z0 - upx * z2;
   x2 = upx * z1 - upy * z0;
-  len3 = Math.hypot(x0, x1, x2);
-  if (!len3) {
+  len4 = Math.hypot(x0, x1, x2);
+  if (!len4) {
     x0 = 0;
     x1 = 0;
     x2 = 0;
   } else {
-    len3 = 1 / len3;
-    x0 *= len3;
-    x1 *= len3;
-    x2 *= len3;
+    len4 = 1 / len4;
+    x0 *= len4;
+    x1 *= len4;
+    x2 *= len4;
   }
   y0 = z1 * x2 - z2 * x1;
   y1 = z2 * x0 - z0 * x2;
   y2 = z0 * x1 - z1 * x0;
-  len3 = Math.hypot(y0, y1, y2);
-  if (!len3) {
+  len4 = Math.hypot(y0, y1, y2);
+  if (!len4) {
     y0 = 0;
     y1 = 0;
     y2 = 0;
   } else {
-    len3 = 1 / len3;
-    y0 *= len3;
-    y1 *= len3;
-    y2 *= len3;
+    len4 = 1 / len4;
+    y0 *= len4;
+    y1 *= len4;
+    y2 *= len4;
   }
   out[0] = x0;
   out[1] = y0;
@@ -7789,20 +7789,20 @@ function lookAt(out, eye2, center, up) {
 function targetTo(out, eye2, target, up) {
   var eyex = eye2[0], eyey = eye2[1], eyez = eye2[2], upx = up[0], upy = up[1], upz = up[2];
   var z0 = eyex - target[0], z1 = eyey - target[1], z2 = eyez - target[2];
-  var len3 = z0 * z0 + z1 * z1 + z2 * z2;
-  if (len3 > 0) {
-    len3 = 1 / Math.sqrt(len3);
-    z0 *= len3;
-    z1 *= len3;
-    z2 *= len3;
+  var len4 = z0 * z0 + z1 * z1 + z2 * z2;
+  if (len4 > 0) {
+    len4 = 1 / Math.sqrt(len4);
+    z0 *= len4;
+    z1 *= len4;
+    z2 *= len4;
   }
   var x0 = upy * z2 - upz * z1, x1 = upz * z0 - upx * z2, x2 = upx * z1 - upy * z0;
-  len3 = x0 * x0 + x1 * x1 + x2 * x2;
-  if (len3 > 0) {
-    len3 = 1 / Math.sqrt(len3);
-    x0 *= len3;
-    x1 *= len3;
-    x2 *= len3;
+  len4 = x0 * x0 + x1 * x1 + x2 * x2;
+  if (len4 > 0) {
+    len4 = 1 / Math.sqrt(len4);
+    x0 *= len4;
+    x1 *= len4;
+    x2 *= len4;
   }
   out[0] = x0;
   out[1] = x1;
@@ -7885,23 +7885,23 @@ function multiplyScalar(out, a, b) {
   out[15] = a[15] * b;
   return out;
 }
-function multiplyScalarAndAdd(out, a, b, scale6) {
-  out[0] = a[0] + b[0] * scale6;
-  out[1] = a[1] + b[1] * scale6;
-  out[2] = a[2] + b[2] * scale6;
-  out[3] = a[3] + b[3] * scale6;
-  out[4] = a[4] + b[4] * scale6;
-  out[5] = a[5] + b[5] * scale6;
-  out[6] = a[6] + b[6] * scale6;
-  out[7] = a[7] + b[7] * scale6;
-  out[8] = a[8] + b[8] * scale6;
-  out[9] = a[9] + b[9] * scale6;
-  out[10] = a[10] + b[10] * scale6;
-  out[11] = a[11] + b[11] * scale6;
-  out[12] = a[12] + b[12] * scale6;
-  out[13] = a[13] + b[13] * scale6;
-  out[14] = a[14] + b[14] * scale6;
-  out[15] = a[15] + b[15] * scale6;
+function multiplyScalarAndAdd(out, a, b, scale7) {
+  out[0] = a[0] + b[0] * scale7;
+  out[1] = a[1] + b[1] * scale7;
+  out[2] = a[2] + b[2] * scale7;
+  out[3] = a[3] + b[3] * scale7;
+  out[4] = a[4] + b[4] * scale7;
+  out[5] = a[5] + b[5] * scale7;
+  out[6] = a[6] + b[6] * scale7;
+  out[7] = a[7] + b[7] * scale7;
+  out[8] = a[8] + b[8] * scale7;
+  out[9] = a[9] + b[9] * scale7;
+  out[10] = a[10] + b[10] * scale7;
+  out[11] = a[11] + b[11] * scale7;
+  out[12] = a[12] + b[12] * scale7;
+  out[13] = a[13] + b[13] * scale7;
+  out[14] = a[14] + b[14] * scale7;
+  out[15] = a[15] + b[15] * scale7;
   return out;
 }
 function exactEquals(a, b) {
@@ -7920,6 +7920,50 @@ function equals(a, b) {
 }
 var mul = multiply;
 var sub = subtract;
+
+// node_modules/gl-matrix/esm/quat.js
+var quat_exports = {};
+__export(quat_exports, {
+  add: () => add4,
+  calculateW: () => calculateW,
+  clone: () => clone4,
+  conjugate: () => conjugate,
+  copy: () => copy4,
+  create: () => create5,
+  dot: () => dot3,
+  equals: () => equals4,
+  exactEquals: () => exactEquals4,
+  exp: () => exp,
+  fromEuler: () => fromEuler,
+  fromMat3: () => fromMat3,
+  fromValues: () => fromValues4,
+  getAngle: () => getAngle,
+  getAxisAngle: () => getAxisAngle,
+  identity: () => identity2,
+  invert: () => invert2,
+  len: () => len2,
+  length: () => length3,
+  lerp: () => lerp3,
+  ln: () => ln,
+  mul: () => mul3,
+  multiply: () => multiply3,
+  normalize: () => normalize3,
+  pow: () => pow,
+  random: () => random2,
+  rotateX: () => rotateX3,
+  rotateY: () => rotateY3,
+  rotateZ: () => rotateZ3,
+  rotationTo: () => rotationTo,
+  scale: () => scale4,
+  set: () => set4,
+  setAxes: () => setAxes,
+  setAxisAngle: () => setAxisAngle,
+  slerp: () => slerp,
+  sqlerp: () => sqlerp,
+  sqrLen: () => sqrLen2,
+  squaredLength: () => squaredLength3,
+  str: () => str3
+});
 
 // node_modules/gl-matrix/esm/vec3.js
 var vec3_exports = {};
@@ -8074,10 +8118,10 @@ function scale2(out, a, b) {
   out[2] = a[2] * b;
   return out;
 }
-function scaleAndAdd(out, a, b, scale6) {
-  out[0] = a[0] + b[0] * scale6;
-  out[1] = a[1] + b[1] * scale6;
-  out[2] = a[2] + b[2] * scale6;
+function scaleAndAdd(out, a, b, scale7) {
+  out[0] = a[0] + b[0] * scale7;
+  out[1] = a[1] + b[1] * scale7;
+  out[2] = a[2] + b[2] * scale7;
   return out;
 }
 function distance(a, b) {
@@ -8114,13 +8158,13 @@ function normalize(out, a) {
   var x = a[0];
   var y = a[1];
   var z = a[2];
-  var len3 = x * x + y * y + z * z;
-  if (len3 > 0) {
-    len3 = 1 / Math.sqrt(len3);
+  var len4 = x * x + y * y + z * z;
+  if (len4 > 0) {
+    len4 = 1 / Math.sqrt(len4);
   }
-  out[0] = a[0] * len3;
-  out[1] = a[1] * len3;
-  out[2] = a[2] * len3;
+  out[0] = a[0] * len4;
+  out[1] = a[1] * len4;
+  out[2] = a[2] * len4;
   return out;
 }
 function dot(a, b) {
@@ -8167,14 +8211,14 @@ function bezier(out, a, b, c, d, t) {
   out[2] = a[2] * factor1 + b[2] * factor2 + c[2] * factor3 + d[2] * factor4;
   return out;
 }
-function random(out, scale6) {
-  scale6 = scale6 || 1;
+function random(out, scale7) {
+  scale7 = scale7 || 1;
   var r = RANDOM() * 2 * Math.PI;
   var z = RANDOM() * 2 - 1;
-  var zScale = Math.sqrt(1 - z * z) * scale6;
+  var zScale = Math.sqrt(1 - z * z) * scale7;
   out[0] = Math.cos(r) * zScale;
   out[1] = Math.sin(r) * zScale;
-  out[2] = z * scale6;
+  out[2] = z * scale7;
   return out;
 }
 function transformMat4(out, a, m) {
@@ -8316,11 +8360,48 @@ function create4() {
   }
   return out;
 }
+function clone3(a) {
+  var out = new ARRAY_TYPE(4);
+  out[0] = a[0];
+  out[1] = a[1];
+  out[2] = a[2];
+  out[3] = a[3];
+  return out;
+}
+function fromValues3(x, y, z, w) {
+  var out = new ARRAY_TYPE(4);
+  out[0] = x;
+  out[1] = y;
+  out[2] = z;
+  out[3] = w;
+  return out;
+}
 function copy3(out, a) {
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
   out[3] = a[3];
+  return out;
+}
+function set3(out, x, y, z, w) {
+  out[0] = x;
+  out[1] = y;
+  out[2] = z;
+  out[3] = w;
+  return out;
+}
+function add3(out, a, b) {
+  out[0] = a[0] + b[0];
+  out[1] = a[1] + b[1];
+  out[2] = a[2] + b[2];
+  out[3] = a[3] + b[3];
+  return out;
+}
+function scale3(out, a, b) {
+  out[0] = a[0] * b;
+  out[1] = a[1] * b;
+  out[2] = a[2] * b;
+  out[3] = a[3] * b;
   return out;
 }
 function length2(a) {
@@ -8342,18 +8423,37 @@ function normalize2(out, a) {
   var y = a[1];
   var z = a[2];
   var w = a[3];
-  var len3 = x * x + y * y + z * z + w * w;
-  if (len3 > 0) {
-    len3 = 1 / Math.sqrt(len3);
+  var len4 = x * x + y * y + z * z + w * w;
+  if (len4 > 0) {
+    len4 = 1 / Math.sqrt(len4);
   }
-  out[0] = x * len3;
-  out[1] = y * len3;
-  out[2] = z * len3;
-  out[3] = w * len3;
+  out[0] = x * len4;
+  out[1] = y * len4;
+  out[2] = z * len4;
+  out[3] = w * len4;
   return out;
 }
 function dot2(a, b) {
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+}
+function lerp2(out, a, b, t) {
+  var ax = a[0];
+  var ay = a[1];
+  var az = a[2];
+  var aw = a[3];
+  out[0] = ax + t * (b[0] - ax);
+  out[1] = ay + t * (b[1] - ay);
+  out[2] = az + t * (b[2] - az);
+  out[3] = aw + t * (b[3] - aw);
+  return out;
+}
+function exactEquals3(a, b) {
+  return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3];
+}
+function equals3(a, b) {
+  var a0 = a[0], a12 = a[1], a22 = a[2], a32 = a[3];
+  var b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
+  return Math.abs(a0 - b0) <= EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a12 - b1) <= EPSILON * Math.max(1, Math.abs(a12), Math.abs(b1)) && Math.abs(a22 - b2) <= EPSILON * Math.max(1, Math.abs(a22), Math.abs(b2)) && Math.abs(a32 - b3) <= EPSILON * Math.max(1, Math.abs(a32), Math.abs(b3));
 }
 var forEach2 = function() {
   var vec = create4();
@@ -8396,6 +8496,13 @@ function create5() {
   out[3] = 1;
   return out;
 }
+function identity2(out) {
+  out[0] = 0;
+  out[1] = 0;
+  out[2] = 0;
+  out[3] = 1;
+  return out;
+}
 function setAxisAngle(out, axis, rad) {
   rad = rad * 0.5;
   var s = Math.sin(rad);
@@ -8403,6 +8510,33 @@ function setAxisAngle(out, axis, rad) {
   out[1] = s * axis[1];
   out[2] = s * axis[2];
   out[3] = Math.cos(rad);
+  return out;
+}
+function getAxisAngle(out_axis, q) {
+  var rad = Math.acos(q[3]) * 2;
+  var s = Math.sin(rad / 2);
+  if (s > EPSILON) {
+    out_axis[0] = q[0] / s;
+    out_axis[1] = q[1] / s;
+    out_axis[2] = q[2] / s;
+  } else {
+    out_axis[0] = 1;
+    out_axis[1] = 0;
+    out_axis[2] = 0;
+  }
+  return rad;
+}
+function getAngle(a, b) {
+  var dotproduct = dot3(a, b);
+  return Math.acos(2 * dotproduct * dotproduct - 1);
+}
+function multiply3(out, a, b) {
+  var ax = a[0], ay = a[1], az = a[2], aw = a[3];
+  var bx = b[0], by = b[1], bz = b[2], bw = b[3];
+  out[0] = ax * bw + aw * bx + ay * bz - az * by;
+  out[1] = ay * bw + aw * by + az * bx - ax * bz;
+  out[2] = az * bw + aw * bz + ax * by - ay * bx;
+  out[3] = aw * bw - ax * bx - ay * by - az * bz;
   return out;
 }
 function rotateX3(out, a, rad) {
@@ -8435,6 +8569,41 @@ function rotateZ3(out, a, rad) {
   out[3] = aw * bw - az * bz;
   return out;
 }
+function calculateW(out, a) {
+  var x = a[0], y = a[1], z = a[2];
+  out[0] = x;
+  out[1] = y;
+  out[2] = z;
+  out[3] = Math.sqrt(Math.abs(1 - x * x - y * y - z * z));
+  return out;
+}
+function exp(out, a) {
+  var x = a[0], y = a[1], z = a[2], w = a[3];
+  var r = Math.sqrt(x * x + y * y + z * z);
+  var et = Math.exp(w);
+  var s = r > 0 ? et * Math.sin(r) / r : 0;
+  out[0] = x * s;
+  out[1] = y * s;
+  out[2] = z * s;
+  out[3] = et * Math.cos(r);
+  return out;
+}
+function ln(out, a) {
+  var x = a[0], y = a[1], z = a[2], w = a[3];
+  var r = Math.sqrt(x * x + y * y + z * z);
+  var t = r > 0 ? Math.atan2(r, w) / r : 0;
+  out[0] = x * t;
+  out[1] = y * t;
+  out[2] = z * t;
+  out[3] = 0.5 * Math.log(x * x + y * y + z * z + w * w);
+  return out;
+}
+function pow(out, a, b) {
+  ln(out, a);
+  scale4(out, out, b);
+  exp(out, out);
+  return out;
+}
 function slerp(out, a, b, t) {
   var ax = a[0], ay = a[1], az = a[2], aw = a[3];
   var bx = b[0], by = b[1], bz = b[2], bw = b[3];
@@ -8460,6 +8629,35 @@ function slerp(out, a, b, t) {
   out[1] = scale0 * ay + scale1 * by;
   out[2] = scale0 * az + scale1 * bz;
   out[3] = scale0 * aw + scale1 * bw;
+  return out;
+}
+function random2(out) {
+  var u1 = RANDOM();
+  var u2 = RANDOM();
+  var u3 = RANDOM();
+  var sqrt1MinusU1 = Math.sqrt(1 - u1);
+  var sqrtU1 = Math.sqrt(u1);
+  out[0] = sqrt1MinusU1 * Math.sin(2 * Math.PI * u2);
+  out[1] = sqrt1MinusU1 * Math.cos(2 * Math.PI * u2);
+  out[2] = sqrtU1 * Math.sin(2 * Math.PI * u3);
+  out[3] = sqrtU1 * Math.cos(2 * Math.PI * u3);
+  return out;
+}
+function invert2(out, a) {
+  var a0 = a[0], a12 = a[1], a22 = a[2], a32 = a[3];
+  var dot6 = a0 * a0 + a12 * a12 + a22 * a22 + a32 * a32;
+  var invDot = dot6 ? 1 / dot6 : 0;
+  out[0] = -a0 * invDot;
+  out[1] = -a12 * invDot;
+  out[2] = -a22 * invDot;
+  out[3] = a32 * invDot;
+  return out;
+}
+function conjugate(out, a) {
+  out[0] = -a[0];
+  out[1] = -a[1];
+  out[2] = -a[2];
+  out[3] = a[3];
   return out;
 }
 function fromMat3(out, m) {
@@ -8489,11 +8687,42 @@ function fromMat3(out, m) {
   }
   return out;
 }
+function fromEuler(out, x, y, z) {
+  var halfToRad = 0.5 * Math.PI / 180;
+  x *= halfToRad;
+  y *= halfToRad;
+  z *= halfToRad;
+  var sx = Math.sin(x);
+  var cx = Math.cos(x);
+  var sy = Math.sin(y);
+  var cy = Math.cos(y);
+  var sz = Math.sin(z);
+  var cz = Math.cos(z);
+  out[0] = sx * cy * cz - cx * sy * sz;
+  out[1] = cx * sy * cz + sx * cy * sz;
+  out[2] = cx * cy * sz - sx * sy * cz;
+  out[3] = cx * cy * cz + sx * sy * sz;
+  return out;
+}
+function str3(a) {
+  return "quat(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ")";
+}
+var clone4 = clone3;
+var fromValues4 = fromValues3;
 var copy4 = copy3;
+var set4 = set3;
+var add4 = add3;
+var mul3 = multiply3;
+var scale4 = scale3;
 var dot3 = dot2;
+var lerp3 = lerp2;
 var length3 = length2;
+var len2 = length3;
 var squaredLength3 = squaredLength2;
+var sqrLen2 = squaredLength3;
 var normalize3 = normalize2;
+var exactEquals4 = exactEquals3;
+var equals4 = equals3;
 var rotationTo = function() {
   var tmpvec3 = create3();
   var xUnitVec3 = fromValues2(1, 0, 0);
@@ -8552,30 +8781,30 @@ var setAxes = function() {
 // node_modules/gl-matrix/esm/quat2.js
 var quat2_exports = {};
 __export(quat2_exports, {
-  add: () => add4,
-  clone: () => clone4,
-  conjugate: () => conjugate,
+  add: () => add5,
+  clone: () => clone5,
+  conjugate: () => conjugate2,
   copy: () => copy5,
   create: () => create6,
   dot: () => dot4,
-  equals: () => equals4,
-  exactEquals: () => exactEquals4,
+  equals: () => equals5,
+  exactEquals: () => exactEquals5,
   fromMat4: () => fromMat4,
   fromRotation: () => fromRotation2,
   fromRotationTranslation: () => fromRotationTranslation2,
   fromRotationTranslationValues: () => fromRotationTranslationValues,
   fromTranslation: () => fromTranslation2,
-  fromValues: () => fromValues4,
+  fromValues: () => fromValues5,
   getDual: () => getDual,
   getReal: () => getReal,
   getTranslation: () => getTranslation2,
-  identity: () => identity2,
-  invert: () => invert2,
-  len: () => len2,
+  identity: () => identity3,
+  invert: () => invert3,
+  len: () => len3,
   length: () => length4,
-  lerp: () => lerp3,
-  mul: () => mul3,
-  multiply: () => multiply3,
+  lerp: () => lerp4,
+  mul: () => mul4,
+  multiply: () => multiply4,
   normalize: () => normalize4,
   rotateAroundAxis: () => rotateAroundAxis,
   rotateByQuatAppend: () => rotateByQuatAppend,
@@ -8583,13 +8812,13 @@ __export(quat2_exports, {
   rotateX: () => rotateX4,
   rotateY: () => rotateY4,
   rotateZ: () => rotateZ4,
-  scale: () => scale4,
-  set: () => set4,
+  scale: () => scale5,
+  set: () => set5,
   setDual: () => setDual,
   setReal: () => setReal,
-  sqrLen: () => sqrLen2,
+  sqrLen: () => sqrLen3,
   squaredLength: () => squaredLength4,
-  str: () => str3,
+  str: () => str4,
   translate: () => translate2
 });
 function create6() {
@@ -8606,7 +8835,7 @@ function create6() {
   dq[3] = 1;
   return dq;
 }
-function clone4(a) {
+function clone5(a) {
   var dq = new ARRAY_TYPE(8);
   dq[0] = a[0];
   dq[1] = a[1];
@@ -8618,7 +8847,7 @@ function clone4(a) {
   dq[7] = a[7];
   return dq;
 }
-function fromValues4(x1, y1, z1, w1, x2, y2, z2, w2) {
+function fromValues5(x1, y1, z1, w1, x2, y2, z2, w2) {
   var dq = new ARRAY_TYPE(8);
   dq[0] = x1;
   dq[1] = y1;
@@ -8696,7 +8925,7 @@ function copy5(out, a) {
   out[7] = a[7];
   return out;
 }
-function identity2(out) {
+function identity3(out) {
   out[0] = 0;
   out[1] = 0;
   out[2] = 0;
@@ -8707,7 +8936,7 @@ function identity2(out) {
   out[7] = 0;
   return out;
 }
-function set4(out, x1, y1, z1, w1, x2, y2, z2, w2) {
+function set5(out, x1, y1, z1, w1, x2, y2, z2, w2) {
   out[0] = x1;
   out[1] = y1;
   out[2] = z1;
@@ -8847,7 +9076,7 @@ function rotateAroundAxis(out, a, axis, rad) {
   out[7] = aw * bw - ax * bx - ay * by - az * bz;
   return out;
 }
-function add4(out, a, b) {
+function add5(out, a, b) {
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   out[2] = a[2] + b[2];
@@ -8858,7 +9087,7 @@ function add4(out, a, b) {
   out[7] = a[7] + b[7];
   return out;
 }
-function multiply3(out, a, b) {
+function multiply4(out, a, b) {
   var ax0 = a[0], ay0 = a[1], az0 = a[2], aw0 = a[3], bx1 = b[4], by1 = b[5], bz1 = b[6], bw1 = b[7], ax1 = a[4], ay1 = a[5], az1 = a[6], aw1 = a[7], bx0 = b[0], by0 = b[1], bz0 = b[2], bw0 = b[3];
   out[0] = ax0 * bw0 + aw0 * bx0 + ay0 * bz0 - az0 * by0;
   out[1] = ay0 * bw0 + aw0 * by0 + az0 * bx0 - ax0 * bz0;
@@ -8870,8 +9099,8 @@ function multiply3(out, a, b) {
   out[7] = aw0 * bw1 - ax0 * bx1 - ay0 * by1 - az0 * bz1 + aw1 * bw0 - ax1 * bx0 - ay1 * by0 - az1 * bz0;
   return out;
 }
-var mul3 = multiply3;
-function scale4(out, a, b) {
+var mul4 = multiply4;
+function scale5(out, a, b) {
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -8883,7 +9112,7 @@ function scale4(out, a, b) {
   return out;
 }
 var dot4 = dot3;
-function lerp3(out, a, b, t) {
+function lerp4(out, a, b, t) {
   var mt = 1 - t;
   if (dot4(a, b) < 0)
     t = -t;
@@ -8897,7 +9126,7 @@ function lerp3(out, a, b, t) {
   out[7] = a[7] * mt + b[7] * t;
   return out;
 }
-function invert2(out, a) {
+function invert3(out, a) {
   var sqlen = squaredLength4(a);
   out[0] = -a[0] / sqlen;
   out[1] = -a[1] / sqlen;
@@ -8909,7 +9138,7 @@ function invert2(out, a) {
   out[7] = a[7] / sqlen;
   return out;
 }
-function conjugate(out, a) {
+function conjugate2(out, a) {
   out[0] = -a[0];
   out[1] = -a[1];
   out[2] = -a[2];
@@ -8921,9 +9150,9 @@ function conjugate(out, a) {
   return out;
 }
 var length4 = length3;
-var len2 = length4;
+var len3 = length4;
 var squaredLength4 = squaredLength3;
-var sqrLen2 = squaredLength4;
+var sqrLen3 = squaredLength4;
 function normalize4(out, a) {
   var magnitude = squaredLength4(a);
   if (magnitude > 0) {
@@ -8948,13 +9177,13 @@ function normalize4(out, a) {
   }
   return out;
 }
-function str3(a) {
+function str4(a) {
   return "quat2(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ", " + a[4] + ", " + a[5] + ", " + a[6] + ", " + a[7] + ")";
 }
-function exactEquals4(a, b) {
+function exactEquals5(a, b) {
   return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3] && a[4] === b[4] && a[5] === b[5] && a[6] === b[6] && a[7] === b[7];
 }
-function equals4(a, b) {
+function equals5(a, b) {
   var a0 = a[0], a12 = a[1], a22 = a[2], a32 = a[3], a42 = a[4], a52 = a[5], a6 = a[6], a7 = a[7];
   var b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3], b4 = b[4], b5 = b[5], b6 = b[6], b7 = b[7];
   return Math.abs(a0 - b0) <= EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a12 - b1) <= EPSILON * Math.max(1, Math.abs(a12), Math.abs(b1)) && Math.abs(a22 - b2) <= EPSILON * Math.max(1, Math.abs(a22), Math.abs(b2)) && Math.abs(a32 - b3) <= EPSILON * Math.max(1, Math.abs(a32), Math.abs(b3)) && Math.abs(a42 - b4) <= EPSILON * Math.max(1, Math.abs(a42), Math.abs(b4)) && Math.abs(a52 - b5) <= EPSILON * Math.max(1, Math.abs(a52), Math.abs(b5)) && Math.abs(a6 - b6) <= EPSILON * Math.max(1, Math.abs(a6), Math.abs(b6)) && Math.abs(a7 - b7) <= EPSILON * Math.max(1, Math.abs(a7), Math.abs(b7));
@@ -9438,9 +9667,9 @@ function createNestedArray(offset, shape, a, isComplex = false) {
   } else {
     const d = shape[0];
     const rest = shape.slice(1);
-    const len3 = rest.reduce((acc, c) => acc * c) * (isComplex ? 2 : 1);
+    const len4 = rest.reduce((acc, c) => acc * c) * (isComplex ? 2 : 1);
     for (let i = 0; i < d; i++) {
-      ret[i] = createNestedArray(offset + i * len3, rest, a, isComplex);
+      ret[i] = createNestedArray(offset + i * len4, rest, a, isComplex);
     }
   }
   return ret;
@@ -10465,7 +10694,7 @@ var require_long = __commonJS({
     Long2.fromInt = fromInt;
     function fromNumber(value, unsigned) {
       if (isNaN(value))
-        return unsigned ? UZERO : ZERO;
+        return unsigned ? UZERO : ZERO2;
       if (unsigned) {
         if (value < 0)
           return UZERO;
@@ -10487,11 +10716,11 @@ var require_long = __commonJS({
     }
     Long2.fromBits = fromBits;
     var pow_dbl = Math.pow;
-    function fromString(str4, unsigned, radix) {
-      if (str4.length === 0)
+    function fromString(str5, unsigned, radix) {
+      if (str5.length === 0)
         throw Error("empty string");
-      if (str4 === "NaN" || str4 === "Infinity" || str4 === "+Infinity" || str4 === "-Infinity")
-        return ZERO;
+      if (str5 === "NaN" || str5 === "Infinity" || str5 === "+Infinity" || str5 === "-Infinity")
+        return ZERO2;
       if (typeof unsigned === "number") {
         radix = unsigned, unsigned = false;
       } else {
@@ -10501,15 +10730,15 @@ var require_long = __commonJS({
       if (radix < 2 || 36 < radix)
         throw RangeError("radix");
       var p2;
-      if ((p2 = str4.indexOf("-")) > 0)
+      if ((p2 = str5.indexOf("-")) > 0)
         throw Error("interior hyphen");
       else if (p2 === 0) {
-        return fromString(str4.substring(1), unsigned, radix).neg();
+        return fromString(str5.substring(1), unsigned, radix).neg();
       }
       var radixToPower = fromNumber(pow_dbl(radix, 8));
-      var result = ZERO;
-      for (var i = 0; i < str4.length; i += 8) {
-        var size = Math.min(8, str4.length - i), value = parseInt(str4.substring(i, i + size), radix);
+      var result = ZERO2;
+      for (var i = 0; i < str5.length; i += 8) {
+        var size = Math.min(8, str5.length - i), value = parseInt(str5.substring(i, i + size), radix);
         if (size < 8) {
           var power = fromNumber(pow_dbl(radix, size));
           result = result.mul(power).add(fromNumber(value));
@@ -10536,8 +10765,8 @@ var require_long = __commonJS({
     var TWO_PWR_64_DBL = TWO_PWR_32_DBL * TWO_PWR_32_DBL;
     var TWO_PWR_63_DBL = TWO_PWR_64_DBL / 2;
     var TWO_PWR_24 = fromInt(TWO_PWR_24_DBL);
-    var ZERO = fromInt(0);
-    Long2.ZERO = ZERO;
+    var ZERO2 = fromInt(0);
+    Long2.ZERO = ZERO2;
     var UZERO = fromInt(0, true);
     Long2.UZERO = UZERO;
     var ONE = fromInt(1);
@@ -10625,7 +10854,7 @@ var require_long = __commonJS({
     LongPrototype.isEven = function isEven2() {
       return (this.low & 1) === 0;
     };
-    LongPrototype.equals = function equals5(other) {
+    LongPrototype.equals = function equals6(other) {
       if (!isLong(other))
         other = fromValue(other);
       if (this.unsigned !== other.unsigned && this.high >>> 31 === 1 && other.high >>> 31 === 1)
@@ -10725,7 +10954,7 @@ var require_long = __commonJS({
     LongPrototype.sub = LongPrototype.subtract;
     LongPrototype.multiply = function multiply32(multiplier) {
       if (this.isZero())
-        return ZERO;
+        return ZERO2;
       if (!isLong(multiplier))
         multiplier = fromValue(multiplier);
       if (wasm) {
@@ -10738,11 +10967,11 @@ var require_long = __commonJS({
         return fromBits(low, wasm.get_high(), this.unsigned);
       }
       if (multiplier.isZero())
-        return ZERO;
+        return ZERO2;
       if (this.eq(MIN_VALUE))
-        return multiplier.isOdd() ? MIN_VALUE : ZERO;
+        return multiplier.isOdd() ? MIN_VALUE : ZERO2;
       if (multiplier.eq(MIN_VALUE))
-        return this.isOdd() ? MIN_VALUE : ZERO;
+        return this.isOdd() ? MIN_VALUE : ZERO2;
       if (this.isNegative()) {
         if (multiplier.isNegative())
           return this.neg().mul(multiplier.neg());
@@ -10802,7 +11031,7 @@ var require_long = __commonJS({
         return fromBits(low, wasm.get_high(), this.unsigned);
       }
       if (this.isZero())
-        return this.unsigned ? UZERO : ZERO;
+        return this.unsigned ? UZERO : ZERO2;
       var approx, rem, res;
       if (!this.unsigned) {
         if (this.eq(MIN_VALUE)) {
@@ -10813,7 +11042,7 @@ var require_long = __commonJS({
           else {
             var halfThis = this.shr(1);
             approx = halfThis.div(divisor).shl(1);
-            if (approx.eq(ZERO)) {
+            if (approx.eq(ZERO2)) {
               return divisor.isNegative() ? ONE : NEG_ONE;
             } else {
               rem = this.sub(divisor.mul(approx));
@@ -10822,14 +11051,14 @@ var require_long = __commonJS({
             }
           }
         } else if (divisor.eq(MIN_VALUE))
-          return this.unsigned ? UZERO : ZERO;
+          return this.unsigned ? UZERO : ZERO2;
         if (this.isNegative()) {
           if (divisor.isNegative())
             return this.neg().div(divisor.neg());
           return this.neg().div(divisor).neg();
         } else if (divisor.isNegative())
           return this.div(divisor.neg()).neg();
-        res = ZERO;
+        res = ZERO2;
       } else {
         if (!divisor.unsigned)
           divisor = divisor.toUnsigned();
@@ -11028,62 +11257,62 @@ function weakHashLen32WithSeeds(w, x, y, z, a, b) {
 function weakHashLen32WithSeedsStr(s, offset, a, b) {
   return weakHashLen32WithSeeds(fetch64(s, offset), fetch64(s, offset + 8), fetch64(s, offset + 16), fetch64(s, offset + 24), a, b);
 }
-function hashLen0to16(s, len3 = s.length) {
-  if (len3 >= 8) {
-    const mul22 = k2.add(len3 * 2);
+function hashLen0to16(s, len4 = s.length) {
+  if (len4 >= 8) {
+    const mul22 = k2.add(len4 * 2);
     const a = fetch64(s, 0).add(k2);
-    const b = fetch64(s, len3 - 8);
+    const b = fetch64(s, len4 - 8);
     const c = rotate64(b, 37).mul(mul22).add(a);
     const d = rotate64(a, 25).add(b).mul(mul22);
     return hashLen16(c, d, mul22);
   }
-  if (len3 >= 4) {
-    const mul22 = k2.add(len3 * 2);
+  if (len4 >= 4) {
+    const mul22 = k2.add(len4 * 2);
     const a = fetch32(s, 0);
-    return hashLen16(a.shl(3).add(len3), fetch32(s, len3 - 4), mul22);
+    return hashLen16(a.shl(3).add(len4), fetch32(s, len4 - 4), mul22);
   }
-  if (len3 > 0) {
+  if (len4 > 0) {
     const a = s[0];
-    const b = s[len3 >> 1];
-    const c = s[len3 - 1];
+    const b = s[len4 >> 1];
+    const c = s[len4 - 1];
     const y = a + (b << 8);
-    const z = len3 + (c << 2);
+    const z = len4 + (c << 2);
     return shiftMix(k2.mul(y).xor(k0.mul(z))).mul(k2);
   }
   return k2;
 }
-function hashLen17to32(s, len3 = s.length) {
-  const mul22 = k2.add(len3 * 2);
+function hashLen17to32(s, len4 = s.length) {
+  const mul22 = k2.add(len4 * 2);
   const a = fetch64(s, 0).mul(k1);
   const b = fetch64(s, 8);
-  const c = fetch64(s, len3 - 8).mul(mul22);
-  const d = fetch64(s, len3 - 16).mul(k2);
+  const c = fetch64(s, len4 - 8).mul(mul22);
+  const d = fetch64(s, len4 - 16).mul(k2);
   return hashLen16(rotate64(a.add(b), 43).add(rotate64(c, 30)).add(d), a.add(rotate64(b.add(k2), 18)).add(c), mul22);
 }
-function hashLen33to64(s, len3 = s.length) {
-  const mul22 = k2.add(len3 * 2);
+function hashLen33to64(s, len4 = s.length) {
+  const mul22 = k2.add(len4 * 2);
   const a = fetch64(s, 0).mul(k2);
   const b = fetch64(s, 8);
-  const c = fetch64(s, len3 - 8).mul(mul22);
-  const d = fetch64(s, len3 - 16).mul(k2);
+  const c = fetch64(s, len4 - 8).mul(mul22);
+  const d = fetch64(s, len4 - 16).mul(k2);
   const y = rotate64(a.add(b), 43).add(rotate64(c, 30)).add(d);
   const z = hashLen16(y, a.add(rotate64(b.add(k2), 18)).add(c), mul22);
   const e = fetch64(s, 16).mul(mul22);
   const f = fetch64(s, 24);
-  const g = y.add(fetch64(s, len3 - 32)).mul(mul22);
-  const h = z.add(fetch64(s, len3 - 24)).mul(mul22);
+  const g = y.add(fetch64(s, len4 - 32)).mul(mul22);
+  const h = z.add(fetch64(s, len4 - 24)).mul(mul22);
   return hashLen16(rotate64(e.add(f), 43).add(rotate64(g, 30)).add(h), e.add(rotate64(f.add(a), 18)).add(g), mul22);
 }
-function fingerPrint64(s, len3 = s.length) {
+function fingerPrint64(s, len4 = s.length) {
   const seed = Long.fromNumber(81, true);
-  if (len3 <= 32) {
-    if (len3 <= 16) {
-      return hashLen0to16(s, len3);
+  if (len4 <= 32) {
+    if (len4 <= 16) {
+      return hashLen0to16(s, len4);
     } else {
-      return hashLen17to32(s, len3);
+      return hashLen17to32(s, len4);
     }
-  } else if (len3 <= 64) {
-    return hashLen33to64(s, len3);
+  } else if (len4 <= 64) {
+    return hashLen33to64(s, len4);
   }
   let x = seed;
   let y = seed.mul(k1).add(113);
@@ -11092,8 +11321,8 @@ function fingerPrint64(s, len3 = s.length) {
   let w = [Long.UZERO, Long.UZERO];
   x = x.mul(k2).add(fetch64(s, 0));
   let offset = 0;
-  const end = (len3 - 1 >> 6) * 64;
-  const last64 = end + (len3 - 1 & 63) - 63;
+  const end = (len4 - 1 >> 6) * 64;
+  const last64 = end + (len4 - 1 & 63) - 63;
   do {
     x = rotate64(x.add(y).add(v[0]).add(fetch64(s, offset + 8)), 37).mul(k1);
     y = rotate64(y.add(v[1]).add(fetch64(s, offset + 48)), 42).mul(k1);
@@ -11107,7 +11336,7 @@ function fingerPrint64(s, len3 = s.length) {
   } while (offset !== end);
   const mul22 = k1.add(z.and(255).shl(1));
   offset = last64;
-  w[0] = w[0].add(len3 - 1 & 63);
+  w[0] = w[0].add(len4 - 1 & 63);
   v[0] = v[0].add(w[0]);
   w[0] = w[0].add(v[0]);
   x = rotate64(x.add(y).add(v[0]).add(fetch64(s, offset + 8)), 37).mul(mul22);
@@ -12127,7 +12356,7 @@ function getOrMakeEngine() {
   setTensorTracker(() => ns._tfengine);
   return ns._tfengine;
 }
-function add5(a, b) {
+function add6(a, b) {
   const inputs = { a, b };
   return ENGINE.runKernel(Add, inputs);
 }
@@ -12876,7 +13105,7 @@ var init_engine = __esm({
             // Pass the tidy function to avoid circular dep with `tape.ts`.
             (f2) => this.tidy(f2),
             // Pass an add function to avoide a circular dep with `tape.ts`.
-            add5
+            add6
           );
           const grads = xs.map((x) => accumulatedGradientMap[x.id]);
           if (this.state.gradientDepth === 0) {
@@ -13412,11 +13641,11 @@ function concatenateTypedArrays(xs) {
   });
   return y.buffer;
 }
-function stringByteLength(str4) {
+function stringByteLength(str5) {
   if (useNodeBuffer) {
-    return Buffer.byteLength(str4);
+    return Buffer.byteLength(str5);
   }
-  return new Blob([str4]).size;
+  return new Blob([str5]).size;
 }
 function arrayBufferToBase64String(buffer2) {
   if (useNodeBuffer) {
@@ -13429,12 +13658,12 @@ function arrayBufferToBase64String(buffer2) {
   }
   return btoa(s);
 }
-function base64StringToArrayBuffer(str4) {
+function base64StringToArrayBuffer(str5) {
   if (useNodeBuffer) {
-    const buf = Buffer.from(str4, "base64");
+    const buf = Buffer.from(str5, "base64");
     return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
   }
-  const s = atob(str4);
+  const s = atob(str5);
   const buffer2 = new Uint8Array(s.length);
   for (let i = 0; i < s.length; ++i) {
     buffer2.set([s.charCodeAt(i)], i);
@@ -14413,14 +14642,14 @@ function clone_(x) {
   const inputs = { x: $x };
   return ENGINE.runKernel(Identity, inputs);
 }
-var clone5;
+var clone6;
 var init_clone = __esm({
   "node_modules/@tensorflow/tfjs-core/dist/ops/clone.js"() {
     init_engine();
     init_kernel_names();
     init_tensor_util_env();
     init_operation();
-    clone5 = /* @__PURE__ */ op({ clone_ });
+    clone6 = /* @__PURE__ */ op({ clone_ });
   }
 });
 function print(x, verbose = false) {
@@ -14446,7 +14675,7 @@ var init_base_side_effects = __esm({
     opHandler2 = {
       buffer,
       cast,
-      clone: clone5,
+      clone: clone6,
       print
     };
     setOpHandler(opHandler2);
@@ -14554,7 +14783,7 @@ function mul_(a, b) {
   const inputs = { a: $a, b: $b };
   return ENGINE.runKernel(Multiply, inputs);
 }
-var mul4;
+var mul5;
 var init_mul = __esm({
   "node_modules/@tensorflow/tfjs-core/dist/ops/mul.js"() {
     init_engine();
@@ -14562,7 +14791,7 @@ var init_mul = __esm({
     init_tensor_util();
     init_tensor_util_env();
     init_operation();
-    mul4 = /* @__PURE__ */ op({ mul_ });
+    mul5 = /* @__PURE__ */ op({ mul_ });
   }
 });
 function abs_(x) {
@@ -15165,7 +15394,7 @@ function concat_(tensors, axis = 0) {
     });
   }
   if ($tensors.length === 1) {
-    return clone5($tensors[0]);
+    return clone6($tensors[0]);
   }
   const inputs = $tensors;
   const attr = { axis };
@@ -15478,7 +15707,7 @@ function broadcastTo_(x, shape) {
   }
   const axes = reps.map((n, i) => n > 1 ? i : -1).filter((i) => i >= 0);
   if (axes.length === 0) {
-    return clone5(input2);
+    return clone6(input2);
   }
   const inputs = { x: input2 };
   const attrs = { reps };
@@ -16316,7 +16545,7 @@ function pow_(base, exp4) {
   const inputs = { a: $base, b: $exp };
   return ENGINE.runKernel(Pow, inputs);
 }
-var pow;
+var pow2;
 var init_pow = __esm({
   "node_modules/@tensorflow/tfjs-core/dist/ops/pow.js"() {
     init_engine();
@@ -16324,7 +16553,7 @@ var init_pow = __esm({
     init_tensor_util();
     init_tensor_util_env();
     init_operation();
-    pow = /* @__PURE__ */ op({ pow_ });
+    pow2 = /* @__PURE__ */ op({ pow_ });
   }
 });
 function scalar(value, dtype) {
@@ -16421,7 +16650,7 @@ function normImpl(x, p2, axis = null) {
       return min2(abs(x), axis);
     }
     if (p2 === "euclidean" || p2 === 2) {
-      return sqrt(sum2(pow(abs(x), scalar(2, "int32")), axis));
+      return sqrt(sum2(pow2(abs(x), scalar(2, "int32")), axis));
     }
     throw new Error(`Error in norm: invalid ord value: ${p2}`);
   }
@@ -16477,14 +16706,14 @@ function exp_(x) {
   const inputs = { x: $x };
   return ENGINE.runKernel(Exp, inputs);
 }
-var exp;
+var exp2;
 var init_exp = __esm({
   "node_modules/@tensorflow/tfjs-core/dist/ops/exp.js"() {
     init_engine();
     init_kernel_names();
     init_tensor_util_env();
     init_operation();
-    exp = /* @__PURE__ */ op({ exp_ });
+    exp2 = /* @__PURE__ */ op({ exp_ });
   }
 });
 function expandDims_(x, axis = 0) {
@@ -16903,7 +17132,7 @@ function logSigmoid_(x) {
   const customOp = customGrad((x2) => {
     const value = neg(softplus(neg(x2)));
     const gradFunc = (dy) => {
-      const derX = mul4(dy, sigmoid(neg(x2)));
+      const derX = mul5(dy, sigmoid(neg(x2)));
       return derX;
     };
     return { value, gradFunc };
@@ -16953,13 +17182,13 @@ function logSoftmax_(logits, axis = -1) {
     const keepDims = true;
     const xMax = max2(logits2, axis, true);
     const shifted = sub3(logits2, xMax);
-    const value = sub3(cast(shifted, "float32"), log2(sum2(exp(shifted), axis, keepDims)));
+    const value = sub3(cast(shifted, "float32"), log2(sum2(exp2(shifted), axis, keepDims)));
     save([value]);
     const gradFunc = (dy, saved) => {
       const [value2] = saved;
       const keepDims2 = true;
-      const softmax4 = exp(value2);
-      return sub3(dy, mul4(sum2(dy, axis, keepDims2), softmax4));
+      const softmax4 = exp2(value2);
+      return sub3(dy, mul5(sum2(dy, axis, keepDims2), softmax4));
     };
     return { value, gradFunc };
   });
@@ -16991,7 +17220,7 @@ function logSumExp_(x, axis = null, keepDims = false) {
     /* keepDims */
   );
   const a = sub3($x, xMax);
-  const b = exp(a);
+  const b = exp2(a);
   const c = sum2(b, axes);
   const d = log2(c);
   const res = add22(reshape(xMax, d.shape), d);
@@ -18347,9 +18576,9 @@ var init_random_normal = __esm({
 function randomUniform_(shape, minval = 0, maxval = 1, dtype = "float32", seed) {
   assertNonNegativeIntegerDimensions(shape);
   const res = buffer(shape, dtype);
-  const random2 = new UniformRandom(minval, maxval, null, seed);
+  const random3 = new UniformRandom(minval, maxval, null, seed);
   for (let i = 0; i < res.values.length; i++) {
-    res.values[i] = random2.nextValue();
+    res.values[i] = random3.nextValue();
   }
   return res.toTensor();
 }
@@ -18707,7 +18936,7 @@ function irfft_(input2) {
     const realInput = reshape(real(input2), [batch, innerDimensionSize]);
     const imagInput = reshape(imag(input2), [batch, innerDimensionSize]);
     const realConjugate = reverse(slice(realInput, [0, 1], [batch, innerDimensionSize - 2]), 1);
-    const imagConjugate = mul4(reverse(slice(imagInput, [0, 1], [batch, innerDimensionSize - 2]), 1), scalar(-1));
+    const imagConjugate = mul5(reverse(slice(imagInput, [0, 1], [batch, innerDimensionSize - 2]), 1), scalar(-1));
     const r = concat([realInput, realConjugate], 1);
     const i = concat([imagInput, imagConjugate], 1);
     const complexInput = reshape(complex(r, i), [outputShape[0], outputShape[1]]);
@@ -19112,7 +19341,7 @@ var init_boolean_mask = __esm({
   "node_modules/@tensorflow/tfjs-core/dist/ops/boolean_mask.js"() {
   }
 });
-function transpose_(x, perm, conjugate2) {
+function transpose_(x, perm, conjugate3) {
   const $x = convertToTensor(x, "x", "transpose");
   if (perm == null) {
     perm = $x.shape.map((s, i) => i).reverse();
@@ -19132,7 +19361,7 @@ function transpose_(x, perm, conjugate2) {
       let $imag = imag($x);
       $real = ENGINE.runKernel(Transpose, { x: $real }, attrs);
       $imag = ENGINE.runKernel(Transpose, { x: $imag }, attrs);
-      if (conjugate2) {
+      if (conjugate3) {
         $imag = neg($imag);
       }
       return complex($real, $imag);
@@ -19276,7 +19505,7 @@ function dropout_(x, rate, noiseShape, seed) {
   const $noiseShape = getNoiseShape($x, noiseShape);
   const keepProb = 1 - rate;
   const multiplier = div2(floor2(add22(randomUniform($noiseShape, 0, 1, "float32", seed), keepProb)), keepProb);
-  return mul4($x, multiplier);
+  return mul5($x, multiplier);
 }
 var dropout;
 var init_dropout = __esm({
@@ -19340,7 +19569,7 @@ function getFusedDyActivation(dy, y, activation) {
     return dy;
   }
   if (activation === "relu") {
-    return mul4(dy, step(y));
+    return mul5(dy, step(y));
   }
   throw new Error(`Cannot compute gradient for fused activation ${activation}.`);
 }
@@ -20322,7 +20551,7 @@ function threshold_(image2, method = "binary", inverted = false, threshValue = 0
   const GREEN_INTENCITY_COEF = 0.587;
   const BLUE_INTENCITY_COEF = 0.114;
   const totalPixelsInImage = $image.shape[0] * $image.shape[1];
-  let $threshold = mul4(tensor1d([threshValue]), 255);
+  let $threshold = mul5(tensor1d([threshValue]), 255);
   let r, g, b, grayscale;
   assert($image.rank === 3, () => `Error in threshold: image must be rank 3,but got rank ${$image.rank}.`);
   assert($image.shape[2] === 3 || $image.shape[2] === 1, () => `Error in threshold: image color channel must be equal to 3 or 1but got ${$image.shape[2]}.`);
@@ -20330,9 +20559,9 @@ function threshold_(image2, method = "binary", inverted = false, threshValue = 0
   assert(method === "otsu" || method === "binary", () => `Method must be binary or otsu, but was ${method}`);
   if ($image.shape[2] === 3) {
     [r, g, b] = split($image, [1, 1, 1], -1);
-    const $r = mul4(r, RED_INTENCITY_COEF);
-    const $g = mul4(g, GREEN_INTENCITY_COEF);
-    const $b = mul4(b, BLUE_INTENCITY_COEF);
+    const $r = mul5(r, RED_INTENCITY_COEF);
+    const $g = mul5(g, GREEN_INTENCITY_COEF);
+    const $b = mul5(b, BLUE_INTENCITY_COEF);
     grayscale = add22(add22($r, $g), $b);
   } else {
     grayscale = image2;
@@ -20342,7 +20571,7 @@ function threshold_(image2, method = "binary", inverted = false, threshValue = 0
     $threshold = otsu($histogram, totalPixelsInImage);
   }
   const invCondition = inverted ? lessEqual(grayscale, $threshold) : greater(grayscale, $threshold);
-  const result = cast(mul4(invCondition, 255), "int32");
+  const result = cast(mul5(invCondition, 255), "int32");
   return result;
 }
 function otsu(histogram, total) {
@@ -20355,16 +20584,16 @@ function otsu(histogram, total) {
     classSecond = slice(histogram, index + 1);
     weightForeground = div2(sum2(classFirst), total);
     weightBack = div2(sum2(classSecond), total);
-    const meanFirstDivA = sum2(mul4(classFirst, range(0, classFirst.size)));
+    const meanFirstDivA = sum2(mul5(classFirst, range(0, classFirst.size)));
     meanFirst = div2(meanFirstDivA, sum2(classFirst));
     const meanSecFill = fill(classSecond.shape, classFirst.size);
     const meanSecAdd = add22(range(0, classSecond.size), meanSecFill);
-    const meanSecMul = mul4(classSecond, meanSecAdd);
+    const meanSecMul = mul5(classSecond, meanSecAdd);
     meanSec = div2(sum2(meanSecMul), sum2(classSecond));
     const cInBetVarSubA = sub3(meanFirst, meanSec);
     const cInBetVarSubB = sub3(meanFirst, meanSec);
-    const cInBetVarMul = mul4(weightForeground, weightBack);
-    cInBetVar = mul4(mul4(cInBetVarMul, cInBetVarSubA), cInBetVarSubB);
+    const cInBetVarMul = mul5(weightForeground, weightBack);
+    cInBetVar = mul5(mul5(cInBetVarMul, cInBetVarSubA), cInBetVarSubB);
     const condition = greater(cInBetVar, bestInBetVar);
     bestInBetVar = where(condition, cInBetVar, bestInBetVar);
     bestThresh = where(condition, tensor1d([index]), bestThresh);
@@ -20485,7 +20714,7 @@ function gramSchmidt_(xs) {
       let x = xs1d[i];
       if (i > 0) {
         for (let j = 0; j < i; ++j) {
-          const proj = mul4(sum2(mul4(ys[j], x)), ys[j]);
+          const proj = mul5(sum2(mul5(ys[j], x)), ys[j]);
           x = sub3(x, proj);
         }
       }
@@ -20544,9 +20773,9 @@ function qr2d(x, fullMatrices = false) {
     const m = x.shape[0];
     const n = x.shape[1];
     let q = eye(m);
-    let r = clone5(x);
+    let r = clone6(x);
     const one2D = tensor2d([[1]], [1, 1]);
-    let w = clone5(one2D);
+    let w = clone6(one2D);
     const iters = m >= n ? n : m;
     for (let j = 0; j < iters; ++j) {
       const rTemp = r;
@@ -20557,10 +20786,10 @@ function qr2d(x, fullMatrices = false) {
         const normX = norm(rjEnd1);
         const rjj = slice(r, [j, j], [1, 1]);
         const s = where(greater(rjj, 0), tensor2d([[-1]]), tensor2d([[1]]));
-        const u1 = sub3(rjj, mul4(s, normX));
+        const u1 = sub3(rjj, mul5(s, normX));
         const wPre = div2(rjEnd1, u1);
         if (wPre.shape[0] === 1) {
-          w = clone5(one2D);
+          w = clone6(one2D);
         } else {
           w = concat([
             one2D,
@@ -20569,7 +20798,7 @@ function qr2d(x, fullMatrices = false) {
         }
         const tau = neg(div2(matMul(s, u1), normX));
         const rjEndAll = slice(r, [j, 0], [m - j, n]);
-        const tauTimesW = mul4(tau, w);
+        const tauTimesW = mul5(tau, w);
         const wT = transpose2(w);
         if (j === 0) {
           r = sub3(rjEndAll, matMul(tauTimesW, matMul(wT, rjEndAll)));
@@ -21029,12 +21258,12 @@ var init_adadelta_optimizer = __esm({
           const accumulatedGrad = this.accumulatedGrads[i].variable;
           const accumulatedUpdate = this.accumulatedUpdates[i].variable;
           tidy(() => {
-            const newAccumulatedGrad = add22(mul4(accumulatedGrad, this.rho), mul4(square(gradient), 1 - this.rho));
-            const updates = mul4(div2(sqrt(add22(accumulatedUpdate, this.epsilon)), sqrt(add22(accumulatedGrad, this.epsilon))), gradient);
-            const newAccumulatedUpdate = add22(mul4(accumulatedUpdate, this.rho), mul4(square(updates), 1 - this.rho));
+            const newAccumulatedGrad = add22(mul5(accumulatedGrad, this.rho), mul5(square(gradient), 1 - this.rho));
+            const updates = mul5(div2(sqrt(add22(accumulatedUpdate, this.epsilon)), sqrt(add22(accumulatedGrad, this.epsilon))), gradient);
+            const newAccumulatedUpdate = add22(mul5(accumulatedUpdate, this.rho), mul5(square(updates), 1 - this.rho));
             accumulatedGrad.assign(newAccumulatedGrad);
             accumulatedUpdate.assign(newAccumulatedUpdate);
-            const newValue = add22(mul4(updates, -this.learningRate), value);
+            const newValue = add22(mul5(updates, -this.learningRate), value);
             value.assign(newValue);
           });
         });
@@ -21119,7 +21348,7 @@ var init_adagrad_optimizer = __esm({
           tidy(() => {
             const newAccumulatedGrad = add22(accumulatedGrad, square(gradient));
             accumulatedGrad.assign(newAccumulatedGrad);
-            const newValue = add22(mul4(div2(gradient, sqrt(add22(newAccumulatedGrad, ENGINE.backend.epsilon()))), -this.learningRate), value);
+            const newValue = add22(mul5(div2(gradient, sqrt(add22(newAccumulatedGrad, ENGINE.backend.epsilon()))), -this.learningRate), value);
             value.assign(newValue);
           });
         });
@@ -21213,17 +21442,17 @@ var init_adam_optimizer = __esm({
             }
             const firstMoment = this.accumulatedFirstMoment[i].variable;
             const secondMoment = this.accumulatedSecondMoment[i].variable;
-            const newFirstMoment = add22(mul4(firstMoment, this.beta1), mul4(gradient, 1 - this.beta1));
-            const newSecondMoment = add22(mul4(secondMoment, this.beta2), mul4(square(gradient), 1 - this.beta2));
+            const newFirstMoment = add22(mul5(firstMoment, this.beta1), mul5(gradient, 1 - this.beta1));
+            const newSecondMoment = add22(mul5(secondMoment, this.beta2), mul5(square(gradient), 1 - this.beta2));
             const biasCorrectedFirstMoment = div2(newFirstMoment, oneMinusAccBeta1);
             const biasCorrectedSecondMoment = div2(newSecondMoment, oneMinusAccBeta2);
             firstMoment.assign(newFirstMoment);
             secondMoment.assign(newSecondMoment);
-            const newValue = add22(mul4(div2(biasCorrectedFirstMoment, add22(sqrt(biasCorrectedSecondMoment), this.epsilon)), -this.learningRate), value);
+            const newValue = add22(mul5(div2(biasCorrectedFirstMoment, add22(sqrt(biasCorrectedSecondMoment), this.epsilon)), -this.learningRate), value);
             value.assign(newValue);
           });
-          this.accBeta1.assign(mul4(this.accBeta1, this.beta1));
-          this.accBeta2.assign(mul4(this.accBeta2, this.beta2));
+          this.accBeta1.assign(mul5(this.accBeta1, this.beta1));
+          this.accBeta2.assign(mul5(this.accBeta2, this.beta2));
         });
         this.incrementIterations();
       }
@@ -21244,8 +21473,8 @@ var init_adam_optimizer = __esm({
       async setWeights(weightValues) {
         weightValues = await this.extractIterations(weightValues);
         tidy(() => {
-          this.accBeta1.assign(pow(this.beta1, this.iterations_ + 1));
-          this.accBeta2.assign(pow(this.beta2, this.iterations_ + 1));
+          this.accBeta1.assign(pow2(this.beta1, this.iterations_ + 1));
+          this.accBeta2.assign(pow2(this.beta2, this.iterations_ + 1));
         });
         const variableCount = weightValues.length / 2;
         const trainable = false;
@@ -21313,7 +21542,7 @@ var init_adamax_optimizer = __esm({
         const variableNames = Array.isArray(variableGradients) ? variableGradients.map((item) => item.name) : Object.keys(variableGradients);
         tidy(() => {
           const oneMinusAccBeta1 = sub3(1, this.accBeta1);
-          const lr = div2(-this.learningRate, add22(mul4(this.iteration, this.decay), 1));
+          const lr = div2(-this.learningRate, add22(mul5(this.iteration, this.decay), 1));
           variableNames.forEach((name, i) => {
             const value = ENGINE.registeredVariables[name];
             const trainable = false;
@@ -21335,17 +21564,17 @@ var init_adamax_optimizer = __esm({
             }
             const firstMoment = this.accumulatedFirstMoment[i].variable;
             const weightedInfNorm = this.accumulatedWeightedInfNorm[i].variable;
-            const newFirstMoment = add22(mul4(firstMoment, this.beta1), mul4(gradient, 1 - this.beta1));
-            const ut0 = mul4(weightedInfNorm, this.beta2);
+            const newFirstMoment = add22(mul5(firstMoment, this.beta1), mul5(gradient, 1 - this.beta1));
+            const ut0 = mul5(weightedInfNorm, this.beta2);
             const ut1 = abs(gradient);
             const newWeightedInfNorm = maximum(ut0, ut1);
             firstMoment.assign(newFirstMoment);
             weightedInfNorm.assign(newWeightedInfNorm);
-            const newValue = add22(mul4(div2(lr, oneMinusAccBeta1), div2(newFirstMoment, add22(newWeightedInfNorm, this.epsilon))), value);
+            const newValue = add22(mul5(div2(lr, oneMinusAccBeta1), div2(newFirstMoment, add22(newWeightedInfNorm, this.epsilon))), value);
             value.assign(newValue);
           });
           this.iteration.assign(add22(this.iteration, 1));
-          this.accBeta1.assign(mul4(this.accBeta1, this.beta1));
+          this.accBeta1.assign(mul5(this.accBeta1, this.beta1));
         });
         this.incrementIterations();
       }
@@ -21409,7 +21638,7 @@ var init_sgd_optimizer = __esm({
           }
           const value = ENGINE.registeredVariables[name];
           tidy(() => {
-            const newValue = add22(mul4(this.c, gradient), value);
+            const newValue = add22(mul5(this.c, gradient), value);
             value.assign(newValue);
           });
         });
@@ -21489,11 +21718,11 @@ var init_momentum_optimizer = __esm({
           }
           tidy(() => {
             let newValue;
-            const newAccumulation = add22(mul4(this.m, accumulation), gradient);
+            const newAccumulation = add22(mul5(this.m, accumulation), gradient);
             if (this.useNesterov) {
-              newValue = add22(mul4(this.c, add22(gradient, mul4(newAccumulation, this.m))), value);
+              newValue = add22(mul5(this.c, add22(gradient, mul5(newAccumulation, this.m))), value);
             } else {
-              newValue = add22(mul4(this.c, newAccumulation), value);
+              newValue = add22(mul5(this.c, newAccumulation), value);
             }
             accumulation.assign(newAccumulation);
             value.assign(newValue);
@@ -21602,20 +21831,20 @@ var init_rmsprop_optimizer = __esm({
           const accumulatedMeanSquare = this.accumulatedMeanSquares[i].variable;
           const accumulatedMoments = this.accumulatedMoments[i].variable;
           tidy(() => {
-            const newAccumulatedMeanSquare = add22(mul4(accumulatedMeanSquare, this.decay), mul4(square(gradient), 1 - this.decay));
+            const newAccumulatedMeanSquare = add22(mul5(accumulatedMeanSquare, this.decay), mul5(square(gradient), 1 - this.decay));
             if (this.centered) {
               const accumulatedMeanGrad = this.accumulatedMeanGrads[i].variable;
-              const newAccumulatedMeanGrad = add22(mul4(accumulatedMeanGrad, this.decay), mul4(gradient, 1 - this.decay));
-              const gradContribution = div2(mul4(gradient, this.learningRate), sqrt(sub3(newAccumulatedMeanSquare, add22(square(newAccumulatedMeanGrad), this.epsilon))));
-              const newAccumulatedMoments = add22(mul4(accumulatedMoments, this.momentum), gradContribution);
+              const newAccumulatedMeanGrad = add22(mul5(accumulatedMeanGrad, this.decay), mul5(gradient, 1 - this.decay));
+              const gradContribution = div2(mul5(gradient, this.learningRate), sqrt(sub3(newAccumulatedMeanSquare, add22(square(newAccumulatedMeanGrad), this.epsilon))));
+              const newAccumulatedMoments = add22(mul5(accumulatedMoments, this.momentum), gradContribution);
               accumulatedMeanSquare.assign(newAccumulatedMeanSquare);
               accumulatedMeanGrad.assign(newAccumulatedMeanGrad);
               accumulatedMoments.assign(newAccumulatedMoments);
               const newValue = sub3(value, newAccumulatedMoments);
               value.assign(newValue);
             } else {
-              const newAccumulatedMeanSquare2 = add22(mul4(accumulatedMeanSquare, this.decay), mul4(square(gradient), 1 - this.decay));
-              const newAccumulatedMoments = add22(mul4(accumulatedMoments, this.momentum), div2(mul4(gradient, this.learningRate), sqrt(add22(newAccumulatedMeanSquare2, this.epsilon))));
+              const newAccumulatedMeanSquare2 = add22(mul5(accumulatedMeanSquare, this.decay), mul5(square(gradient), 1 - this.decay));
+              const newAccumulatedMoments = add22(mul5(accumulatedMoments, this.momentum), div2(mul5(gradient, this.learningRate), sqrt(add22(newAccumulatedMeanSquare2, this.epsilon))));
               accumulatedMeanSquare.assign(newAccumulatedMeanSquare2);
               accumulatedMoments.assign(newAccumulatedMoments);
               const newValue = sub3(value, newAccumulatedMoments);
@@ -23412,9 +23641,9 @@ function splitRealAndImagArrays(complex4) {
   return { real: real4, imag: imag4 };
 }
 function complexWithEvenIndex(complex4) {
-  const len3 = Math.ceil(complex4.length / 4);
-  const real4 = new Float32Array(len3);
-  const imag4 = new Float32Array(len3);
+  const len4 = Math.ceil(complex4.length / 4);
+  const real4 = new Float32Array(len4);
+  const imag4 = new Float32Array(len4);
   for (let i = 0; i < complex4.length; i += 4) {
     real4[Math.floor(i / 4)] = complex4[i];
     imag4[Math.floor(i / 4)] = complex4[i + 1];
@@ -23422,9 +23651,9 @@ function complexWithEvenIndex(complex4) {
   return { real: real4, imag: imag4 };
 }
 function complexWithOddIndex(complex4) {
-  const len3 = Math.floor(complex4.length / 4);
-  const real4 = new Float32Array(len3);
-  const imag4 = new Float32Array(len3);
+  const len4 = Math.floor(complex4.length / 4);
+  const real4 = new Float32Array(len4);
+  const imag4 = new Float32Array(len4);
   for (let i = 2; i < complex4.length; i += 4) {
     real4[Math.floor(i / 4)] = complex4[i];
     imag4[Math.floor(i / 4)] = complex4[i + 1];
@@ -23946,7 +24175,7 @@ var init_Abs_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => mul4(dy, step(cast(x, "float32"), -1)) };
+        return { x: () => mul5(dy, step(cast(x, "float32"), -1)) };
       }
     };
   }
@@ -24148,7 +24377,7 @@ var init_Atan2_grad = __esm({
         const outShape = assertAndGetBroadcastShape(a.shape, b.shape);
         const derA = () => {
           const d = add22(square(a), square(b));
-          let res = mul4(dy, div2(b, d));
+          let res = mul5(dy, div2(b, d));
           const reduceAxes = getReductionAxes(a.shape, outShape);
           if (reduceAxes.length > 0) {
             res = sum2(res, reduceAxes);
@@ -24157,7 +24386,7 @@ var init_Atan2_grad = __esm({
         };
         const derB = () => {
           const d = add22(square(a), square(b));
-          let res = neg(mul4(dy, div2(a, d)));
+          let res = neg(mul5(dy, div2(a, d)));
           const reduceAxes = getReductionAxes(b.shape, outShape);
           if (reduceAxes.length > 0) {
             res = sum2(res, reduceAxes);
@@ -24587,7 +24816,7 @@ var init_Cos_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => mul4(neg(sin(cast(x, "float32"))), dy) };
+        return { x: () => mul5(neg(sin(cast(x, "float32"))), dy) };
       }
     };
   }
@@ -24604,7 +24833,7 @@ var init_Cosh_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => mul4(sinh(cast(x, "float32")), dy) };
+        return { x: () => mul5(sinh(cast(x, "float32")), dy) };
       }
     };
   }
@@ -24714,8 +24943,8 @@ var init_Erf_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        const a = mul4(exp(neg(square(x))), 2 / Math.sqrt(Math.PI));
-        return { x: () => mul4(dy, a) };
+        const a = mul5(exp2(neg(square(x))), 2 / Math.sqrt(Math.PI));
+        return { x: () => mul5(dy, a) };
       }
     };
   }
@@ -24730,7 +24959,7 @@ var init_Exp_grad = __esm({
       outputsToSave: [true],
       gradFunc: (dy, saved) => {
         const [y] = saved;
-        return { x: () => mul4(dy, y) };
+        return { x: () => mul5(dy, y) };
       }
     };
   }
@@ -24761,7 +24990,7 @@ var init_Expm1_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => mul4(dy, exp(x)) };
+        return { x: () => mul5(dy, exp2(x)) };
       }
     };
   }
@@ -24806,7 +25035,7 @@ var init_FloorDiv_grad = __esm({
           return res;
         };
         const derB = () => {
-          let res = mul4(dy, cast(a, "float32"));
+          let res = mul5(dy, cast(a, "float32"));
           const reduceAxes = getReductionAxes(b.shape, outShape);
           if (reduceAxes.length > 0) {
             res = reshape(sum2(res, reduceAxes), b.shape);
@@ -24848,33 +25077,33 @@ var init_FusedBatchNorm_grad = __esm({
           tileShape.push(1);
         }
         const xMinusMean = sub3(x, mean3);
-        const dyTimesScaleValue = mul4(dy, scaleValue);
+        const dyTimesScaleValue = mul5(dy, scaleValue);
         const oneOverSqrtVariance = rsqrt(add22(variance, scalar(varianceEpsilon)));
-        const minusHalfRCube = mul4(mul4(mul4(oneOverSqrtVariance, oneOverSqrtVariance), oneOverSqrtVariance), scalar(-0.5));
+        const minusHalfRCube = mul5(mul5(mul5(oneOverSqrtVariance, oneOverSqrtVariance), oneOverSqrtVariance), scalar(-0.5));
         const derX = () => {
           if (mean3.rank === 1) {
-            return reshape(mul4(mul4(dy, tile(reshape(oneOverSqrtVariance, [1, 1, 1, mean3.shape[0]]), tileShape)), scaleValue), x.shape);
+            return reshape(mul5(mul5(dy, tile(reshape(oneOverSqrtVariance, [1, 1, 1, mean3.shape[0]]), tileShape)), scaleValue), x.shape);
           } else {
-            return reshape(mul4(mul4(dy, oneOverSqrtVariance), scaleValue), x.shape);
+            return reshape(mul5(mul5(dy, oneOverSqrtVariance), scaleValue), x.shape);
           }
         };
         const derMean = () => {
-          let meanDer = mul4(mul4(oneOverSqrtVariance, scalar(-1)), dyTimesScaleValue);
+          let meanDer = mul5(mul5(oneOverSqrtVariance, scalar(-1)), dyTimesScaleValue);
           if (mean3.rank === 1) {
             meanDer = sum2(meanDer, reductionAxes);
           }
           return reshape(meanDer, mean3.shape);
         };
         const derVariance = () => {
-          let varianceDer = mul4(mul4(minusHalfRCube, xMinusMean), dyTimesScaleValue);
+          let varianceDer = mul5(mul5(minusHalfRCube, xMinusMean), dyTimesScaleValue);
           if (mean3.rank === 1) {
             varianceDer = sum2(varianceDer, reductionAxes);
           }
           return reshape(varianceDer, mean3.shape);
         };
         const derScale = () => {
-          const xMinusMean2TimesRsqrt = mul4(xMinusMean, oneOverSqrtVariance);
-          let scaleDer = mul4(dy, xMinusMean2TimesRsqrt);
+          const xMinusMean2TimesRsqrt = mul5(xMinusMean, oneOverSqrtVariance);
+          let scaleDer = mul5(dy, xMinusMean2TimesRsqrt);
           if (mean3.rank === 1) {
             scaleDer = sum2(scaleDer, reductionAxes);
           }
@@ -25035,7 +25264,7 @@ var init_LeakyRelu_grad = __esm({
         const [x] = saved;
         const { alpha } = attrs;
         const mask = greater(x, 0);
-        return { x: () => where(mask, dy, mul4(dy, alpha)) };
+        return { x: () => where(mask, dy, mul5(dy, alpha)) };
       }
     };
   }
@@ -25090,8 +25319,8 @@ var init_LogSoftmax_grad = __esm({
         return {
           logits: () => {
             const keepDims = true;
-            const softmax4 = exp(value);
-            return sub3(dy, mul4(sum2(dy, axis, keepDims), softmax4));
+            const softmax4 = exp2(value);
+            return sub3(dy, mul5(sum2(dy, axis, keepDims), softmax4));
           }
         };
       }
@@ -25140,7 +25369,7 @@ function gradForMinAndMax(dy, y, xOrig, origAxes) {
   }
   return {
     x: () => {
-      const dx = mul4(dy, cast(equal(xOrig, y), dy.dtype));
+      const dx = mul5(dy, cast(equal(xOrig, y), dy.dtype));
       return dx;
     }
   };
@@ -25193,8 +25422,8 @@ var init_Maximum_grad = __esm({
       inputsToSave: ["a", "b"],
       gradFunc: (dy, saved) => {
         const [a, b] = saved;
-        const derA = () => mul4(dy, cast(greaterEqual(a, b), "float32"));
-        const derB = () => mul4(dy, cast(less(a, b), "float32"));
+        const derA = () => mul5(dy, cast(greaterEqual(a, b), "float32"));
+        const derB = () => mul5(dy, cast(less(a, b), "float32"));
         return { a: derA, b: derB };
       }
     };
@@ -25339,7 +25568,7 @@ var init_Mean_grad = __esm({
             expandedDyShape[axis2] = 1;
           });
           const expandedDy = reshape(dy, expandedDyShape);
-          const res = div2(mul4(expandedDy, ones2(x.shape, "float32")), reduceSize);
+          const res = div2(mul5(expandedDy, ones2(x.shape, "float32")), reduceSize);
           return res;
         };
         return { x: derX };
@@ -25385,8 +25614,8 @@ var init_Minimum_grad = __esm({
       inputsToSave: ["a", "b"],
       gradFunc: (dy, saved) => {
         const [a, b] = saved;
-        const derA = () => mul4(dy, cast(lessEqual(a, b), "float32"));
-        const derB = () => mul4(dy, cast(greater(a, b), "float32"));
+        const derA = () => mul5(dy, cast(lessEqual(a, b), "float32"));
+        const derB = () => mul5(dy, cast(greater(a, b), "float32"));
         return { a: derA, b: derB };
       }
     };
@@ -25434,7 +25663,7 @@ var init_Mod_grad = __esm({
           return dy;
         };
         const derB = () => {
-          const res = mul4(dy, neg(floor2(div2(a, b))));
+          const res = mul5(dy, neg(floor2(div2(a, b))));
           const reduceAxes = getReductionAxes(b.shape, outShape);
           if (reduceAxes.length > 0) {
             return reshape(sum2(res, reduceAxes), b.shape);
@@ -25462,7 +25691,7 @@ var init_Multiply_grad = __esm({
         const [a, b] = saved;
         const outShape = assertAndGetBroadcastShape(a.shape, b.shape);
         const derA = () => {
-          const res = mul4(dy, cast(b, "float32"));
+          const res = mul5(dy, cast(b, "float32"));
           const reduceAxes = getReductionAxes(a.shape, outShape);
           if (reduceAxes.length > 0) {
             return reshape(sum2(res, reduceAxes), a.shape);
@@ -25470,7 +25699,7 @@ var init_Multiply_grad = __esm({
           return res;
         };
         const derB = () => {
-          const res = mul4(dy, cast(a, "float32"));
+          const res = mul5(dy, cast(a, "float32"));
           const reduceAxes = getReductionAxes(b.shape, outShape);
           if (reduceAxes.length > 0) {
             return reshape(sum2(res, reduceAxes), b.shape);
@@ -25583,7 +25812,7 @@ var init_Pow_grad = __esm({
         const outShape = assertAndGetBroadcastShape(base.shape, exp4.shape);
         const derBase = () => {
           const expFloat = cast(exp4, "float32");
-          let res = mul4(dy, mul4(expFloat, pow(base, sub3(expFloat, scalar(1)))));
+          let res = mul5(dy, mul5(expFloat, pow2(base, sub3(expFloat, scalar(1)))));
           const reduceAxes = getReductionAxes(base.shape, outShape);
           if (reduceAxes.length > 0) {
             res = sum2(res, reduceAxes);
@@ -25593,7 +25822,7 @@ var init_Pow_grad = __esm({
         const derExp = () => {
           const condition = greater(base, 0);
           const logBase = where(condition, log2(base), zerosLike(base));
-          let res = mul4(dy, mul4(y, logBase));
+          let res = mul5(dy, mul5(y, logBase));
           const reduceAxes = getReductionAxes(exp4.shape, outShape);
           if (reduceAxes.length > 0) {
             res = sum2(res, reduceAxes);
@@ -25623,9 +25852,9 @@ var init_Prelu_grad = __esm({
         const [x, alpha] = saved;
         const mask = greater(x, 0);
         return {
-          x: () => where(mask, dy, mul4(dy, alpha)),
+          x: () => where(mask, dy, mul5(dy, alpha)),
           alpha: () => {
-            let res = where(mask, zerosLike(dy), mul4(dy, x));
+            let res = where(mask, zerosLike(dy), mul5(dy, x));
             const reduceAxes = getReductionAxes(alpha.shape, dy.shape);
             if (reduceAxes.length > 0) {
               res = sum2(res, reduceAxes);
@@ -25643,8 +25872,8 @@ function prodGradFn_(x, dy, axis) {
   const expandedDy = reshape(dy, expandedYShape);
   const xCumProd = cumprod(x, axis, true, false);
   const xCumRevProd = cumprod(x, axis, true, true);
-  const dx = mul4(xCumProd, xCumRevProd);
-  return mul4(expandedDy, dx);
+  const dx = mul5(xCumProd, xCumRevProd);
+  return mul5(expandedDy, dx);
 }
 function prodsGradFn_(x, dy, axis) {
   const xRank = x.shape.length;
@@ -25722,7 +25951,7 @@ var init_RealDiv_grad = __esm({
           return res;
         };
         const derB = () => {
-          let res = mul4(dy, cast(a, "float32"));
+          let res = mul5(dy, cast(a, "float32"));
           const reduceAxes = getReductionAxes(b.shape, outShape);
           if (reduceAxes.length > 0) {
             res = reshape(sum2(res, reduceAxes), b.shape);
@@ -25765,8 +25994,8 @@ var init_Relu6_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        const mask = mul4(lessEqual(x, 6), step(x));
-        return { x: () => mul4(dy, cast(mask, "float32")) };
+        const mask = mul5(lessEqual(x, 6), step(x));
+        return { x: () => mul5(dy, cast(mask, "float32")) };
       }
     };
   }
@@ -25783,7 +26012,7 @@ var init_Relu_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => mul4(dy, cast(step(x), "float32")) };
+        return { x: () => mul5(dy, cast(step(x), "float32")) };
       }
     };
   }
@@ -25885,7 +26114,7 @@ var init_Rsqrt_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => neg(div2(dy, mul4(pow(x, 1.5), 2))) };
+        return { x: () => neg(div2(dy, mul5(pow2(x, 1.5), 2))) };
       }
     };
   }
@@ -25907,8 +26136,8 @@ var init_Select_grad = __esm({
           // TODO(julianoks): Return null for condition gradient
           // when backprop supports it.
           condition: () => cast(zerosLike(condition), "float32"),
-          t: () => mul4(dy, cast(condition, dy.dtype)),
-          e: () => mul4(dy, cast(logicalNot(condition), dy.dtype))
+          t: () => mul5(dy, cast(condition, dy.dtype)),
+          e: () => mul5(dy, cast(logicalNot(condition), dy.dtype))
         };
       }
     };
@@ -25935,8 +26164,8 @@ var init_Selu_grad = __esm({
             const mask = greater(x, scalar(0));
             const scaleAlpha2 = scalar(SELU_SCALEALPHA);
             const scale22 = scalar(SELU_SCALE);
-            const greaterThanZeroDer = mul4(dy, scale22);
-            const lessEqualZeroDer = mul4(mul4(dy, scaleAlpha2), exp(cast(x, "float32")));
+            const greaterThanZeroDer = mul5(dy, scale22);
+            const lessEqualZeroDer = mul5(mul5(dy, scaleAlpha2), exp2(cast(x, "float32")));
             return where(mask, greaterThanZeroDer, lessEqualZeroDer);
           }
         };
@@ -25956,7 +26185,7 @@ var init_Sigmoid_grad = __esm({
       outputsToSave: [true],
       gradFunc: (dy, saved) => {
         const [y] = saved;
-        return { x: () => mul4(dy, mul4(y, sub3(scalar(1), y))) };
+        return { x: () => mul5(dy, mul5(y, sub3(scalar(1), y))) };
       }
     };
   }
@@ -25986,7 +26215,7 @@ var init_Sin_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => mul4(cos(cast(x, "float32")), dy) };
+        return { x: () => mul5(cos(cast(x, "float32")), dy) };
       }
     };
   }
@@ -26003,7 +26232,7 @@ var init_Sinh_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => mul4(cosh(cast(x, "float32")), dy) };
+        return { x: () => mul5(cosh(cast(x, "float32")), dy) };
       }
     };
   }
@@ -26045,9 +26274,9 @@ var init_Softmax_grad = __esm({
         const [y] = saved;
         const { dim } = attrs;
         const keepDims = true;
-        const dyTimesY = mul4(dy, y);
+        const dyTimesY = mul5(dy, y);
         return {
-          logits: () => sub3(dyTimesY, mul4(sum2(dyTimesY, [dim], keepDims), y))
+          logits: () => sub3(dyTimesY, mul5(sum2(dyTimesY, [dim], keepDims), y))
         };
       }
     };
@@ -26064,7 +26293,7 @@ var init_Softplus_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => mul4(dy, sigmoid(x)) };
+        return { x: () => mul5(dy, sigmoid(x)) };
       }
     };
   }
@@ -26110,7 +26339,7 @@ var init_Sqrt_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => div2(dy, mul4(sqrt(cast(x, "float32")), 2)) };
+        return { x: () => div2(dy, mul5(sqrt(cast(x, "float32")), 2)) };
       }
     };
   }
@@ -26126,7 +26355,7 @@ var init_Square_grad = __esm({
       inputsToSave: ["x"],
       gradFunc: (dy, saved) => {
         const [x] = saved;
-        return { x: () => mul4(dy, mul4(cast(x, "float32"), 2)) };
+        return { x: () => mul5(dy, mul5(cast(x, "float32"), 2)) };
       }
     };
   }
@@ -26144,8 +26373,8 @@ var init_SquaredDifference_grad = __esm({
       gradFunc: (dy, saved) => {
         const [a, b] = saved;
         const two = scalar(2);
-        const derA = () => mul4(dy, mul4(two, sub3(a, b)));
-        const derB = () => mul4(dy, mul4(two, sub3(b, a)));
+        const derA = () => mul5(dy, mul5(two, sub3(a, b)));
+        const derB = () => mul5(dy, mul5(two, sub3(b, a)));
         return { a: derA, b: derB };
       }
     };
@@ -26219,7 +26448,7 @@ var init_Sum_grad = __esm({
           expandedDyShape[axis2] = 1;
         });
         const expandedDy = reshape(dy, expandedDyShape);
-        const derX = mul4(expandedDy, ones2(x.shape, "float32"));
+        const derX = mul5(expandedDy, ones2(x.shape, "float32"));
         return { x: () => derX };
       }
     };
@@ -26255,7 +26484,7 @@ var init_Tanh_grad = __esm({
       outputsToSave: [true],
       gradFunc: (dy, saved) => {
         const [y] = saved;
-        return { x: () => mul4(sub3(scalar(1), square(y)), dy) };
+        return { x: () => mul5(sub3(scalar(1), square(y)), dy) };
       }
     };
   }
@@ -27082,7 +27311,7 @@ var init_exp2 = __esm({
     init_tensor();
     getGlobalTensorClass().prototype.exp = function() {
       this.throwIfDisposed();
-      return exp(this);
+      return exp2(this);
     };
   }
 });
@@ -27452,7 +27681,7 @@ var init_mul2 = __esm({
     init_tensor();
     getGlobalTensorClass().prototype.mul = function(b) {
       this.throwIfDisposed();
-      return mul4(this, b);
+      return mul5(this, b);
     };
   }
 });
@@ -27532,7 +27761,7 @@ var init_pow2 = __esm({
     init_tensor();
     getGlobalTensorClass().prototype.pow = function(exp4) {
       this.throwIfDisposed();
-      return pow(this, exp4);
+      return pow2(this, exp4);
     };
   }
 });
@@ -28881,7 +29110,7 @@ function gather2(reference, indices, axis) {
   });
 }
 function square2(x) {
-  return mul4(x, x);
+  return mul5(x, x);
 }
 function reshapeBias(xRank, bias, dataFormat) {
   const biasShape = bias.shape;
@@ -28958,7 +29187,7 @@ function dropout2(x, level, noiseShape, seed) {
 }
 function hardSigmoid(x) {
   return tidy(() => {
-    const y = add22(0.5, mul4(0.2, x));
+    const y = add22(0.5, mul5(0.2, x));
     return clipByValue(y, 0, 1);
   });
 }
@@ -29106,7 +29335,7 @@ var init_initializers = __esm({
         this.value = args.value;
       }
       apply(shape, dtype) {
-        return tidy(() => mul4(scalar(this.value), ones2(shape, dtype)));
+        return tidy(() => mul5(scalar(this.value), ones2(shape, dtype)));
       }
       getConfig() {
         return {
@@ -29188,7 +29417,7 @@ var init_initializers = __esm({
           if (shape.length !== 2 || shape[0] !== shape[1]) {
             throw new ValueError("Identity matrix initializer can only be used for 2D square matrices.");
           } else {
-            return mul4(this.gain, eye(shape[0]));
+            return mul5(this.gain, eye(shape[0]));
           }
         });
       }
@@ -29378,7 +29607,7 @@ var init_initializers = __esm({
           if (shape[0] > shape[1]) {
             q = transpose2(q);
           }
-          return mul4(this.gain, q);
+          return mul5(this.gain, q);
         });
       }
       getConfig() {
@@ -31000,7 +31229,7 @@ var init_flags_layers = __esm({
   }
 });
 function calcL2Norms(w, axis) {
-  return tidy(() => sqrt(sum2(mul4(w, w), axis, true)));
+  return tidy(() => sqrt(sum2(mul5(w, w), axis, true)));
 }
 function serializeConstraint(constraint) {
   return serializeKerasObject(constraint);
@@ -31051,7 +31280,7 @@ var init_constraints = __esm({
         return tidy(() => {
           const norms = calcL2Norms(w, this.axis);
           const desired = clipByValue(norms, 0, this.maxValue);
-          return mul4(w, div2(desired, add22(epsilon(), norms)));
+          return mul5(w, div2(desired, add22(epsilon(), norms)));
         });
       }
       getConfig() {
@@ -31097,8 +31326,8 @@ var init_constraints = __esm({
       apply(w) {
         return tidy(() => {
           const norms = calcL2Norms(w, this.axis);
-          const desired = add22(mul4(this.rate, clipByValue(norms, this.minValue, this.maxValue)), mul4(1 - this.rate, norms));
-          return mul4(w, div2(desired, add22(epsilon(), norms)));
+          const desired = add22(mul5(this.rate, clipByValue(norms, this.minValue, this.maxValue)), mul5(1 - this.rate, norms));
+          return mul5(w, div2(desired, add22(epsilon(), norms)));
         });
       }
       getConfig() {
@@ -31391,7 +31620,7 @@ var init_base_callbacks = __esm({
             } else {
               this.totals[key] = 0;
             }
-            const total = tidy(() => add22(this.totals[key], mul4(value, batchSize)));
+            const total = tidy(() => add22(this.totals[key], mul5(value, batchSize)));
             this.totals[key] = total;
             if (oldTotalsToDispose != null) {
               oldTotalsToDispose.dispose();
@@ -31409,7 +31638,7 @@ var init_base_callbacks = __esm({
               logs[key] = this.totals[key] / this.seen;
             } else {
               tidy(() => {
-                const log5 = mul4(div2(1, this.seen), this.totals[key]);
+                const log5 = mul5(div2(1, this.seen), this.totals[key]);
                 logs[key] = log5;
                 this.totals[key].dispose();
                 keep(logs[key]);
@@ -31640,7 +31869,7 @@ function meanAbsolutePercentageError(yTrue, yPred) {
     const diff = sub3(yTrue, yPred);
     const clippedTrue = clipByValue(abs(yTrue), epsilon(), Number.MAX_VALUE);
     const absResult = abs(div2(diff, clippedTrue));
-    return mul4(100, mean(absResult, -1));
+    return mul5(100, mean(absResult, -1));
   });
 }
 function meanSquaredLogarithmicError(yTrue, yPred) {
@@ -31654,20 +31883,20 @@ function meanSquaredLogarithmicError(yTrue, yPred) {
 }
 function squaredHinge(yTrue, yPred) {
   return tidy(() => {
-    const maxResult = maximum(0, sub3(1, mul4(yTrue, yPred)));
+    const maxResult = maximum(0, sub3(1, mul5(yTrue, yPred)));
     return mean(square2(maxResult), -1);
   });
 }
 function hinge(yTrue, yPred) {
   return tidy(() => {
-    const maxResult = maximum(0, sub3(1, mul4(yTrue, yPred)));
+    const maxResult = maximum(0, sub3(1, mul5(yTrue, yPred)));
     return mean(maxResult, -1);
   });
 }
 function categoricalHinge(yTrue, yPred) {
   return tidy(() => {
-    const pos = sum2(mul4(yTrue, yPred), -1);
-    const neg4 = max2(mul4(sub3(1, yTrue), yPred), -1);
+    const pos = sum2(mul5(yTrue, yPred), -1);
+    const neg4 = max2(mul5(sub3(1, yTrue), yPred), -1);
     return maximum(0, add22(1, sub3(neg4, pos)));
   });
 }
@@ -31675,7 +31904,7 @@ function logcosh(yTrue, yPred) {
   return tidy(() => {
     const log22 = Math.log(2);
     const predictionDiff = sub3(yPred, yTrue);
-    const logcoshResult = sub3(add22(predictionDiff, softplus(mul4(-2, predictionDiff))), log22);
+    const logcoshResult = sub3(add22(predictionDiff, softplus(mul5(-2, predictionDiff))), log22);
     return mean(logcoshResult, -1);
   });
 }
@@ -31688,7 +31917,7 @@ function categoricalCrossentropy(target, output, fromLogits = false) {
       output = div2(output, outputSum);
     }
     output = clipByValue(output, epsilon(), 1 - epsilon());
-    return neg(sum2(mul4(cast(target, "float32"), log2(output)), output.shape.length - 1));
+    return neg(sum2(mul5(cast(target, "float32"), log2(output)), output.shape.length - 1));
   });
 }
 function sparseCategoricalCrossentropy(target, output, fromLogits = false) {
@@ -31707,7 +31936,7 @@ function sigmoidCrossEntropyWithLogits(labels, logits) {
   return tidy(() => {
     const reluLogits = relu(logits);
     const negAbsLogits = neg(abs(logits));
-    return add22(sub3(reluLogits, mul4(logits, labels)), log1p(exp(negAbsLogits)));
+    return add22(sub3(reluLogits, mul5(logits, labels)), log1p(exp2(negAbsLogits)));
   });
 }
 function binaryCrossentropy(yTrue, yPred) {
@@ -31722,20 +31951,20 @@ function kullbackLeiblerDivergence(yTrue, yPred) {
   return tidy(() => {
     const clippedTrue = clipByValue(yTrue, epsilon(), 1);
     const clippedPred = clipByValue(yPred, epsilon(), 1);
-    return sum2(mul4(yTrue, log2(div2(clippedTrue, clippedPred))), -1);
+    return sum2(mul5(yTrue, log2(div2(clippedTrue, clippedPred))), -1);
   });
 }
 function poisson(yTrue, yPred) {
   return tidy(() => {
     const logPred = log2(add22(epsilon(), yPred));
-    return mean(sub3(yPred, mul4(yTrue, logPred)), -1);
+    return mean(sub3(yPred, mul5(yTrue, logPred)), -1);
   });
 }
 function cosineProximity(yTrue, yPred) {
   return tidy(() => {
     const trueNormalized = l2Normalize(yTrue, -1);
     const predNormalized = l2Normalize(yPred, -1);
-    const trueXPred = mul4(trueNormalized, predNormalized);
+    const trueXPred = mul5(trueNormalized, predNormalized);
     return neg(sum2(trueXPred, -1));
   });
 }
@@ -31781,7 +32010,7 @@ var init_losses = __esm({
 });
 function binaryAccuracy(yTrue, yPred) {
   return tidy(() => {
-    const threshold3 = mul4(0.5, onesLike(yPred));
+    const threshold3 = mul5(0.5, onesLike(yPred));
     const yPredThresholded = cast2(greater(yPred, threshold3), yTrue.dtype);
     return mean(equal(yTrue, yPredThresholded), -1);
   });
@@ -33157,7 +33386,7 @@ async function standardizeWeights(y, sampleWeight, classWeight, sampleWeightMode
   if (classWeight != null) {
     const yClasses = tidy(() => {
       if (y.shape.length === 1) {
-        return clone5(y);
+        return clone6(y);
       } else if (y.shape.length === 2) {
         if (y.shape[1] > 1) {
           const axis = 1;
@@ -33187,7 +33416,7 @@ async function standardizeWeights(y, sampleWeight, classWeight, sampleWeightMode
   }
 }
 function computeWeightedLoss(losses, sampleWeights) {
-  return mul4(losses, sampleWeights);
+  return mul5(losses, sampleWeights);
 }
 var init_training_utils = __esm({
   "node_modules/@tensorflow/tfjs-layers/dist/engine/training_utils.js"() {
@@ -33412,7 +33641,7 @@ async function evaluateDataset(model2, dataset, args) {
         for (let i = 0; i < batchOuts.length; ++i) {
           const batchOut = batchOuts[i];
           const oldScalar = outs[i];
-          outs[i] = tidy(() => add22(outs[i], mul4(batchSize, batchOut)));
+          outs[i] = tidy(() => add22(outs[i], mul5(batchSize, batchOut)));
           if (batch > 0) {
             dispose(oldScalar);
           }
@@ -34324,7 +34553,7 @@ var init_training = __esm({
               }
               for (let i = 0; i < batchOuts.length; ++i) {
                 const batchOut = batchOuts[i];
-                outs[i] = add22(outs[i], mul4(batchEnd - batchStart, batchOut));
+                outs[i] = add22(outs[i], mul5(batchEnd - batchStart, batchOut));
               }
             }
             for (let i = 0; i < outs.length; ++i) {
@@ -35861,7 +36090,7 @@ var init_activations = __esm({
        * @returns a Tensor of the same shape as x
        */
       apply(x, alpha = 1) {
-        return tidy(() => mul4(sigmoid(mul4(x, alpha)), x));
+        return tidy(() => mul5(sigmoid(mul5(x, alpha)), x));
       }
     };
     Swish.className = "swish";
@@ -35874,7 +36103,7 @@ var init_activations = __esm({
        * @returns a Tensor of the same shape as x
        */
       apply(x) {
-        return tidy(() => mul4(x, tanh2(softplus(x))));
+        return tidy(() => mul5(x, tanh2(softplus(x))));
       }
     };
     Mish.className = "mish";
@@ -35934,10 +36163,10 @@ var init_regularizers = __esm({
         return tidy(() => {
           let regularization = zeros([1]);
           if (this.hasL1) {
-            regularization = add22(regularization, sum2(mul4(this.l1, abs(x))));
+            regularization = add22(regularization, sum2(mul5(this.l1, abs(x))));
           }
           if (this.hasL2) {
-            regularization = add22(regularization, sum2(mul4(this.l2, square2(x))));
+            regularization = add22(regularization, sum2(mul5(this.l2, square2(x))));
           }
           return reshape(regularization, []);
         });
@@ -36125,7 +36354,7 @@ var init_advanced_activations = __esm({
       }
       call(inputs, kwargs) {
         const x = getExactlyOneTensor(inputs);
-        return mul4(x, cast(greater(x, this.theta), "float32"));
+        return mul5(x, cast(greater(x, this.theta), "float32"));
       }
       computeOutputShape(inputShape) {
         return inputShape;
@@ -37156,9 +37385,9 @@ function rnn(stepFunction, inputs, initialStates, goBackwards = false, mask, con
         const maskedOutputs = tidy(() => {
           const stepMask = perStepMasks[t];
           const negStepMask = sub3(onesLike(stepMask), stepMask);
-          const output = add22(mul4(stepOutputs[0], stepMask), mul4(states[0], negStepMask));
+          const output = add22(mul5(stepOutputs[0], stepMask), mul5(states[0], negStepMask));
           const newStates = states.map((state, i) => {
-            return add22(mul4(stepOutputs[1][i], stepMask), mul4(state, negStepMask));
+            return add22(mul5(stepOutputs[1][i], stepMask), mul5(state, negStepMask));
           });
           return { output, newStates };
         });
@@ -37638,7 +37867,7 @@ var init_recurrent = __esm({
           const dpMask = this.dropoutMask;
           const recDpMask = this.recurrentDropoutMask;
           if (dpMask != null) {
-            h = dot22(mul4(inputs, dpMask), this.kernel.read());
+            h = dot22(mul5(inputs, dpMask), this.kernel.read());
           } else {
             h = dot22(inputs, this.kernel.read());
           }
@@ -37646,7 +37875,7 @@ var init_recurrent = __esm({
             h = biasAdd(h, this.bias.read());
           }
           if (recDpMask != null) {
-            prevOutput = mul4(prevOutput, recDpMask);
+            prevOutput = mul5(prevOutput, recDpMask);
           }
           let output = add22(h, dot22(prevOutput, this.recurrentKernel.read()));
           if (this.activation != null) {
@@ -37788,14 +38017,14 @@ var init_recurrent = __esm({
           let r;
           let hh;
           if (0 < this.dropout && this.dropout < 1) {
-            inputs = mul4(inputs, dpMask[0]);
+            inputs = mul5(inputs, dpMask[0]);
           }
           let matrixX = dot22(inputs, this.kernel.read());
           if (this.useBias) {
             matrixX = biasAdd(matrixX, this.bias.read());
           }
           if (0 < this.recurrentDropout && this.recurrentDropout < 1) {
-            hTMinus1 = mul4(hTMinus1, recDpMask[0]);
+            hTMinus1 = mul5(hTMinus1, recDpMask[0]);
           }
           const recurrentKernelValue = this.recurrentKernel.read();
           const [rk1, rk2] = split(recurrentKernelValue, [2 * this.units, this.units], recurrentKernelValue.rank - 1);
@@ -37804,9 +38033,9 @@ var init_recurrent = __esm({
           const [recurrentZ, recurrentR] = split(matrixInner, 2, matrixInner.rank - 1);
           z = this.recurrentActivation.apply(add22(xZ, recurrentZ));
           r = this.recurrentActivation.apply(add22(xR, recurrentR));
-          const recurrentH = dot22(mul4(r, hTMinus1), rk2);
+          const recurrentH = dot22(mul5(r, hTMinus1), rk2);
           hh = this.activation.apply(add22(xH, recurrentH));
-          const h = add22(mul4(z, hTMinus1), mul4(add22(1, neg(z)), hh));
+          const h = add22(mul5(z, hTMinus1), mul5(add22(1, neg(z)), hh));
           return [h, h];
         });
       }
@@ -37969,11 +38198,11 @@ var init_recurrent = __esm({
           let c;
           let o;
           if (0 < this.dropout && this.dropout < 1) {
-            inputs = mul4(inputs, dpMask[0]);
+            inputs = mul5(inputs, dpMask[0]);
           }
           let z = dot22(inputs, this.kernel.read());
           if (0 < this.recurrentDropout && this.recurrentDropout < 1) {
-            hTMinus1 = mul4(hTMinus1, recDpMask[0]);
+            hTMinus1 = mul5(hTMinus1, recDpMask[0]);
           }
           z = add22(z, dot22(hTMinus1, this.recurrentKernel.read()));
           if (this.useBias) {
@@ -37982,9 +38211,9 @@ var init_recurrent = __esm({
           const [z0, z1, z2, z3] = split(z, 4, z.rank - 1);
           i = this.recurrentActivation.apply(z0);
           f = this.recurrentActivation.apply(z1);
-          c = add22(mul4(f, cTMinus1), mul4(i, this.activation.apply(z2)));
+          c = add22(mul5(f, cTMinus1), mul5(i, this.activation.apply(z2)));
           o = this.recurrentActivation.apply(z3);
-          const h = mul4(o, this.activation.apply(c));
+          const h = mul5(o, this.activation.apply(c));
           return [h, h, c];
         });
       }
@@ -38420,7 +38649,7 @@ var init_convolutional_recurrent = __esm({
             if (!mask || !mask[index]) {
               return x2;
             }
-            return mul4(mask[index], x2);
+            return mul5(mask[index], x2);
           };
           let xI = applyDropout(x, dropoutMask, 0);
           let xF = applyDropout(x, dropoutMask, 1);
@@ -38454,8 +38683,8 @@ var init_convolutional_recurrent = __esm({
           hO = this.recurrentConv(hO, recKernelO);
           const i = this.recurrentActivation.apply(add22(xI, hI));
           const f = this.recurrentActivation.apply(add22(xF, hF));
-          const c = add22(mul4(f, cTMinus1), mul4(i, this.activation.apply(add22(xC, hC))));
-          const h = mul4(this.recurrentActivation.apply(add22(xO, hO)), this.activation.apply(c));
+          const c = add22(mul5(f, cTMinus1), mul5(i, this.activation.apply(add22(xC, hC))));
+          const h = mul5(this.recurrentActivation.apply(add22(xO, hO)), this.activation.apply(c));
           return [h, h, c];
         });
       }
@@ -38921,7 +39150,7 @@ var init_core = __esm({
           const axis = -1;
           const keepDims = true;
           const booleanMask = any(notEqual(input2, this.maskValue), axis, keepDims);
-          const output = mul4(input2, cast(booleanMask, input2.dtype));
+          const output = mul5(input2, cast(booleanMask, input2.dtype));
           return output;
         });
       }
@@ -39088,9 +39317,9 @@ function batchDot(x, y, axes) {
     let out;
     if (x.shape.length === 2 && y.shape.length === 2) {
       if (axesArray[0] === axesArray[1]) {
-        out = sum2(mul4(x, y), axesArray[0]);
+        out = sum2(mul5(x, y), axesArray[0]);
       } else {
-        out = sum2(mul4(transpose2(x, [1, 0]), y), axesArray[1]);
+        out = sum2(mul5(transpose2(x, [1, 0]), y), axesArray[1]);
       }
     } else {
       const adjX = axesArray[0] !== x.shape.length - 1;
@@ -39348,7 +39577,7 @@ var init_merge = __esm({
         return tidy(() => {
           let output = inputs[0].clone();
           for (let i = 1; i < inputs.length; ++i) {
-            output = mul4(output, inputs[i]);
+            output = mul5(output, inputs[i]);
           }
           return output;
         });
@@ -39366,7 +39595,7 @@ var init_merge = __esm({
           for (let i = 1; i < inputs.length; ++i) {
             output = add22(output, inputs[i]);
           }
-          return mul4(1 / inputs.length, output);
+          return mul5(1 / inputs.length, output);
         });
       }
     };
@@ -39664,7 +39893,7 @@ var init_noise = __esm({
           if (this.rate > 0 && this.rate < 1) {
             const noised = () => {
               const stddev = Math.sqrt(this.rate / (1 - this.rate));
-              return mul4(input2, randomNormal2(input2.shape, 1, stddev));
+              return mul5(input2, randomNormal2(input2.shape, 1, stddev));
             };
             return inTrainPhase(noised, () => input2, kwargs["training"] || false);
           }
@@ -39706,8 +39935,8 @@ var init_noise = __esm({
               keptIdx = cast2(keptIdx, "float32");
               const a = ((1 - this.rate) * (1 + this.rate * alphaP ** 2)) ** -0.5;
               const b = -a * alphaP * this.rate;
-              const x = add22(mul4(input2, keptIdx), mul4(add22(keptIdx, -1), alphaP));
-              return add22(mul4(x, a), b);
+              const x = add22(mul5(input2, keptIdx), mul5(add22(keptIdx, -1), alphaP));
+              return add22(mul5(x, a), b);
             };
             return inTrainPhase(droppedInputs, () => getExactlyOneTensor(inputs), kwargs["training"] || false);
           }
@@ -39856,7 +40085,7 @@ var init_normalization = __esm({
             tidy(() => {
               const decay = 1 - momentum;
               const origValue = variable2.read();
-              const updateDelta = mul4(sub3(origValue, value), decay);
+              const updateDelta = mul5(sub3(origValue, value), decay);
               variable2.write(sub3(origValue, updateDelta));
             });
           };
@@ -40873,9 +41102,9 @@ var init_wrappers = __esm({
           } else if (this.mergeMode === "sum") {
             output = add22(y, yRev);
           } else if (this.mergeMode === "ave") {
-            output = mul4(0.5, add22(y, yRev));
+            output = mul5(0.5, add22(y, yRev));
           } else if (this.mergeMode === "mul") {
-            output = mul4(y, yRev);
+            output = mul5(y, yRev);
           } else if (this.mergeMode == null) {
             output = [y, yRev];
           }
@@ -41003,7 +41232,7 @@ var init_image_preprocessing = __esm({
           if (inputs.dtype !== "float32") {
             inputs = cast2(inputs, "float32");
           }
-          return add22(mul4(inputs, this.scale), this.offset);
+          return add22(mul5(inputs, this.scale), this.offset);
         });
       }
     };
@@ -41141,7 +41370,7 @@ function encodeCategoricalInputs(inputs, outputMode, depth, weights) {
     return binCounts;
   }
   if (weights) {
-    return mul4(binCounts, weights);
+    return mul5(binCounts, weights);
   } else {
     throw new ValueError(`When outputMode is 'tfIdf', weights must be provided.`);
   }
@@ -42039,15 +42268,15 @@ var init_growing_ring_buffer = __esm({
       expand() {
         const newCapacity = this.capacity * 2;
         const newData = new Array(newCapacity);
-        const len3 = this.length();
-        for (let i = 0; i < len3; i++) {
+        const len4 = this.length();
+        for (let i = 0; i < len4; i++) {
           newData[i] = this.get(this.wrap(this.begin + i));
         }
         this.data = newData;
         this.capacity = newCapacity;
         this.doubledCapacity = 2 * this.capacity;
         this.begin = 0;
-        this.end = len3;
+        this.end = len4;
       }
     };
     GrowingRingBuffer.INITIAL_CAPACITY = 32;
@@ -43104,11 +43333,11 @@ var init_dataset = __esm({
           }
         }
         const base = this;
-        const random2 = seedrandom3.alea(seed || util_exports.now().toString());
+        const random3 = seedrandom3.alea(seed || util_exports.now().toString());
         return datasetFromIteratorFn(async () => {
-          let seed2 = random2.int32();
+          let seed2 = random3.int32();
           if (reshuffleEachIteration) {
-            seed2 += random2.int32();
+            seed2 += random3.int32();
           }
           return (await base.iterator()).shuffle(bufferSize, seed2.toString());
         }, this.size);
@@ -43565,7 +43794,7 @@ var init_zeros_impl = __esm({
     init_Complex();
   }
 });
-function identity3(args) {
+function identity4(args) {
   const { inputs, backend: backend2 } = args;
   const { x } = inputs;
   backend2.incRef(x.dataId);
@@ -43578,7 +43807,7 @@ var init_Identity = __esm({
     identityConfig = {
       kernelName: Identity,
       backendName: "cpu",
-      kernelFunc: identity3
+      kernelFunc: identity4
     };
   }
 });
@@ -43618,7 +43847,7 @@ function cast3(args) {
   const { dtype } = attrs;
   if (dtype === "complex64") {
     if (x.dtype === "complex64") {
-      return identity3({ inputs: { x }, backend: backend2 });
+      return identity4({ inputs: { x }, backend: backend2 });
     }
     const zerosTensorInfo = zeros2(backend2, x.shape, x.dtype);
     const floatX = cast3({ inputs: { x }, backend: backend2, attrs: { dtype: "float32" } });
@@ -43634,7 +43863,7 @@ function cast3(args) {
     return result;
   }
   if (!util_exports.hasEncodingLoss(x.dtype, dtype)) {
-    const result = identity3({ inputs: { x }, backend: backend2 });
+    const result = identity4({ inputs: { x }, backend: backend2 });
     return { dataId: result.dataId, shape: result.shape, dtype };
   }
   const values = backend2.data.get(x.dataId).values;
@@ -43949,7 +44178,7 @@ var init_Equal = __esm({
   }
 });
 var expImpl;
-var exp2;
+var exp22;
 var expConfig;
 var init_Exp = __esm({
   "node_modules/@tensorflow/tfjs-backend-cpu/dist/kernels/Exp.js"() {
@@ -43957,11 +44186,11 @@ var init_Exp = __esm({
     init_unary_impl();
     init_unary_utils();
     expImpl = createSimpleUnaryImpl((xi) => Math.exp(xi));
-    exp2 = unaryKernelFuncFromImpl(Exp, expImpl, "float32");
+    exp22 = unaryKernelFuncFromImpl(Exp, expImpl, "float32");
     expConfig = {
       kernelName: Exp,
       backendName: "cpu",
-      kernelFunc: exp2
+      kernelFunc: exp22
     };
   }
 });
@@ -44199,7 +44428,7 @@ var init_Minimum = __esm({
 });
 var multiplyImpl;
 var multiplyComplexImpl;
-var multiply4;
+var multiply5;
 var multiplyConfig;
 var init_Multiply = __esm({
   "node_modules/@tensorflow/tfjs-backend-cpu/dist/kernels/Multiply.js"() {
@@ -44213,11 +44442,11 @@ var init_Multiply = __esm({
         imag: aReal * bImag + aImag * bReal
       };
     });
-    multiply4 = binaryKernelFunc(Multiply, multiplyImpl, multiplyComplexImpl);
+    multiply5 = binaryKernelFunc(Multiply, multiplyImpl, multiplyComplexImpl);
     multiplyConfig = {
       kernelName: Multiply,
       backendName: "cpu",
-      kernelFunc: multiply4
+      kernelFunc: multiply5
     };
   }
 });
@@ -45404,7 +45633,7 @@ var init_StringNGrams_impl = __esm({
           output[outputStartIndex + nGramIndex] = new Uint8Array(nGramSize);
           const nGram = output[outputStartIndex + nGramIndex];
           let nextNGramIndex = 0;
-          const appendToNGram = (str4) => str4.forEach((value) => nGram[nextNGramIndex++] = value);
+          const appendToNGram = (str5) => str5.forEach((value) => nGram[nextNGramIndex++] = value);
           for (let n = 0; n < leftPadding; ++n) {
             appendToNGram(this.leftPad);
             appendToNGram(this.separator);
@@ -45497,36 +45726,36 @@ var init_StringNGrams_impl = __esm({
     };
   }
 });
-function split3(str4, delimiters, skipEmpty, result) {
-  if (!str4.length) {
+function split3(str5, delimiters, skipEmpty, result) {
+  if (!str5.length) {
     return;
   }
   if (delimiters.length === 0) {
-    for (let i = 0; i < str4.length; ++i) {
-      result.push(str4.subarray(i, i + 1));
+    for (let i = 0; i < str5.length; ++i) {
+      result.push(str5.subarray(i, i + 1));
     }
     return;
   }
   if (delimiters.length === 1) {
     const delimiter = delimiters[0];
-    let f = str4.indexOf(delimiter);
+    let f = str5.indexOf(delimiter);
     while (f !== -1) {
-      const token = str4.subarray(0, f);
+      const token = str5.subarray(0, f);
       if (!skipEmpty || token.length !== 0) {
         result.push(token);
       }
-      str4 = str4.subarray(f + 1);
-      f = str4.indexOf(delimiter);
+      str5 = str5.subarray(f + 1);
+      f = str5.indexOf(delimiter);
     }
-    if (!skipEmpty || str4.length !== 0) {
-      result.push(str4);
+    if (!skipEmpty || str5.length !== 0) {
+      result.push(str5);
     }
     return;
   }
   let tokenStart = 0;
-  for (let i = 0; i < str4.length + 1; i++) {
-    if (i === str4.length || delimiters.indexOf(str4[i]) !== -1) {
-      const token = str4.subarray(tokenStart, i);
+  for (let i = 0; i < str5.length + 1; i++) {
+    if (i === str5.length || delimiters.indexOf(str5[i]) !== -1) {
+      const token = str5.subarray(tokenStart, i);
       if (!skipEmpty || token.length !== 0) {
         result.push(token);
       }
@@ -45975,7 +46204,7 @@ var init_Relu6 = __esm({
 });
 function applyActivation2(backend2, x, activation, preluActivationWeights, leakyreluAlpha) {
   if (activation === "linear") {
-    return identity3({ inputs: { x }, backend: backend2 });
+    return identity4({ inputs: { x }, backend: backend2 });
   } else if (activation === "relu") {
     return relu2({ inputs: { x }, backend: backend2 });
   } else if (activation === "elu") {
@@ -46754,7 +46983,7 @@ function avgPool2(args) {
   const convInfo = backend_util_exports.computePool2DInfo(x.shape, filterSize, strides, dilations, pad2, dimRoundingMode);
   let res;
   if (convInfo.filterWidth === 1 && convInfo.filterHeight === 1 && util_exports.arraysEqual(convInfo.inShape, convInfo.outShape)) {
-    res = identity3({ inputs: { x }, backend: backend2 });
+    res = identity4({ inputs: { x }, backend: backend2 });
   } else {
     const xValues = backend2.data.get(x.dataId).values;
     const strides2 = util_exports.computeStrides(x.shape);
@@ -47145,7 +47374,7 @@ function concat2(args) {
   }
   const $inputs = inputs.filter((t) => util_exports.sizeFromShape(t.shape) > 0);
   if ($inputs.length === 1) {
-    return identity3({ inputs: { x: $inputs[0] }, backend: backend2 });
+    return identity4({ inputs: { x: $inputs[0] }, backend: backend2 });
   }
   if ($inputs[0].dtype === "complex64") {
     const reals = $inputs.map((t) => real2({ inputs: { input: t }, backend: backend2 }));
@@ -48346,7 +48575,7 @@ function sum3(args) {
   if (x.dtype === "bool") {
     $x = cast3({ inputs: { x }, backend: backend2, attrs: { dtype: "int32" } });
   } else {
-    $x = identity3({ inputs: { x }, backend: backend2 });
+    $x = identity4({ inputs: { x }, backend: backend2 });
   }
   const xRank = $x.shape.length;
   const axes = util_exports.parseAxisParam(axis, $x.shape);
@@ -48433,7 +48662,7 @@ function einsum(args) {
       if (out === null) {
         out = x;
       } else {
-        out = multiply4({ inputs: { a: x, b: out }, backend: backend2 });
+        out = multiply5({ inputs: { a: x, b: out }, backend: backend2 });
         tensorsToDispose.push(out);
       }
     }
@@ -48631,7 +48860,7 @@ function fftImpl(input2, inverse2, cpuBackend) {
       const realInfo = cpuBackend.makeTensorInfo(resultShape, "float32", result.real);
       const imagInfo = cpuBackend.makeTensorInfo(resultShape, "float32", result.imag);
       const sizeInfo = cpuBackend.makeTensorInfo([], "float32", util_exports.createScalarValue(inputSize, "float32"));
-      const sizeInfoCopy = identity3({ inputs: { x: sizeInfo }, backend: cpuBackend });
+      const sizeInfoCopy = identity4({ inputs: { x: sizeInfo }, backend: cpuBackend });
       const divRealInfo = realDivConfig.kernelFunc({ inputs: { a: realInfo, b: sizeInfo }, backend: cpuBackend });
       const divImagInfo = realDivConfig.kernelFunc({ inputs: { a: imagInfo, b: sizeInfoCopy }, backend: cpuBackend });
       const divRealVals = cpuBackend.data.get(divRealInfo.dataId).values;
@@ -48696,7 +48925,7 @@ function fftRadix2(realVals, imagVals, size, inverse2, cpuBackend) {
   const eRealInfo = cpuBackend.makeTensorInfo(eShape, "float32", e.real);
   const eImagInfo = cpuBackend.makeTensorInfo(eShape, "float32", e.imag);
   const complexInfo = complex2({ inputs: { real: eRealInfo, imag: eImagInfo }, backend: cpuBackend });
-  const exponentInfo = multiply4({ inputs: { a: complexInfo, b: $oddTensorInfo }, backend: cpuBackend });
+  const exponentInfo = multiply5({ inputs: { a: complexInfo, b: $oddTensorInfo }, backend: cpuBackend });
   const addPart = add32({
     inputs: { a: $evenTensorInfo, b: exponentInfo },
     backend: cpuBackend
@@ -49364,7 +49593,7 @@ function maxPool2(args) {
   const convInfo = backend_util_exports.computePool2DInfo(x.shape, filterSize, strides, dilations, pad2, dimRoundingMode);
   let res;
   if (convInfo.filterWidth === 1 && convInfo.filterHeight === 1 && util_exports.arraysEqual(convInfo.inShape, convInfo.outShape)) {
-    res = identity3({ inputs: { x }, backend: backend2 });
+    res = identity4({ inputs: { x }, backend: backend2 });
   } else {
     const xValues = backend2.data.get(x.dataId).values;
     const strides2 = util_exports.computeStrides(x.shape);
@@ -49775,7 +50004,7 @@ function softmax2(args) {
   const expandedShape = backend_util_exports.expandShapeToKeepDim(maxLogit.shape, axes);
   const maxLogitReshaped = reshape2({ inputs: { x: maxLogit }, backend: backend2, attrs: { shape: expandedShape } });
   const a = sub22({ inputs: { a: logits, b: maxLogitReshaped }, backend: backend2 });
-  const b = exp2({ inputs: { x: a }, backend: backend2 });
+  const b = exp22({ inputs: { x: a }, backend: backend2 });
   const sumExp = sum3({ inputs: { x: b }, backend: backend2, attrs: { axis: axes, keepDims: false } });
   const sumReshaped = reshape2({ inputs: { x: sumExp }, backend: backend2, attrs: { shape: expandedShape } });
   const result = div22({ inputs: { a: b, b: sumReshaped }, backend: backend2 });
@@ -49822,10 +50051,10 @@ function multinomial(args) {
     for (let event = 1; event < cdf.length; ++event) {
       cdf[event] = cdf[event - 1] + probVals[offset + event];
     }
-    const random2 = seedrandom4.alea(seed.toString());
+    const random3 = seedrandom4.alea(seed.toString());
     const outOffset = b * numSamples;
     for (let sampleId = 0; sampleId < numSamples; ++sampleId) {
-      const r = random2();
+      const r = random3();
       resVals[outOffset + sampleId] = cdf.length;
       for (let event = 0; event < cdf.length; event++) {
         if (r < cdf[event]) {
@@ -50114,7 +50343,7 @@ var init_PadV2 = __esm({
   }
 });
 var powImpl;
-var pow2;
+var pow22;
 var powConfig;
 var init_Pow = __esm({
   "node_modules/@tensorflow/tfjs-backend-cpu/dist/kernels/Pow.js"() {
@@ -50122,11 +50351,11 @@ var init_Pow = __esm({
     init_binary_impl();
     init_binary_utils();
     powImpl = createSimpleBinaryKernelImpl((a, b) => Math.pow(a, b));
-    pow2 = binaryKernelFunc(Pow, powImpl);
+    pow22 = binaryKernelFunc(Pow, powImpl);
     powConfig = {
       kernelName: Pow,
       backendName: "cpu",
-      kernelFunc: pow2
+      kernelFunc: pow22
     };
   }
 });
@@ -50524,7 +50753,7 @@ function reverse2(args) {
   const xRank = x.shape.length;
   const $dims = util_exports.parseAxisParam(dims, x.shape);
   if (xRank === 0) {
-    return identity3({ inputs: { x }, backend: backend2 });
+    return identity4({ inputs: { x }, backend: backend2 });
   }
   const outBuf = new TensorBuffer(x.shape, x.dtype);
   const xBuf = backend2.bufferSync(x);
@@ -50758,7 +50987,7 @@ var init_Select = __esm({
   }
 });
 var scaleAlpha;
-var scale5;
+var scale6;
 var selu2;
 var seluConfig;
 var init_Selu = __esm({
@@ -50766,10 +50995,10 @@ var init_Selu = __esm({
     init_dist();
     init_unary_utils();
     scaleAlpha = backend_util_exports.SELU_SCALEALPHA;
-    scale5 = backend_util_exports.SELU_SCALE;
+    scale6 = backend_util_exports.SELU_SCALE;
     selu2 = unaryKernelFunc(Selu, (xi) => {
       if (xi >= 0) {
-        return scale5 * xi;
+        return scale6 * xi;
       } else {
         return scaleAlpha * (Math.exp(xi) - 1);
       }
@@ -51431,68 +51660,68 @@ function transform2(args) {
   const dataId = backend2.write(outVals, outShape, image2.dtype);
   return { dataId, shape: image2.shape, dtype: image2.dtype };
 }
-function mapCoord(outCoord, len3, mode) {
+function mapCoord(outCoord, len4, mode) {
   switch (mode) {
     case "reflect":
-      return mapCoordReflect(outCoord, len3);
+      return mapCoordReflect(outCoord, len4);
     case "wrap":
-      return mapCoordWrap(outCoord, len3);
+      return mapCoordWrap(outCoord, len4);
     case "nearest":
-      return mapCoordNearest(outCoord, len3);
+      return mapCoordNearest(outCoord, len4);
     case "constant":
     default:
-      return mapCoordConstant(outCoord, len3);
+      return mapCoordConstant(outCoord, len4);
   }
 }
-function mapCoordReflect(outCoord, len3) {
+function mapCoordReflect(outCoord, len4) {
   let inCoord = outCoord;
   if (inCoord < 0) {
-    if (len3 <= 1) {
+    if (len4 <= 1) {
       inCoord = 0;
     } else {
-      const sz2 = 2 * len3;
+      const sz2 = 2 * len4;
       if (inCoord < sz2) {
         inCoord = sz2 * Math.trunc(-inCoord / sz2) + inCoord;
       }
-      inCoord = inCoord < -len3 ? inCoord + sz2 : -inCoord - 1;
+      inCoord = inCoord < -len4 ? inCoord + sz2 : -inCoord - 1;
     }
-  } else if (inCoord > len3 - 1) {
-    if (len3 <= 1) {
+  } else if (inCoord > len4 - 1) {
+    if (len4 <= 1) {
       inCoord = 0;
     } else {
-      const sz2 = 2 * len3;
+      const sz2 = 2 * len4;
       inCoord -= sz2 * Math.trunc(inCoord / sz2);
-      if (inCoord >= len3) {
+      if (inCoord >= len4) {
         inCoord = sz2 - inCoord - 1;
       }
     }
   }
-  return util_exports.clamp(0, inCoord, len3 - 1);
+  return util_exports.clamp(0, inCoord, len4 - 1);
 }
-function mapCoordWrap(outCoord, len3) {
+function mapCoordWrap(outCoord, len4) {
   let inCoord = outCoord;
   if (inCoord < 0) {
-    if (len3 <= 1) {
+    if (len4 <= 1) {
       inCoord = 0;
     } else {
-      const sz = len3 - 1;
-      inCoord += len3 * (Math.trunc(-inCoord / sz) + 1);
+      const sz = len4 - 1;
+      inCoord += len4 * (Math.trunc(-inCoord / sz) + 1);
     }
-  } else if (inCoord > len3 - 1) {
-    if (len3 <= 1) {
+  } else if (inCoord > len4 - 1) {
+    if (len4 <= 1) {
       inCoord = 0;
     } else {
-      const sz = len3 - 1;
-      inCoord -= len3 * Math.trunc(inCoord / sz);
+      const sz = len4 - 1;
+      inCoord -= len4 * Math.trunc(inCoord / sz);
     }
   }
-  return util_exports.clamp(0, inCoord, len3 - 1);
+  return util_exports.clamp(0, inCoord, len4 - 1);
 }
-function mapCoordConstant(outCoord, len3) {
+function mapCoordConstant(outCoord, len4) {
   return outCoord;
 }
-function mapCoordNearest(outCoord, len3) {
-  return util_exports.clamp(0, outCoord, len3 - 1);
+function mapCoordNearest(outCoord, len4) {
+  return util_exports.clamp(0, outCoord, len4 - 1);
 }
 function readWithFillValue(imageVals, imageHeight, imageWidth, batchStride, rowStride, colStride, batch, y, x, channel, fillValue) {
   const ind = batch * batchStride + y * rowStride + x * colStride + channel;
@@ -51614,7 +51843,7 @@ function unsortedSegmentSum2(args) {
     const segmentId = backend2.makeTensorInfo([], "int32", scalarValue);
     const mask = equal2({ inputs: { a: segmentId, b: $segmentIds }, backend: backend2 });
     const maskCasted = cast3({ inputs: { x: mask }, backend: backend2, attrs: { dtype: "float32" } });
-    const mul22 = multiply4({ inputs: { a: maskCasted, b: x }, backend: backend2 });
+    const mul22 = multiply5({ inputs: { a: maskCasted, b: x }, backend: backend2 });
     const sumTensorInfo = sum3({ inputs: { x: mul22 }, backend: backend2, attrs: { axis: 0, keepDims: false } });
     res.push(sumTensorInfo);
     intermediates.push(segmentId);
@@ -68128,11 +68357,11 @@ function disposeIntermediateTensorInfoOrNull(backend2, tensorInfo) {
   }
 }
 function roundUpToPow2(num) {
-  let pow22 = 1;
-  while (pow22 < num) {
-    pow22 *= 2;
+  let pow222 = 1;
+  while (pow222 < num) {
+    pow222 *= 2;
   }
-  return pow22;
+  return pow222;
 }
 function topK2(args) {
   const { inputs, backend: backend2, attrs } = args;
@@ -68185,9 +68414,9 @@ function topK2(args) {
     indices = backend2.runWebGLProgram(program, inputs2, "int32", customValues);
     disposeIntermediateTensorInfoOrNull(backend2, prevIndices2);
   };
-  for (let len3 = 1; len3 < kPow2; len3 *= 2) {
-    const dir = len3 * 2;
-    for (let inc = len3; inc >= 1; inc /= 2) {
+  for (let len4 = 1; len4 < kPow2; len4 *= 2) {
+    const dir = len4 * 2;
+    for (let inc = len4; inc >= 1; inc /= 2) {
       runSwap(dir, inc, [batch, lastDimPow2]);
     }
   }
@@ -68199,9 +68428,9 @@ function topK2(args) {
     const prevIndices2 = indices;
     indices = backend2.runWebGLProgram(mergeProgram, inputs2, "int32", customValues);
     disposeIntermediateTensorInfoOrNull(backend2, prevIndices2);
-    const len3 = kPow2 / 2;
-    const dir = len3 * 2;
-    for (let inc = len3; inc >= 1; inc /= 2) {
+    const len4 = kPow2 / 2;
+    const dir = len4 * 2;
+    for (let inc = len4; inc >= 1; inc /= 2) {
       runSwap(dir, inc, indices.shape);
     }
   }
@@ -71149,12 +71378,12 @@ var init_int2 = __esm({
     UINT32_MAX = 4294967295;
   }
 });
-function utf8Count(str4) {
-  var strLength = str4.length;
+function utf8Count(str5) {
+  var strLength = str5.length;
   var byteLength = 0;
   var pos = 0;
   while (pos < strLength) {
-    var value = str4.charCodeAt(pos++);
+    var value = str5.charCodeAt(pos++);
     if ((value & 4294967168) === 0) {
       byteLength++;
       continue;
@@ -71163,7 +71392,7 @@ function utf8Count(str4) {
     } else {
       if (value >= 55296 && value <= 56319) {
         if (pos < strLength) {
-          var extra = str4.charCodeAt(pos);
+          var extra = str5.charCodeAt(pos);
           if ((extra & 64512) === 56320) {
             ++pos;
             value = ((value & 1023) << 10) + (extra & 1023) + 65536;
@@ -71179,12 +71408,12 @@ function utf8Count(str4) {
   }
   return byteLength;
 }
-function utf8EncodeJs(str4, output, outputOffset) {
-  var strLength = str4.length;
+function utf8EncodeJs(str5, output, outputOffset) {
+  var strLength = str5.length;
   var offset = outputOffset;
   var pos = 0;
   while (pos < strLength) {
-    var value = str4.charCodeAt(pos++);
+    var value = str5.charCodeAt(pos++);
     if ((value & 4294967168) === 0) {
       output[offset++] = value;
       continue;
@@ -71193,7 +71422,7 @@ function utf8EncodeJs(str4, output, outputOffset) {
     } else {
       if (value >= 55296 && value <= 56319) {
         if (pos < strLength) {
-          var extra = str4.charCodeAt(pos);
+          var extra = str5.charCodeAt(pos);
           if ((extra & 64512) === 56320) {
             ++pos;
             value = ((value & 1023) << 10) + (extra & 1023) + 65536;
@@ -71212,11 +71441,11 @@ function utf8EncodeJs(str4, output, outputOffset) {
     output[offset++] = value & 63 | 128;
   }
 }
-function utf8EncodeTEencode(str4, output, outputOffset) {
-  output.set(sharedTextEncoder.encode(str4), outputOffset);
+function utf8EncodeTEencode(str5, output, outputOffset) {
+  output.set(sharedTextEncoder.encode(str5), outputOffset);
 }
-function utf8EncodeTEencodeInto(str4, output, outputOffset) {
-  sharedTextEncoder.encodeInto(str4, output.subarray(outputOffset));
+function utf8EncodeTEencodeInto(str5, output, outputOffset) {
+  sharedTextEncoder.encodeInto(str5, output.subarray(outputOffset));
 }
 function utf8DecodeJs(bytes, inputOffset, byteLength) {
   var offset = inputOffset;
@@ -71949,10 +72178,10 @@ var init_CachedKeyDecoder = __esm({
           return cachedValue;
         }
         this.miss++;
-        var str4 = utf8DecodeJs(bytes, inputOffset, byteLength);
+        var str5 = utf8DecodeJs(bytes, inputOffset, byteLength);
         var slicedCopyOfBytes = Uint8Array.prototype.slice.call(bytes, inputOffset, inputOffset + byteLength);
-        this.store(slicedCopyOfBytes, str4);
-        return str4;
+        this.store(slicedCopyOfBytes, str5);
+        return str5;
       };
       return CachedKeyDecoder2;
     }();
@@ -72992,7 +73221,21 @@ var init_input_loader = __esm({
       }
       // input is instance of HTMLVideoElement or HTMLImageElement
       loadInput(input2) {
-        this.context.drawImage(input2, 0, 0, this.width, this.height);
+        const context = this.context;
+        context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+        const isInputRotated = input2.width === this.height && input2.height === this.width;
+        if (isInputRotated) {
+          let x = this.context.canvas.width / 2;
+          let y = this.context.canvas.height / 2;
+          let angleInDegrees = 90;
+          context.save();
+          context.translate(x, y);
+          context.rotate(angleInDegrees * Math.PI / 180);
+          context.drawImage(input2, -input2.width / 2, -input2.height / 2);
+          context.restore();
+        } else {
+          this.context.drawImage(input2, 0, 0, input2.width, input2.height);
+        }
         const backend2 = backend();
         backend2.gpgpu.uploadPixelDataToTexture(backend2.getTexture(this.tempPixelHandle.dataId), this.context.canvas);
         const res = this._compileAndRun(this.program, [this.tempPixelHandle]);
@@ -73213,6 +73456,27 @@ var init_controller = __esm({
       getProjectionMatrix() {
         return this.projectionMatrix;
       }
+      getRotatedZ90Matrix(m) {
+        const rotatedMatrix = [
+          -m[1],
+          m[0],
+          m[2],
+          m[3],
+          -m[5],
+          m[4],
+          m[6],
+          m[7],
+          -m[9],
+          m[8],
+          m[10],
+          m[11],
+          -m[13],
+          m[12],
+          m[14],
+          m[15]
+        ];
+        return rotatedMatrix;
+      }
       getWorldMatrix(modelViewTransform, targetIndex) {
         return this._glModelViewMatrix(modelViewTransform, targetIndex);
       }
@@ -73304,9 +73568,13 @@ var init_controller = __esm({
               if (trackingState.showing) {
                 const worldMatrix = this._glModelViewMatrix(trackingState.currentModelViewTransform, i);
                 trackingState.trackingMatrix = trackingState.filter.filter(Date.now(), worldMatrix);
-                const clone22 = [];
+                let clone22 = [];
                 for (let j = 0; j < trackingState.trackingMatrix.length; j++) {
                   clone22[j] = trackingState.trackingMatrix[j];
+                }
+                const isInputRotated = input2.width === this.inputHeight && input2.height === this.inputWidth;
+                if (isInputRotated) {
+                  clone22 = this.getRotatedZ90Matrix(clone22);
                 }
                 this.onUpdate && this.onUpdate({ type: "updateMatrix", targetIndex: i, worldMatrix: clone22 });
               }
@@ -73440,14 +73708,10 @@ var ImageTracking = class extends Component {
       inputWidth: input2.width,
       inputHeight: input2.height,
       maxTrack: this.maxTrack,
-      filterMinCF: 1e-3,
-      // OneEuroFilter, min cutoff frequency. default is 0.001
-      filterBeta: 1,
-      // OneEuroFilter, beta. default is 1000
-      missTolerance: 5,
-      // number of miss before considered target lost. default is 5
-      warmupTolerance: 5,
-      // number of track before considered target found. default is 5
+      filterMinCF: this.filterMinCF,
+      filterBeta: this.filterBeta,
+      missTolerance: this.missTolerance,
+      warmupTolerance: this.warmupTolerance,
       onUpdate: (data) => {
         if (this.videoTexture)
           this.videoTexture.update();
@@ -73470,9 +73734,15 @@ var ImageTracking = class extends Component {
     this.controller = controller;
     this.markerDimensions = dimensions;
     this.videoTexture = texture;
-    const videoPaneMesh = this.videoPane.getComponent("mesh");
-    videoPaneMesh.material = videoPaneMesh.material.clone();
-    videoPaneMesh.material.flatTexture = texture;
+    if (this.videoPane) {
+      const videoPaneMesh = this.videoPane.getComponent("mesh");
+      videoPaneMesh.material = videoPaneMesh.material.clone();
+      videoPaneMesh.material.flatTexture = texture;
+    } else if (this.engine.scene.skyMaterial) {
+      this.engine.scene.skyMaterial.texture = texture;
+    } else {
+      console.warn("No videoPane or sky material set, cannot show video feed.");
+    }
     this.controller.processVideo(input2);
   }
   /* Update camera projection matrix and background video plane */
@@ -73490,11 +73760,14 @@ var ImageTracking = class extends Component {
     const inputAspect = input2.width / input2.height;
     if (canvasAspect < inputAspect) {
       projectionMatrix[0] *= inputAspect / canvasAspect;
-    } else {
-      projectionMatrix[5] *= canvasAspect / inputAspect;
     }
+    this.view.fov = 2 * Math.atan(1 / projectionMatrix[0]) * 180 / Math.PI;
+    this.lastProjectionCanvasWidth = this.engine.canvas.width;
+    this.lastProjectionCanvasHeight = this.engine.canvas.height;
+    if (!this.videoPane)
+      return;
     const invProjectionMatrix = new Float32Array(16);
-    mat4_exports.invert(invProjectionMatrix, projectionMatrix);
+    mat4_exports.invert(invProjectionMatrix, this.view.projectionMatrix);
     const corner = new Float32Array(3);
     vec3_exports.transformMat4(corner, [1, 1, 0], invProjectionMatrix);
     let videoScaleX, videoScaleY;
@@ -73513,41 +73786,62 @@ var ImageTracking = class extends Component {
       1
     ];
     this.videoPane.setTranslationLocal([0, 0, videoTranslateZ]);
-    this.view.projectionMatrix.set(projectionMatrix);
-    this.lastProjectionCanvasWidth = this.engine.canvas.width;
-    this.lastProjectionCanvasHeight = this.engine.canvas.height;
   }
 };
 __publicField2(ImageTracking, "TypeName", "image-tracking");
 __publicField2(ImageTracking, "Properties", {
   /** Object with plane mesh for the background video */
-  videoPane: { type: Type.Object },
+  videoPane: Property.object(),
   /** Path to the .mind file containing the marker information */
-  mindPath: { type: Type.String },
+  mindPath: Property.string(),
   /** Maximum amount of markers to use */
-  maxTrack: { type: Type.Int, default: 1 },
+  maxTrack: Property.int(1),
   /** Facing mode of the user camera to get the video feed from */
-  facingMode: { type: Type.Enum, values: FacingModes, default: FacingModes[0] }
+  facingMode: Property.enum(FacingModes),
+  /* OneEuroFilter, min cutoff frequency. default is 0.001 */
+  filterMinCF: Property.float(1e-3),
+  /* OneEuroFilter, beta. */
+  filterBeta: Property.float(1),
+  /* number of miss before considered target lost. */
+  missTolerance: Property.int(5),
+  /* number of track before considered target found. */
+  warmupTolerance: Property.int(5)
 });
+var ZERO = [0, 0, 0];
+var tempQuat = quat_exports.create();
+var tempQuat2 = quat2_exports.create();
+var tempVec3 = vec3_exports.create();
 var ImageTrackingTarget = class extends Component {
+  constructor() {
+    super(...arguments);
+    __publicField2(this, "originalScaling", vec3_exports.create());
+  }
   init() {
     this.arCamera.getComponent("image-tracking").registerTarget(this.targetIndex, this);
-    this.object.scalingLocal.fill(0);
-    this.object.setDirty();
+  }
+  start() {
+    this.onTrackingLost();
+  }
+  onTrackingLost() {
+    this.object.getScalingLocal(this.originalScaling);
+    this.object.setScalingLocal(ZERO);
   }
   /* Update tracking target transformation */
-  updateTrack(worldMatrix, markerWidth, markerHeight) {
+  updateTrack(worldMatrix, markerWidth, _) {
     if (!worldMatrix) {
-      this.object.scalingLocal.fill(0);
-      this.object.setDirty();
+      this.onTrackingLost();
       return;
     }
-    quat2_exports.fromMat4(this.object.transformLocal, worldMatrix);
-    quat2_exports.normalize(this.object.transformLocal, this.object.transformLocal);
-    this.object.translateObject([markerWidth / 2, markerHeight / 2, 0]);
     const mw = markerWidth / window.devicePixelRatio;
-    this.object.scalingLocal.fill(mw);
-    this.object.setDirty();
+    mat4_exports.getRotation(tempQuat, worldMatrix);
+    quat_exports.normalize(tempQuat, tempQuat);
+    mat4_exports.getTranslation(tempVec3, worldMatrix);
+    vec3_exports.scale(tempVec3, tempVec3, 1 / mw);
+    quat2_exports.fromRotationTranslation(tempQuat2, tempQuat, tempVec3);
+    this.object.setTransformLocal(tempQuat2);
+    const c = window.devicePixelRatio / 2;
+    this.object.translateObject([c, c, 0]);
+    this.object.setScalingLocal(this.originalScaling);
   }
 };
 __publicField2(ImageTrackingTarget, "TypeName", "image-tracking-target");
