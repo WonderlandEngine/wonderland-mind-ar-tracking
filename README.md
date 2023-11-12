@@ -61,6 +61,10 @@ You can add as many targets as you want, and assign different `targetIndex` to m
 
 **Multiple Targets**: `/examples/image-tracking-multiple-targets` ([Live](https://wonderlandengine.github.io/wonderland-mind-ar-tracking/image-tracking-multiple-targets/index.html))
 
+![target0](https://github.com/WonderlandEngine/wonderland-mind-ar-tracking/blob/c5805e2f0c2fb3075c34b254bcbf9462c5660f7c/examples/image-tracking/static/target0.png)
+
+![target1](https://github.com/WonderlandEngine/wonderland-mind-ar-tracking/blob/c5805e2f0c2fb3075c34b254bcbf9462c5660f7c/examples/image-tracking/static/target1.png)
+
 ## Roadmap
 
 - Integration of mind-ar's face tracking feature
