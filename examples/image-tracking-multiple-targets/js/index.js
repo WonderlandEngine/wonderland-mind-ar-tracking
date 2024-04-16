@@ -12,25 +12,34 @@
  */
 
 /* wle:auto-imports:start */
+import {CursorTarget} from '@wonderlandengine/components';
+import {HowlerAudioListener} from '@wonderlandengine/components';
 import {ImageTracking} from '@wonderlandengine/mind-ar-tracking';
 import {ImageTrackingTarget} from '@wonderlandengine/mind-ar-tracking';
+import {ButtonComponent} from './button.js';
+import {CursorCustom} from './cursor-custom.js';
 /* wle:auto-imports:end */
 
 import {loadRuntime} from '@wonderlandengine/api';
 import * as API from '@wonderlandengine/api'; // Deprecated: Backward compatibility.
 
 /* wle:auto-constants:start */
-const RuntimeOptions = {
-    physx: false,
-    loader: false,
-    xrFramebufferScaleFactor: 1,
-    canvas: 'canvas',
-};
 const Constants = {
     ProjectName: 'multiple-targets',
     RuntimeBaseName: 'WonderlandRuntime',
     WebXRRequiredFeatures: ['local',],
     WebXROptionalFeatures: ['local','hand-tracking','hit-test',],
+};
+const RuntimeOptions = {
+    physx: true,
+    loader: false,
+    xrFramebufferScaleFactor: 1,
+    xrOfferSession: {
+        mode: 'auto',
+        features: Constants.WebXRRequiredFeatures,
+        optionalFeatures: Constants.WebXROptionalFeatures,
+    },
+    canvas: 'canvas',
 };
 /* wle:auto-constants:end */
 
@@ -76,8 +85,12 @@ if (document.readyState === 'loading') {
 }
 
 /* wle:auto-register:start */
+engine.registerComponent(CursorTarget);
+engine.registerComponent(HowlerAudioListener);
 engine.registerComponent(ImageTracking);
 engine.registerComponent(ImageTrackingTarget);
+engine.registerComponent(ButtonComponent);
+engine.registerComponent(CursorCustom);
 /* wle:auto-register:end */
 
 engine.scene.load(`${Constants.ProjectName}.bin`);

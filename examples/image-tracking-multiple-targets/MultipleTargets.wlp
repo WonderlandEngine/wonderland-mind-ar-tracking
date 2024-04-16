@@ -13,6 +13,12 @@
                         "mindPath": "./targets.mind",
                         "maxTrack": 1
                     }
+                },
+                {
+                    "type": "cursor-custom"
+                },
+                {
+                    "type": "howler-audio-listener"
                 }
             ]
         },
@@ -53,20 +59,41 @@
             },
             "parent": "19",
             "translation": [
-                0.0,
-                -0.3329777,
-                0.3500743
+                0.0469585,
+                0.1155414,
+                0.5217332
             ],
             "rotation": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
+                -0.7355935,
+                -0.1042961,
+                -0.1163907,
+                0.6591491
             ],
             "scaling": [
-                0.5,
-                0.4999967,
-                0.4999967
+                1.3079355,
+                1.3079241,
+                1.307928
+            ],
+            "name": "shiba",
+            "components": [
+                {
+                    "type": "collision",
+                    "collision": {
+                        "sphere": {
+                            "radius": 1.2999999
+                        }
+                    }
+                },
+                {
+                    "type": "cursor-target"
+                },
+                {
+                    "type": "button",
+                    "button": {
+                        "buttonMeshObject": "35",
+                        "hoverMaterial": "42"
+                    }
+                }
             ]
         },
         "29": {
@@ -76,9 +103,9 @@
             },
             "parent": "28",
             "translation": [
-                0.0,
-                0.0,
-                0.75
+                0.0000135,
+                -0.5971105,
+                0.4456017
             ],
             "rotation": [
                 0.0,
@@ -132,7 +159,12 @@
                 "name": "Box002_default_0<Box002<RootNode<1.FBX<RootNode (model correction matrix)<RootNode (gltf orientation matrix)",
                 "file": "assets\\shiba\\scene.gltf"
             },
-            "parent": "34"
+            "parent": "34",
+            "components": [
+                {
+                    "active": true
+                }
+            ]
         },
         "36": {
             "link": {
@@ -185,20 +217,37 @@
             },
             "parent": "39",
             "translation": [
-                0.0,
-                0.0,
-                0.4645909
+                0.0818783,
+                0.0028502,
+                0.4829049
             ],
             "rotation": [
-                -0.0000013,
-                0.0,
-                0.0,
-                1.0
+                -0.7054453,
+                -0.1235611,
+                -0.0921415,
+                0.6918016
             ],
             "scaling": [
-                0.57,
-                0.5699994,
-                0.5699994
+                1.3117234,
+                1.3117235,
+                1.3117237
+            ],
+            "name": "dino",
+            "components": [
+                {
+                    "type": "collision",
+                    "collision": {
+                        "sphere": {
+                            "radius": 1.5
+                        }
+                    }
+                },
+                {
+                    "type": "cursor-target"
+                },
+                {
+                    "type": "button"
+                }
             ]
         },
         "45": {
@@ -255,6 +304,22 @@
                 {
                     "active": true
                 }
+            ],
+            "translation": [
+                -2.635067914980027e-7,
+                5.994123171149113e-7,
+                3.7655675555470225e-7
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
+                0.9999994,
+                0.9999994,
+                0.9999997
             ]
         },
         "54": {
@@ -285,6 +350,34 @@
                 1.0,
                 1.0
             ]
+        },
+        "92": {
+            "name": "Light",
+            "parent": "19",
+            "components": [
+                {
+                    "type": "light"
+                }
+            ],
+            "translation": [
+                -0.0561157,
+                -0.1026484,
+                1.4639438
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scaling": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        "95": {
+            "name": "Empty"
         }
     },
     "meshes": {
@@ -398,7 +491,21 @@
             "pipeline": "6"
         },
         "21": {
-            "name": "material"
+            "name": "material",
+            "Phong": {
+                "ambientColor": [
+                    0.6233183,
+                    0.6233183,
+                    0.6233183,
+                    1.0
+                ],
+                "diffuseColor": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
         },
         "24": {
             "link": {
@@ -608,6 +715,18 @@
                 "name": "lib\\Uniforms.glsl",
                 "file": "default"
             }
+        },
+        "93": {
+            "link": {
+                "name": "lib\\MorphTargets.glsl",
+                "file": "default"
+            }
+        },
+        "94": {
+            "link": {
+                "name": "lib\\PhysicalBSDF.glsl",
+                "file": "default"
+            }
         }
     },
     "animations": {},
@@ -725,8 +844,8 @@
             "name": "multiple-targets",
             "version": [
                 1,
-                1,
-                2
+                2,
+                0
             ],
             "customIndexHtml": false
         },
@@ -748,7 +867,17 @@
             "sky": {
                 "enabled": true,
                 "material": "90"
+            },
+            "hdr": {
+                "exposure": 1.5
             }
+        },
+        "physx": {
+            "enable": true
+        },
+        "runtime": {
+            "visualizeColliders": false,
+            "visualizePhysX": false
         }
     },
     "files": {
@@ -769,5 +898,6 @@
             }
         }
     },
-    "languages": {}
+    "languages": {},
+    "morphTargets": {}
 }
